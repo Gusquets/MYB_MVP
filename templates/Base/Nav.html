@@ -1,0 +1,42 @@
+	<div style="position: fixed; z-index: 100; width: 100%;" class="navi-bg">
+	<nav class="navbar navbar-expand navbar-dark navi container">
+	  	<a class="navbar-brand" href="#">
+		    <img src="/media/Main/logo.png" height="32" class="d-inline-block align-top" alt="">
+	 	</a>
+	  	<div class="collapse navbar-collapse" id="navbarsExample02">
+		    <ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">버스킹</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">아티스트</a>
+				</li>
+		      	<li class="nav-item">
+		        	<a class="nav-link" href="#">고객센터</a>
+		      	</li>
+		    </ul>
+		    {% if user.is_authenticated %}
+		    <ul class="nav justify-content-end">
+		      	<li class="nav-item">
+		          	<a class="nav-link auth" href="#">로그아웃</a>
+		        </li>
+		    </ul>
+		    {% else %}
+		    <ul class="nav justify-content-end">
+		    	<li class="nav-item">
+		          	<form class="nav-search-form" method="get" action="">
+		          		<input class="nav-search" type="text" name="q">
+		          		<button class="nav-search-btn"><img src="/media/main/search.png" width="16px"></button>
+		          	</form>
+		        </li>
+		      	<li class="nav-item">
+		          	<a class="nav-link auth" href="#">로그인</a>
+		        </li>
+		        <li class="nav-item">
+		          	<a class="nav-link auth" href="#">회원가입</a>
+		        </li>
+		    </ul>
+		    {% endif %}
+	  	</div>
+	</nav>
+	</div>
