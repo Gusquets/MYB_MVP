@@ -1,0 +1,126 @@
+body {
+	font-family: 'Nanum Gothic', sans-serif !important;
+}
+/* 가운데 정렬 */
+.outer {
+    display: table;
+    height: 100%;
+    width: 95%;
+    margin: auto;
+   /* max-width: 1200px; */
+}
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+}
+.bottom {
+    display : table-cell;
+    vertical-align : bottom;
+}
+/* 강구헌이 자주쓰는 */
+
+.row{
+    padding : 0px;
+    margin : 0px;
+
+}
+
+.txt-center{
+    text-align : center;
+}
+.txt-right{
+    text-align : right;
+}
+.txt-left{
+    text-align : left;
+}
+.txt-pre{
+    white-space : pre;
+}
+.txt-blue{
+    color : #009bfc;
+}
+
+.mtb_auto{
+    margin-top : auto;
+    margin-bottom : auto;
+}
+
+/* 꾸밈 선 */
+.upper_sm_line{
+    width : 70px;
+    border-top : solid white 1.2px;
+    padding-bottom : 7px;
+    margin : auto;
+}
+
+.upper_bg_line{
+    width : 140px;
+    border-top : solid white 1px;
+    margin : auto;
+    padding-bottom : 15px;
+}
+
+.line_blue{
+    border-top : solid #009bfc 1px;
+}
+
+/* 마이버스커 버튼 */
+
+/* 주 버튼 - class btn과 함께 사용할 것 */
+.mb_main_button{
+    width : 230px;
+    height : 70px;
+    background : white;
+    color : black;
+    border-radius : 40px;
+    font-family : 'Nanum Gothic', sans-serif;
+    font-weight : bold;
+}
+
+.b_sha_blue{
+    box-shadow: 0 50px 60px 0 #22a0e8;
+}
+
+.b_sha_gray{
+    box-shadow: 0 50px 60px 0 #dedede;
+}
+
+.b_sha_lg_blue{
+    box-shadow: 0 50px 60px 0 #007dc4;
+}
+
+@media(max-width : 780px){
+    /* 모바일 버튼 크기 조정 */
+    .mb_main_button{
+        width: 220px;
+        height : 66px;
+
+    }
+    .b_sha_blue{
+        box-shadow: 0 20px 40px 0 #22a0e8;
+    }
+
+    .b_sha_gray{
+        box-shadow: 0 20px 40px 0 #dedede;
+    }
+
+    .b_sha_lg_blue{
+        box-shadow: 0 20px 40px 0 #007dc4;
+    }
+
+    /* 모바일 패딩 0 */
+    .mb_pd_0{
+        padding : 0
+    }
+
+    /* 모바일 텍스트 구현 */
+    .mb_txt_pre{
+        white-space : pre;
+    }
+
+}

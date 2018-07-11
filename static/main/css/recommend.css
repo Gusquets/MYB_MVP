@@ -1,0 +1,27 @@
+.recommend{
+    background : white;
+}
+
+.mb_slide2_title{
+        font-family: 'Nanum Square', sans-serif;
+        font-size: 40px;
+        text-align: center;
+        color: #009bfc;
+        font-weight:300;
+    }
+.mb_slide2_title_sub{
+    font-size:18px;
+}
+
+.mb_main_slide2_container{
+        max-width: 750px;
+        margin : auto;
+    }
+@media(max-width : 780px){
+    .mb_slide2_title{
+        font-size : 30px;
+    }
+    .mb_slide2_title_sub{
+        font-size : 15px;
+    }
+}
