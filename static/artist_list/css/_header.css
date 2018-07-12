@@ -1,0 +1,18 @@
+.section{
+    height : 280px;
+    font-family : 'Nanum Square', sans-serif;
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+    background-image: url("/media/main/sub-top-bg.png");
+}
+.mb_sub_title{
+    font-size : 30px;
+    color: white;
+}
+
+@media(max-width : 780px){
+    .section{
+        height : 230px;
+    }
+}
