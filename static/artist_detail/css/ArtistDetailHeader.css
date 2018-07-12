@@ -7,12 +7,29 @@
     background-image: url("/media/main/sub-top-bg.png");
 }
 .mb_sub_title{
-    font-size : 30px;
+    font-size : 20px;
+    font-weight: lighter;
     color: white;
 }
 
+.artist_profile{
+    height : 120px;
+    width : 120px;
+    background: white;
+    border-radius : 80px;
+    margin : auto;
+}
+
+.artist_stat{
+    color : white;
+}
 @media(max-width : 780px){
     .section{
         height : 264px;
+    }
+
+    .artist_profile{
+        height : 96px;
+        width : 96px;
     }
 }
