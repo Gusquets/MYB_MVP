@@ -59,5 +59,6 @@ class PasswordResetConfirmView(BasePasswordResetConfirmView):
 
 class PasswordChangeView(BasePasswordChangeView):
     form_class = PasswordChangeForm
+    success_url = reverse_lazy('profile')
 
     name = 'password_change'
