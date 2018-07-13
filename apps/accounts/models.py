@@ -81,3 +81,32 @@ class User(AbstractUser):
     
     def get_user_type(self):
         return self.usertype
+
+
+def artist_image_upload_to(instance, filename):
+    return '/'.join([instance.artist.name, 'images'])
+
+class ArtistImage(models.Model):
+    artist = models.ForeignKey(Artist, verbose_name = '아티스트 사진', on_delete = models.CASCADE)
+    image = models.ImageField(upload_to=artist_image_upload_to)
+
+    class Meta:
+        verbose_name = '아티스트 사진'
+        verbose_name_plural = '아티스트 사진'
+    
+    def get_artist_name(self):
+        return self.artist.name
+
+
+def artist_movie_upload_to(instance, filename):
+    return '/'.join([instance.artist.name, 'movies'])
+class ArtistMovie(models.Model):
+    artist = models.ForeignKey(Artist, verbose_name = '아티스트 사진', on_delete = models.CASCADE)
+    movie = models.FileField(upload_to=artist_movie_upload_to)
+
+    class Meta:
+        verbose_name = '아티스트 동영상'
+        verbose_name_plural = '아티스트 동영상'
+    
+    def get_artist_name(self):
+        return self.artist.name
