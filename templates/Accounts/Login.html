@@ -3,7 +3,7 @@
 {% block content %}
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static '/Accounts/css/_login.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '/Accounts/css/Login.css' %}">
 
 <div class="row login">
     <div class="outer">
@@ -12,7 +12,7 @@
                 <form class="row">
                     <!-- 로고 ( 홈 화면으로 링크 )-->
                     <div class="col-12 login-row pb-5">
-                        <a><img class="mb_login_logo" src="/media/main/logo-color@2x.png"></a>
+                        <a href="{% url 'artist:Main' %}"><img class="mb_login_logo" src="/media/main/logo-color@2x.png"></a>
                     </div>
                     <!-- 이메일, 비밀번호, 로그인 버튼 -->
                     <div class="col-12 login-row">
