@@ -7,4 +7,5 @@ urlpatterns = [
     path('logout/', auth_views.logout, name = 'logout', kwargs = {'next_page': '/'}),
     path('signup/', views.UserCreate.as_view(), name = 'user_create'),
     path('profile/', views.profile, name = 'profile'),
+    path('profile/update/', views.UserUpdate.as_view(), name = 'user_update'),
 ]

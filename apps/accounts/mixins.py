@@ -17,10 +17,8 @@ class LoginRequiredMixin(AccessMixin):
             })
             messages.warning(self.request, message, extra_tags='html')
             return self.request.META.get('HTTP_REFERER', '/')
-        else:
-            return reverse('user_verify')
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.is_verified:
+        if request.user.is_authenticated:
             return super().dispatch(request, *args, **kwargs)
         return self.handle_no_permission()
