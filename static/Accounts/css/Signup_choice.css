@@ -1,0 +1,71 @@
+.navi {
+    display : none;
+}
+.navi-mobile{
+    display : none;
+}
+
+.Signup_choice{
+    min-height : 800px;
+    max-width : 1000px;
+    text-align : center;
+    margin : auto;
+}
+
+.Signup-title{
+    padding-top : 3rem;
+    padding-bottom : 3rem;
+}
+
+.Signup-audience{
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+    background-image : url("/media/main/signup-img1@3x.png");
+    min-height : 500px;
+    border-right : 4px;
+    line-height : 500px;
+}
+.Signup-artist{
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+    background-image: url("/media/main/signup-img2@3x.png");
+    min-height : 500px;
+    border-left : 4px;
+    line-height : 500px;
+}
+
+.Signup-caption{
+    color : white;
+    margin :  auto;
+    vertical-align : middle;
+    font-size : 25px;
+    font-weight : bold;
+}
+
+@media(max-width : 780px){
+    .Signup_choice{
+        min-height : 500px;
+        max-width : 320px;
+        padding-bottom : 220px;
+    }
+    .Signup-audience{
+        min-height : 180px;
+        line-height : 180px;
+        background-image: url("/media/main/m-signup-img1.png");
+        border : 0;
+        margin-bottom : 10px;
+    }
+
+    .Signup-artist{
+        min-height : 180px;
+        line-height : 180px;
+        background-image: url("/media/main/m-signup-img2.png");
+        border : 0;
+    }
+
+    .Signup-caption{
+        font-size : 18px;
+    }
+}
