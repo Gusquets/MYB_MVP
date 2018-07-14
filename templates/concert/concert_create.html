@@ -1,0 +1,6 @@
+공연 등록
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit" value="공연등록">
+</form>

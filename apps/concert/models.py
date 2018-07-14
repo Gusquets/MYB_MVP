@@ -9,7 +9,7 @@ class Concert(models.Model):
     location_2 = models.CharField('공연 장소 2', max_length = 100)
     artist = models.ForeignKey(Artist, verbose_name = '아티스트', on_delete = models.CASCADE)
     description = models.TextField('공연 설명')
-    probability = models.IntegerField('공영 확률')
+    probability = models.IntegerField('공연 확률')
 
     class Meta:
         verbose_name = '공연 정보'

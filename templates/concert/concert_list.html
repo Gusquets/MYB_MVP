@@ -1,0 +1,12 @@
+공연 목록
+<br/>
+{% for concert in concert_list %}
+<a href="{% url "concert:concert_detail" concert.id %}">{{ concert.date }} / {{ concert.time }} / {{ concert.location_1 }} / {{ concert.artist }} / {{ concert.robability }}</a>
+<br/>
+{% endfor %}
+<br/>
+<br/>
+<hr/>
+{% if user.is_authenticated %}
+<a href="{% url "concert:concert_create" %}">공연등록하기</a>
+{% endif %}

@@ -29,7 +29,7 @@ class ArtistRequiredMixin(AccessMixin):
 
     def get_login_url(self):
         user = self.request.user
-        if not user.usertype == 2:
+        if not user.is_authenticated or not user.usertype == 2:
             login_url = super().get_login_url()
             message = render_to_string('common/messages/artist_required.html', context={
                 'login_url': login_url,
