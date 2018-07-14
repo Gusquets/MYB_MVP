@@ -1,6 +1,10 @@
 body {
 	font-family: 'Nanum Gothic', sans-serif !important;
 }
+
+label {
+    font-weight : bold;
+}
 /* 가운데 정렬 */
 .outer {
     display: table;
