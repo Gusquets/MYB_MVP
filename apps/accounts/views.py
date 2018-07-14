@@ -6,13 +6,13 @@ from django.contrib.auth.views import PasswordResetConfirmView as BasePasswordRe
     PasswordChangeView as BasePasswordChangeView, PasswordResetView as BasePasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.shortcuts import get_current_site
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.http import urlsafe_base64_decode
-from django.views.generic import CreateView, RedirectView, UpdateView, FormView
+from django.views.generic import CreateView, RedirectView, UpdateView, FormView, TemplateView
 from django.conf import settings
 
-from .forms import UserCreateForm, UserUpdateForm, SetPasswordForm, PasswordChangeForm
+from .forms import UserCreateForm, ArtistCreateForm, UserUpdateForm, SetPasswordForm, PasswordChangeForm
 from .mixins import LoginRequiredMixin
 
 User = get_user_model()
@@ -32,9 +32,29 @@ class UserCreate(CreateView):
         user = self.object
 
         auth_login(self.request, user)
+        if self.request.POST.get('usertype') == '2':
+            return redirect('artist_create')
 
         return response
 
+class UserCreateChoice(TemplateView):
+    template_name = 'registration/user_create_choice.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+class ArtistCreate(CreateView):
+    template_name = 'registration/artist_create.html'
+    form_class = ArtistCreateForm
+    success_url = reverse_lazy('website:home')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        artist = self.object
+
+        self.request.user.artist = artist
+        self.request.user.save()
+        return response
 
 class UserUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'registration/user_update.html'

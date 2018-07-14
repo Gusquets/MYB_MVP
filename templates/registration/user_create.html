@@ -4,5 +4,9 @@ user_create
     {% csrf_token %}
     {{ form.as_table }}
 
-    <input type="submit">
+    {% if request.POST.usertype == "1" %}
+        <input type="submit" value="회원가입">
+    {% else %}
+        <input type="submit" value="다음">
+    {% endif %}
 </form>

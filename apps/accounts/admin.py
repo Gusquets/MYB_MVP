@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils.safestring import mark_safe
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserCreationForm
-from .models import Artist, ArtistImage, ArtistMovie
+from .models import Artist
 User = get_user_model()
 
 
@@ -18,7 +18,7 @@ class UserCreateAdminForm(UserCreationForm):
 class UserAdmin(BaseUserAdmin):
     list_display = ['id', 'email', 'nickname', 'usertype', 'is_staff']
     list_display_links = ['id', 'email', 'nickname']
-    list_filter = ['usertype', 'is_active']
+    list_filter = ['usertype', 'is_active', 'artist']
     ordering = ['-id']
     search_fields = ['email', 'nickname']
     add_form = UserCreateAdminForm
@@ -26,7 +26,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'nickname', 'user_type', 'password1', 'password2'),
+            'fields': ('email', 'nickname', 'usertype', 'password1', 'password2'),
         }),
     )
     fieldsets = [
@@ -36,11 +36,10 @@ class UserAdmin(BaseUserAdmin):
             'phone_number',
             'is_agreed_1',
             'is_agreed_2',
-            'regist_dt',
             'artist',
         ]}),
         ('권한', {'fields': (
-            'user_type',
+            'usertype',
             'is_active',
             'is_staff',
             'is_superuser',
@@ -54,33 +53,31 @@ class ArtistAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'get_user_number', 'is_verify', 'regist_dt']
     list_display_links = ['id', 'name']
     list_filter = ['is_verify']
+    fieldsets = [
+        ('아티스트 정보', {'fields': [
+            'name',
+            'description',
+        ]}),
+        ('아티스트 소개', {'fields': [
+            'image_1',
+            'image_2',
+            'image_3',
+            'image_4',
+            'image_5',
+            'movie_1',
+            'movie_2',
+            'movie_3',
+            'social_fb',
+            'social_insta',
+            'social_youtube',
+        ]}),
+        ('권한', {'fields': (
+            'is_verify',
+        )})
+    ]
+
 
     def get_user_number(self, artist):
         return len(artist.user_set.all())
 
     get_user_number.short_description = '회원수'
-
-
-@admin.register(ArtistImage)
-class ArtistImageAdmin(admin.ModelAdmin):
-    list_display = ['artist', 'get_image']
-    list_display_links = ['artist', 'get_image']
-    list_filter = ['artist']
-
-    def get_image(self, image):
-        if image.image:
-            return mark_safe('<img src="{}" style="width: 75px;">'.format(image.image.url))
-        return None
-    
-    get_image.short_description = '아티스트 사진'
-
-
-@admin.register(ArtistMovie)
-class ArtistMovie(admin.ModelAdmin):
-    list_display = ['artist', 'get_movie']
-    list_display_links = ['artist', 'get_movie']
-    list_filter = ['artist']
-
-    def get_movie(self, movie):
-        if movie.movie:
-            return mark_safe('<video src="{}" style="width: 75px;"></video>'.format(movie.movie.url))

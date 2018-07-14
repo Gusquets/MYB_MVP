@@ -4,6 +4,7 @@ from django.contrib.auth.forms import SetPasswordForm as BaseSetPasswordForm, Pa
 from django.utils.safestring import mark_safe
 
 from .validators import validate_password
+from .models import Artist
 
 User = get_user_model()
 
@@ -24,6 +25,7 @@ class UserCreateForm(forms.ModelForm):
             'password2',
             'is_agreed_1',
             'is_agreed_2',
+            'usertype',
         ]
         help_texts = {
             'email': 'MYBUSKER의 ID로 사용할 이메일 주소를 입력해주세요.<br>가입하신 이메일 주소는 변경할 수 없습니다.',
@@ -32,6 +34,7 @@ class UserCreateForm(forms.ModelForm):
         widgets = {
             'email': forms.EmailInput(attrs={'placeholder': 'example@email.com'}),
             'nickname': forms.TextInput(attrs={'placeholder': 'Nickname'}),
+            'usertype': forms.HiddenInput()
         }
 
     def clean_password2(self):
@@ -49,6 +52,10 @@ class UserCreateForm(forms.ModelForm):
             user.save()
 
         return user
+class ArtistCreateForm(forms.ModelForm):
+    class Meta:
+        model = Artist
+        fields = '__all__'
 
 
 class UserUpdateForm(forms.ModelForm):

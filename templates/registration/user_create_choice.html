@@ -1,0 +1,12 @@
+회원가입 유형
+
+<form action="{% url "user_create" %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="usertype" value=1>
+    <input type="submit" value="일반회원가입">
+</form>
+<form action="{% url "user_create" %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="usertype" value=2>
+    <input type="submit" value="아티스트회원가입">
+</form>
