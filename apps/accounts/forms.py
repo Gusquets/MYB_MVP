@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import SetPasswordForm as BaseSetPasswordForm, PasswordChangeForm as BasePasswordChangeForm
 from django.utils.safestring import mark_safe
 
-from .validators import validate_password
+from apps.common.validators import validate_password
 from .models import Artist
 
 User = get_user_model()
