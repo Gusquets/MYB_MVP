@@ -7,30 +7,21 @@
     background-image: url("/media/main/sub-top-bg.png");
     font-weight : bold;
 }
-.mb_sub_title{
-    font-size : 20px;
+.payment-name{
+    padding-top : 15px;
+    font-size : 30px;
+    margin-bottom : 0px;
     color: white;
-    margin-bottom : 5px;
 }
 
-.artist_profile{
-    height : 120px;
-    width : 120px;
-    background: white;
-    border-radius : 80px;
-    margin : auto;
-}
-
-.artist_stat{
+.payment-subtitle{
+    padding-top : 5px;
+    font-size : 20px;
     color : white;
 }
+
 @media(max-width : 780px){
     .section{
         height : 264px;
-    }
-
-    .artist_profile{
-        height : 96px;
-        width : 96px;
     }
 }
