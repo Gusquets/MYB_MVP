@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from apps.common.mixins import LoginRequiredMixin
@@ -36,3 +36,13 @@ def basket_create_artist(request, id):
     context = {'message': message,}
 
     return HttpResponse(json.dumps(context), content_type="application/json")
+
+
+class MyBasket(TemplateView):
+    template_name = 'preference/basket/my_basket.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['concert_list'] = self.request.user.basket_set.all().filter(artist__isnull = True)
+        context['artist_list'] = self.request.user.basket_set.all().filter(concert__isnull = True)
+        context['hi'] = 'hi'
+        return context

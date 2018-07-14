@@ -1,0 +1,20 @@
+내가 찜한 목록
+<br/>
+<hr/>
+공연 목록
+<br/>
+<hr/>
+{% for concert in concert_list %}
+<a href="{% url "concert:concert_detail" concert.concert.id %}">{{ concert.concert.date }} / {{ concert.concert.location_1 }} / {{ concert.concert.artist }} / {{ concert.concert.probability }}</a>
+<br/>
+{% endfor %}
+<br/>
+<hr/>
+<br/>
+아티스트 목록
+<br/>
+<hr/>
+{% for artist in artist_list %}
+<a href="{% url "artist_detail" artist.artist.id %}">{{ artist.artist.name }} / {{artist.artist.description }}</a>
+<br/>
+{% endfor %}

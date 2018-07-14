@@ -14,6 +14,9 @@ class Basket(models.Model):
         verbose_name = '찜'
         verbose_name_plural = '찜'
 
+    def __str__(self):
+        return self.user.nickname
+
 
 class Review(models.Model):
     user = models.ForeignKey(User, verbose_name = '사용자', on_delete = models.CASCADE)
