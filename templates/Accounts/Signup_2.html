@@ -1,0 +1,42 @@
+{% extends "Base/Base.html" %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static '/Accounts/css/Signup_2.css' %}">
+
+<div class="Signup_2 row">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+                <form class="row mb-5 form-group">
+                    <!-- 로고는 홈으로 연결 -->
+                    <div class="col-12 Signup-title">
+                        <img src="/media/main/logo-color.png">
+                    </div>
+                    <label for="artist_name">아티스트 이름</label><br>
+                    <input id="artist_name" class="form-control Signup_form mb-4" placeholder="아티스트 이름">
+                    <label for="artist_introduce">간단한 소개</label><br>
+                    <textarea id="artist_introduce" class="form-control Signup_form mb-4" rows="3" placeholder="간단한 소개"></textarea>
+                    <label for="artist_photo">사진 (최대 5장)</label><br>
+                    <input type="file" multiple="multiple" id="artist_photo" class="form-control-file mb-4">
+                    <label for="artist_video1">영상 (최대 3개)</label><br>
+                    <input id="artist_video1" class="form-control Signup_form" placeholder="youtube 영상주소 1">
+                    <input id="artist_video2" class="form-control Signup_form" placeholder="youtube 영상주소 2">
+                    <input id="artist_video3" class="form-control Signup_form mb-4" placeholder="youtube 영상주소 3">
+
+                    <label for="artist_social">SNS 주소</label><br>
+                    <input id="artist_social" class="form-control Signup_form"  placeholder="페이스북">
+                    <input id="artist_social" class="form-control Signup_form"  placeholder="유튜브">
+                    <input id="artist_social" class="form-control Signup_form mb-4"  placeholder="인스타그램">
+
+                    <div class="Signup_submit">
+                    <input type="submit" value="회원가입하기" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

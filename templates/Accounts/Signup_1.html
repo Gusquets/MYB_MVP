@@ -1,0 +1,48 @@
+{% extends "Base/Base.html" %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static '/Accounts/css/Signup_1.css' %}">
+
+<div class="Signup_1 row">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+                <form class="row mb-5">
+                    <!-- 로고는 홈으로 연결 -->
+                    <div class="col-12 Signup-title">
+                        <img src="/media/main/logo-color.png">
+                    </div>
+                    <label for="su_e-mail">이메일</label><br>
+                    <input id="su_e-mail" class="form-control Signup_form mb-4" type="email" placeholder="이메일">
+                    <label for="su_password">비밀번호</label><br>
+                    <input id="su_password" class="form-control Signup_form" type="password" placeholder="비밀번호 입력(8자리 이상, 숫자 + 영문)">
+                    <input class="form-control Signup_form mb-4" type="password" placeholder="비밀번호 확인">
+                    <label for="su_phone-number">휴대폰 번호</label><br>
+                    <input id="su_phone-number" class="form-control Signup_form mb-4" maxlength="11" placeholder="(-) 제외">
+                    <label for="nickname">닉네임</label><br>
+                    <input id="nickname" class="form-control Signup_form mb-4" placeholder="마이버스커에서 사용할 닉네임">
+                    <div>
+                        <input type="checkbox" id="Signup-agree">
+                        <label for="Signup-agree" class="Signup-agree" required>
+                            <a href="#">이용약관</a>과 <a href="#">개인정보처리방침</a>에 동의합니다.
+                        </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="Signup-agree2">
+                        <label for="Signup-agree2" class="Signup-agree">
+                            마케팅 정보 활용에 동의합니다.
+                        </label>
+                    </div>
+                    <!-- Submit 부분 아티스트인 경우 value="다음" -->
+                    <div class="Signup_submit">
+                    <input type="submit" value="회원가입하기" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
