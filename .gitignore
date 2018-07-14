@@ -1,0 +1,9 @@
+
+*.pyc
+.idea
+*.iml
+
+/resources/
+*.sqlite3
+
+secrets.json
