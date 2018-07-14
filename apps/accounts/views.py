@@ -21,9 +21,11 @@ from apps.common.mixins import LoginRequiredMixin
 User = get_user_model()
 
 
-@login_required
-def profile(request):
-    return render(request, 'accounts/profile.html')
+class Profile(LoginRequiredMixin, TemplateView):
+    template_name = 'accounts/profile.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 def login(request):
     providers = []

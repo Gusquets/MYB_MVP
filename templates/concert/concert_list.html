@@ -1,7 +1,13 @@
 공연 목록
 <br/>
 {% for concert in concert_list %}
+<hr/>
 <a href="{% url "concert:concert_detail" concert.id %}">{{ concert.date }} / {{ concert.time }} / {{ concert.location_1 }} / {{ concert.artist }} / {{ concert.robability }}</a>
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="찜하기">
+</form>
+<hr/>
 <br/>
 {% endfor %}
 <br/>
