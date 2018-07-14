@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model, login as auth_login
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetConfirmView as BasePasswordResetConfirmView, \
-    PasswordChangeView as BasePasswordChangeView, PasswordResetView as BasePasswordResetView
+    PasswordChangeView as BasePasswordChangeView, PasswordResetView as BasePasswordResetView, login as auth_login2
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import get_object_or_404, render, redirect
@@ -12,7 +12,10 @@ from django.utils.http import urlsafe_base64_decode
 from django.views.generic import CreateView, RedirectView, UpdateView, FormView, TemplateView
 from django.conf import settings
 
-from .forms import UserCreateForm, ArtistCreateForm, UserUpdateForm, SetPasswordForm, PasswordChangeForm
+from allauth.socialaccount.models import SocialApp
+from allauth.socialaccount.templatetags.socialaccount import get_providers
+
+from .forms import UserCreateForm, AuthenticationForm, ArtistCreateForm, UserUpdateForm, SetPasswordForm, PasswordChangeForm
 from .mixins import LoginRequiredMixin
 
 User = get_user_model()
@@ -21,6 +24,19 @@ User = get_user_model()
 @login_required
 def profile(request):
     return render(request, 'accounts/profile.html')
+
+def login(request):
+    providers = []
+    for provider in get_providers():
+        try:
+            provider.social_app = SocialApp.objects.get(provider = provider.id, sites = settings.SITE_ID)
+        except SocialApp.DoesNotExist:
+            provider.social_app = None
+        providers.append(provider)
+
+    return auth_login2(request,
+        template_name = 'accounts/login.html',
+        extra_context = {'providers' : providers})
 
 class UserCreate(CreateView):
     template_name = 'registration/user_create.html'
