@@ -8,7 +8,11 @@ User = get_user_model()
 class Basket(models.Model):
     user = models.ForeignKey(User, verbose_name = '찜한 회원', on_delete = models.CASCADE)
     artist = models.ForeignKey(Artist, verbose_name = '아티스트', blank = True, null = True, on_delete = models.CASCADE, related_name = 'basket_artist')
-    concert = models.ForeignKey(Artist, verbose_name = '공연', blank = True, null = True, on_delete = models.CASCADE, related_name = 'basket_concert')
+    concert = models.ForeignKey(Concert, verbose_name = '공연', blank = True, null = True, on_delete = models.CASCADE, related_name = 'basket_concert')
+
+    class Meta:
+        verbose_name = '찜'
+        verbose_name_plural = '찜'
 
 
 class Review(models.Model):
@@ -20,7 +24,15 @@ class Review(models.Model):
     regist_dt = models.DateTimeField('작성 시각', auto_now_add = True)
     like = models.PositiveIntegerField('좋아요', default = 0)
 
+    class Meta:
+        verbose_name = '후기'
+        verbose_name_plural = '후기'
+
 class Answer(models.Model):
     user = models.ForeignKey(User, verbose_name = '사용자', on_delete = models.CASCADE)
     review = models. ForeignKey(Review, verbose_name = '리뷰', on_delete = models.CASCADE)
     description = models.TextField('답변')
+
+    class Meta:
+        verbose_name = '답변'
+        verbose_name_plural = '답변'
