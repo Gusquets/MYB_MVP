@@ -9,13 +9,14 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.http import urlsafe_base64_decode
-from django.views.generic import CreateView, RedirectView, UpdateView, FormView, TemplateView
+from django.views.generic import CreateView, RedirectView, UpdateView, FormView, TemplateView, ListView, DetailView
 from django.conf import settings
 
 from allauth.socialaccount.models import SocialApp
 from allauth.socialaccount.templatetags.socialaccount import get_providers
 
 from .forms import UserCreateForm, ArtistCreateForm, UserUpdateForm, SetPasswordForm, PasswordChangeForm
+from .models import Artist
 from apps.common.mixins import LoginRequiredMixin
 
 User = get_user_model()
@@ -100,3 +101,19 @@ class PasswordChangeView(BasePasswordChangeView):
     success_url = reverse_lazy('profile')
 
     name = 'password_change'
+
+
+class ArtistList(ListView):
+    template_name = 'accounts/artist_list.html'
+    paginate_by = 10
+
+    name = 'artist_list'
+
+
+    def get_queryset(self):
+        return Artist.objects.all()
+
+
+class ArtistDetail(DetailView):
+    template_name = 'accounts/artist_detail.html'
+    model = Artist

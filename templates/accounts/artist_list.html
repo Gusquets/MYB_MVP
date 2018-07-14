@@ -1,0 +1,27 @@
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+아티스트 목록
+<br/>
+{% for artist in artist_list %}
+<hr/>
+<a href="{% url "artist_detail" artist.id %}">{{ artist.name }} / {{ artist.description }}/</a>
+<a class="basket_create_artist" href="{% url "preference:basket_create_artist" artist.id %}">/찜하기</a>
+<hr/>
+<br/>
+{% endfor %}
+<br/>
+<br/>
+<hr/>
+<script>
+    $(function() {
+        $('.basket_create_artist').click(function() {
+            $.get($(this).attr('href'))
+            .done(function(response) {
+                alert(response.message)
+            })
+            .fail(function(response) {
+                console.log('문제가 발생하였습니다. 다시 시도해 주세요.');
+            });
+            return false;
+        });
+    });
+</script>

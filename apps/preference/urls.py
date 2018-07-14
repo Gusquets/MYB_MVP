@@ -3,5 +3,6 @@ from . import views
 
 app_name = 'preference'
 urlpatterns = [
-    path('basket/create/<int:id>/', views.basket_create, name = 'basket_create'),
+    path('basket/create/concert/<int:id>/', views.basket_create_concert, name = 'basket_create_concert'),
+    path('basket/create/artist/<int:id>/', views.basket_create_artist, name = 'basket_create_artist'),
 ]
