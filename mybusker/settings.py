@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'apps.website',
     'apps.concert',
     'apps.common',
+    'apps.preference',
 ]
 
 MIDDLEWARE = [

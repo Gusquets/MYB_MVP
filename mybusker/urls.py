@@ -20,10 +20,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('apps.accounts.urls')),
-    path('accounts/', include('allauth.urls')),
+
     path('', include('apps.website.urls', namespace = 'website')),
+    path('accounts/', include('apps.accounts.urls')),
     path('concert/', include('apps.concert.urls', namespace = 'concert')),
+    path('preference/', include('apps.preference.urls', namespace = 'preference')),
+
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:
