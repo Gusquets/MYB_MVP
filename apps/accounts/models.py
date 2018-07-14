@@ -1,7 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from .validators import PhoneNumberValidator
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -67,7 +67,7 @@ class User(AbstractUser):
 
     email = models.EmailField('이메일 (ID)', unique=True)
     nickname = models.CharField('닉네임', max_length=50)
-    phone_number = models.CharField('휴대폰 번호', max_length = 16)
+    phone_number = models.CharField('휴대폰 번호', max_length = 16, validators=[PhoneNumberValidator()])
     regist_dt = models.DateTimeField('등록시간', auto_now_add=True)
     is_agreed_1 = models.BooleanField('이용약관 동의여부', default = False)
     is_agreed_2 = models.BooleanField('개인정보 처리방침 동의여부', default = False)

@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.naver',
     'apps.accounts',
     'apps.website',
+    'apps.concert',
 ]
 
 MIDDLEWARE = [

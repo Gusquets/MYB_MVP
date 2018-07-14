@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.accounts.urls')),
     path('accounts/', include('allauth.urls')),
-    path('',include('apps.website.urls', namespace = 'website')),
+    path('', include('apps.website.urls', namespace = 'website')),
+    path('concert/', include('apps.concert.urls', namespace = 'concert')),
 ]
 
 if settings.DEBUG:
