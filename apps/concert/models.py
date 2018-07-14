@@ -18,3 +18,7 @@ class Concert(models.Model):
 class ConcertSongList(models.Model):
     concert = models.ForeignKey(Concert, verbose_name = '공연', on_delete = models.CASCADE)
     name = models.CharField('곡 제목', max_length = 50)
+
+    class Meta:
+        verbose_name ='공연 곡'
+        verbose_name_plural = '공연 곡'
