@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.website',
     'apps.concert',
+    'apps.common',
 ]
 
 MIDDLEWARE = [
