@@ -57,7 +57,7 @@ label {
 /* 꾸밈 선 */
 .upper_sm_line{
     width : 70px;
-    border-top : solid white 1.2px;
+    border-top : solid white 1px;
     padding-bottom : 7px;
     margin : auto;
 }
@@ -97,6 +97,7 @@ label {
 .b_sha_lg_blue{
     box-shadow: 0 50px 60px 0 #007dc4;
 }
+
 
 @media(max-width : 780px){
     /* 모바일 버튼 크기 조정 */
