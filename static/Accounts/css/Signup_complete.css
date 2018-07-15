@@ -1,0 +1,38 @@
+.navi {
+    display : none;
+}
+.navi-mobile{
+    display : none;
+}
+
+.outer{
+    max-width : 350px;
+    margin : auto;
+}
+
+.signup-complete-section{
+    min-height : 750px;
+}
+
+.signup-complete-logo{
+    margin-bottom : 2rem;
+}
+
+.signup-complete-title{
+    font-size : 25px;
+    font-family : "Nanum Gothic", sans-serif;
+    font-weight : bold;
+    margin-top: 2rem;
+    padding-bottom : 2rem;
+}
+.signup-complete-img{
+    max-width : 400px;
+    margin :auto;
+}
+
+@media(max-width : 568px){
+    .signup-complete-section{
+        min-height : 700px;
+    }
+
+}
