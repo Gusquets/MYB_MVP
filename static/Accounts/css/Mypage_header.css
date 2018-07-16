@@ -1,0 +1,24 @@
+.section{
+    height : 310px;
+    font-family : 'Nanum Gothic', sans-serif;
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+    background-image: url("/media/main/sub-top-bg.png");
+    font-weight : bold;
+}
+.mb_sub_title{
+    font-size : 30px;
+    color: white;
+}
+
+.mypage_username{
+    font-size :20px;
+    color : white;
+}
+
+@media(max-width : 780px){
+    .section{
+        height : 264px;
+    }
+}
