@@ -117,3 +117,14 @@ class ArtistList(ListView):
 class ArtistDetail(DetailView):
     template_name = 'accounts/artist_detail.html'
     model = Artist
+
+
+class FindEmail(TemplateView):
+    template_name = 'accounts/find_id.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        phone_number = self.request.GET.get('phone_number')
+        if User.objects.all().filter(phone_number = phone_number):
+            context['result'] = User.objects.all().filter(phone_number = phone_number)
+        return context

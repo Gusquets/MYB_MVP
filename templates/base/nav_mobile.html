@@ -24,12 +24,18 @@
             </li>
         </ul>
         <div class="auth-group">
+            {% if user.is_authenticated %}
             <div class="auth">
-                <a href="{% url "login" %}">로그인 </a>
+                <a href="{% url "logout" %}?next={{ request.path }}">로그아웃 </a>
+            </div>
+            {% else %}
+            <div class="auth">
+                <a href="{% url "login" %}?next={{ request.path }}">로그인 </a>
             </div>
             <div class="auth">
                 <a href="{% url "user_create" %}">회원가입 </a>
             </div>
+            {% endif %}
         </div>
     </div>
 </nav>
