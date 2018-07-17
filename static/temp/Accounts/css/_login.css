@@ -4,12 +4,6 @@
     margin : auto;
     text-align: center;
 }
-.navi {
-    display : none;
-}
-.navi-mobile{
-    display : none;
-}
 
 .mb_login_logo{
     max-width : 150px;
@@ -94,7 +88,4 @@
 }
 .social-facebook:not(:disabled):not(.disabled):active:focus, .social-facebook:not(:disabled):not(.disabled).active:focus {
     box-shadow: 0 0 0 0.2rem rgba(65,102,176,0.5) !important;
-}
-.footer {
-    display: none;
 }

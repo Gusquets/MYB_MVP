@@ -45,10 +45,19 @@ class UserCreate(CreateView):
     template_name = 'registration/user_create.html'
     form_class = UserCreateForm
     success_url = reverse_lazy('website:home')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        usertype = self.request.GET.get('usertype','')
+        if usertype:
+            context['usertype'] = usertype
+        return context
 
     def form_valid(self, form):
         response = super().form_valid(form)
         user = self.object
+        user.is_agreed_1 = True
+        user.is_agreed_2 = True
+        user.save()
 
         auth_login(self.request, user)
         if self.request.POST.get('usertype') == '2':

@@ -10,8 +10,8 @@ User = get_user_model()
 
 
 class UserCreateForm(forms.ModelForm):
-    password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput(attrs={'placeholder': '6~32자리의 영문, 숫자를 혼합하여 사용하세요.'}), validators=[validate_password])
-    password2 = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput(attrs={'placeholder': ''}))
+    password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput(attrs={'placeholder': '비밀번호 입력(8자리 이상, 숫자 + 영문)'}), validators=[validate_password])
+    password2 = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput(attrs={'placeholder': '비밀번호 확인'}))
 
     current_site = None
 
@@ -32,8 +32,8 @@ class UserCreateForm(forms.ModelForm):
             'nickname': '닉네임은 언제든지 변경할 수 있습니다.'
         }
         widgets = {
-            'email': forms.EmailInput(attrs={'placeholder': 'example@email.com'}),
-            'nickname': forms.TextInput(attrs={'placeholder': 'Nickname'}),
+            'email': forms.EmailInput(attrs={'placeholder': '이메일'}),
+            'nickname': forms.TextInput(attrs={'placeholder': '마이버스커에서 사용할 닉네임'}),
             'usertype': forms.HiddenInput()
         }
 

@@ -1,9 +1,9 @@
 {% extends "base/base.html" %}
 {% load static socialaccount bootstrap4 %}sss
 
+{% block nav %}
+{% endblock %}
 {% block content %}
-
-<link rel="stylesheet" type="text/css" href="{% static "css/_login.css" %}">
 
 <div class="row login">
     <div class="outer">
@@ -23,7 +23,7 @@
                         <button type="submit" class="btn btn-outline-primary login-button">로그인</button>
                     </div>
                     <div class="col-12 login-row">
-                        <a class="btn btn-primary sign-up-button" href="{% url "user_create" %}">회원가입</a>
+                        <a class="btn btn-primary sign-up-button" href="{% url "user_create_choice" %}">회원가입</a>
                     </div>
                     <div class="col-6 pb-5">
                         <a href="{% url "find_email" %}">이메일 찾기</a>
@@ -55,4 +55,6 @@
     </div>
 </div>
 
-{% endblock %}sss
+{% endblock %}
+{% block footer %}
+{% endblock %}

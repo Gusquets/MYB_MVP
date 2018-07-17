@@ -27,6 +27,22 @@
         display: block;
     }
 }
+input[type='checkbox'] {
+    display: none; 
+}
+.checkbox input[type='checkbox'] + label::before {
+    content: ' ';
+    display: inline-block; 
+    width: 36px; 
+    height: 36px;
+    vertical-align: middle;
+    margin: -5px 10px 0 0; 
+    background: #009bfc;
+}
+.checkbox input[type='checkbox']:checked + label::before {
+    background: url('/static/images/check.png');
+    background-position: 18px 0;
+}
 
 .line-dotted {
     height: 1px;
@@ -487,3 +503,202 @@ background: #FFF !important;
 display: none !important;
 }
 
+/* account/_login.css */
+.login{
+    min-height : 750px;
+    max-width  : 500px;
+    margin : auto;
+    text-align: center;
+}
+
+.mb_login_logo{
+    max-width : 150px;
+}
+
+.login-row{
+    padding-bottom : 10px;
+}
+
+.login-button{
+    width : 100%;
+}
+.sign-up-button{
+    width : 100%;
+}
+
+.social-naver {
+    width : 100%;
+    border-color : #2db400;
+    color: #2db400;
+}
+.social-naver:hover {
+    color: #fff !important;
+    background-color: #2db400 !important;
+}
+.social-naver:focus, .social-naver.focus {
+    box-shadow: 0 0 0 0.2rem rgba(45,180,0,0.5) !important;
+}
+.social-naver.disabled, .social-naver:disabled {
+    color: #2db400 !important;
+    background-color: #fff !important;
+}
+.social-naver:not(:disabled):not(.disabled):active, .social-naver:not(:disabled):not(.disabled).active {
+    color: #fff !important;
+    background-color: #2db400 !important;
+}
+.social-naver:not(:disabled):not(.disabled):active:focus, .social-naver:not(:disabled):not(.disabled).active:focus {
+    box-shadow: 0 0 0 0.2rem rgba(45,180,0,0.5) !important;
+}
+.social-kakao {
+    width : 100%;
+    border-color : #3c1e1e;
+    color : #3c1e1e;
+}
+.social-kakao:hover {
+    color: #fff !important;
+    background-color: #3c1e1e !important;
+}
+.social-kakao:focus, .social-kakao.focus {
+    box-shadow: 0 0 0 0.2rem rgba(60,30,30,0.5) !important;
+}
+.social-kakao.disabled, .social-kakao:disabled {
+    color: #3c1e1e !important;
+    background-color: #fff !important;
+}
+.social-kakao:not(:disabled):not(.disabled):active, .social-kakao:not(:disabled):not(.disabled).active {
+    color: #fff !important;
+    background-color: #3c1e1e !important;
+}
+.social-kakao:not(:disabled):not(.disabled):active:focus, .social-kakao:not(:disabled):not(.disabled).active:focus {
+    box-shadow: 0 0 0 0.2rem rgba(60,30,30,0.5) !important;
+}
+.social-facebook {
+    width : 100%;
+    border-color : #4166b0;
+    color : #4166b0;
+}
+.social-facebook:hover {
+    color: #fff !important;
+    background-color: #4166b0 !important;
+}
+.social-facebook:focus, .social-facebook.focus {
+    box-shadow: 0 0 0 0.2rem rgba(65,102,176,0.5) !important;
+}
+.social-facebook.disabled, .social-facebook:disabled {
+    color: #4166b0 !important;
+    background-color: #fff !important;
+}
+.social-facebook:not(:disabled):not(.disabled):active, .social-facebook:not(:disabled):not(.disabled).active {
+    color: #fff !important;
+    background-color: #4166b0 !important;
+}
+.social-facebook:not(:disabled):not(.disabled):active:focus, .social-facebook:not(:disabled):not(.disabled).active:focus {
+    box-shadow: 0 0 0 0.2rem rgba(65,102,176,0.5) !important;
+}
+
+/* accounts/signup_choice.css */
+.Signup_choice{
+    min-height : 800px;
+    max-width : 1000px;
+    text-align : center;
+    margin : auto;
+}
+
+.Signup-title{
+    padding-top : 3rem;
+    padding-bottom : 3rem;
+}
+
+.Signup-audience{
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+    background-image : url("/static/images/signup-img1@3x.png");
+    min-height : 500px;
+    border-right : 4px;
+    line-height : 500px;
+}
+.Signup-artist{
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+    background-image: url("/static/images/signup-img2@3x.png");
+    min-height : 500px;
+    border-left : 4px;
+    line-height : 500px;
+}
+
+.Signup-caption{
+    color : white;
+    margin :  auto;
+    vertical-align : middle;
+    font-size : 25px;
+    font-weight : bold;
+}
+
+@media(max-width : 780px){
+    .Signup_choice{
+        min-height : 500px;
+        max-width : 320px;
+        padding-bottom : 220px;
+    }
+    .Signup-audience{
+        min-height : 180px;
+        line-height : 180px;
+        background-image: url("/static/images/m-signup-img1.png");
+        border : 0;
+        margin-bottom : 10px;
+    }
+
+    .Signup-artist{
+        min-height : 180px;
+        line-height : 180px;
+        background-image: url("/static/images/m-signup-img2.png");
+        border : 0;
+    }
+
+    .Signup-caption{
+        font-size : 18px;
+    }
+}
+
+/* account/signup_1.css */
+.Signup_1{
+    min-height : 750px;
+    max-width  : 400px;
+    margin : auto;
+    text-align: center;
+}
+
+.Signup-title{
+    padding-top : 3rem;
+    padding-bottom : 3rem;
+}
+
+.Signup_form{
+    margin-bottom: 5px;
+}
+
+.Signup_submit {
+    padding-top : 15px;
+    padding-bottom : 5px;
+    width : 100%;
+}
+
+.Signup_submit input{
+    width : 100%;
+    padding-top : 10px;
+    padding-bottom : 10px;
+}
+
+@media(max-width : 780px) {
+    .Signup_1 {
+        min-height: 500px;
+        max-width: 320px;
+        padding-bottom: 20px;
+    }
+
+    .Signup-agree {
+        font-size : 15px;
+    }
+}

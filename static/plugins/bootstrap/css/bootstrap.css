@@ -3151,7 +3151,6 @@ input[type="button"].btn-block {
 
 .dropdown-item {
   display: block;
-  width: 100%;
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
@@ -3171,7 +3170,6 @@ input[type="button"].btn-block {
 .dropdown-item.active, .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #009bfc;
 }
 
 .dropdown-item.disabled, .dropdown-item:disabled {

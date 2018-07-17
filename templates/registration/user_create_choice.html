@@ -1,12 +1,33 @@
-회원가입 유형
+{% extends "base/base.html" %}
+{% load static %}
 
-<form action="{% url "user_create" %}" method="post">
-    {% csrf_token %}
-    <input type="hidden" name="usertype" value=1>
-    <input type="submit" value="일반회원가입">
-</form>
-<form action="{% url "user_create" %}" method="post">
-    {% csrf_token %}
-    <input type="hidden" name="usertype" value=2>
-    <input type="submit" value="아티스트회원가입">
-</form>
+{% block nav %}
+{% endblock %}
+{% block content %}
+<div class="Signup_choice row">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+                <div class="row mb-5">
+                    <!-- 로고는 홈으로 연결 -->
+                    <div class="col-12 Signup-title">
+                        <a href="{% url "website:home" %}"><img src="{% static "images/logo-color.png" %}"></a>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="Signup-audience">
+                            <a href="{% url "user_create" %}?usertype=1"><div class="outer Signup-caption">관객(일반) 회원가입</div></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="Signup-artist">
+                            <a href="{% url "user_create" %}?usertype=2"><div class="outer Signup-caption">아티스트 회원가입</div></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
