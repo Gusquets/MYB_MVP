@@ -1,0 +1,489 @@
+.mobile-only {
+    display: block;
+}
+.mobile-only-row {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -ms-flex-wrap:wrap;
+    flex-wrap:wrap;
+    margin-right:-15px;
+    margin-left:-15px
+}
+@media (min-width: 576px) {
+    .mobile-only {
+        display: none;
+    }
+    .mobile-only-row {
+        display: none;
+    }
+}
+
+.mobile-none {
+    display: none;
+}
+@media (min-width: 576px) {
+    .mobile-none { 
+        display: block;
+    }
+}
+
+.line-dotted {
+    height: 1px;
+    border-bottom: 1px dotted #d5d5d5;
+}
+/* base/style.css */
+body {
+	font-family: 'Nanum Gothic', sans-serif !important;
+}
+
+label {
+    font-weight : bold;
+}
+/* 가운데 정렬 */
+.outer {
+    display: table;
+    height: 100%;
+    width: 95%;
+    margin: auto;
+   /* max-width: 1200px; */
+}
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+}
+.bottom {
+    display : table-cell;
+    vertical-align : bottom;
+}
+/* 강구헌이 자주쓰는 */
+
+.row{
+    padding : 0px;
+    margin : 0px;
+
+}
+
+.txt-center{
+    text-align : center;
+}
+.txt-right{
+    text-align : right;
+}
+.txt-left{
+    text-align : left;
+}
+.txt-pre{
+    white-space : pre;
+}
+.txt-blue{
+    color : #009bfc;
+}
+
+.mtb_auto{
+    margin-top : auto;
+    margin-bottom : auto;
+}
+
+/* 꾸밈 선 */
+.upper_sm_line{
+    width : 70px;
+    border-top : solid white 1px;
+    padding-bottom : 7px;
+    margin : auto;
+}
+
+.upper_bg_line{
+    width : 140px;
+    border-top : solid white 1px;
+    margin : auto;
+    padding-bottom : 15px;
+}
+
+.line_blue{
+    border-top : solid #009bfc 1px;
+}
+
+/* 마이버스커 버튼 */
+
+/* 주 버튼 - class btn과 함께 사용할 것 */
+.mb_main_button{
+    width : 230px;
+    height : 70px;
+    background : white;
+    color : black;
+    border-radius : 40px;
+    font-family : 'Nanum Gothic', sans-serif;
+    font-weight : bold;
+}
+
+.b_sha_blue{
+    box-shadow: 0 50px 60px 0 #22a0e8;
+}
+
+.b_sha_gray{
+    box-shadow: 0 50px 60px 0 #dedede;
+}
+
+.b_sha_lg_blue{
+    box-shadow: 0 50px 60px 0 #007dc4;
+}
+
+
+@media(max-width : 780px){
+    /* 모바일 버튼 크기 조정 */
+    .mb_main_button{
+        width: 220px;
+        height : 66px;
+
+    }
+    .b_sha_blue{
+        box-shadow: 0 20px 40px 0 #22a0e8;
+    }
+
+    .b_sha_gray{
+        box-shadow: 0 20px 40px 0 #dedede;
+    }
+
+    .b_sha_lg_blue{
+        box-shadow: 0 20px 40px 0 #007dc4;
+    }
+
+    /* 모바일 패딩 0 */
+    .mb_pd_0{
+        padding : 0
+    }
+
+    /* 모바일 텍스트 구현 */
+    .mb_txt_pre{
+        white-space : pre;
+    }
+
+}
+
+/* base/nav.css */
+@media (min-width: 0px) and (max-width: 996px){
+	.navi{
+		display: none;
+	}
+	.navi-mobile{
+		display: block;
+	}
+}
+@media (min-width: 997px){
+	.navi{
+		display: block;
+	}
+	.navi-mobile{
+		display: none;
+	}
+}
+/* 네비게이션 PC 버전 */
+.navi{
+    z-index: 100;
+    width: 100%;
+}
+.navi a{
+	color: rgb(0, 0, 0) !important;
+	font-weight: bold;
+	margin:0px 10px;
+}
+.navi .auth{
+	color: rgb(39, 105, 129) !important;
+	font-weight: bold;
+	font-size: 14px;
+	margin:0px 5px;
+}
+.navi .navbar-brand{
+	    float: left;
+}
+/* 네비게이션 서치바 */
+.navi .nav-search{
+	height: 30px;
+    background: rgba(255, 255, 255, 0);
+    border: none;
+    color: rgb(39, 105, 129);
+    font-weight: bold;
+}
+.navi .nav-search:focus{
+	outline: none !important;
+}
+.navi .nav-search-btn{
+    background: rgba(255,255,255,0);
+    border: none;
+    margin-left: 0px;
+    cursor: pointer;
+}
+.navi .nav-search-btn:focus{
+    outline: none;
+}
+.navi .nav-search-form{
+	border-bottom: 2px solid rgb(39, 105, 129);
+}
+
+/* 네비게이션 모바일 버전 */
+.navi-mobile{
+	text-align: center;
+	background: rgba(255, 255, 255);
+	padding: 0px !important;
+	position: fixed;
+    z-index: 1;
+    width: 100%;
+    transition: 0.5s;
+}
+.navi-bg{
+	background: rgba(255, 255, 255, 0);
+	transition: 0.5s;
+}
+.navi-group{
+	padding: .5rem 1rem;
+}
+.navi-mobile .menu{
+	float: left;
+	border:none;
+	padding: 0px !important;
+}
+.navi-mobile .menu:focus{
+	outline:none;
+}
+.navi-mobile .search{
+	float: right;
+}
+.navi-mobile img{
+	padding: 8px;
+}
+
+/* 모바일 메뉴 */
+.navi-mobile .navi-white{
+	background: rgb(255, 255, 255);
+}
+.navi-mobile .nav-link{
+	color: rgb(0, 0, 0) !important;
+	font-weight: bold;
+	font-size: 18px;
+	padding: 15px 0px;
+}
+.navi-mobile .navbar-collapse{
+	/*background:rgb(255, 255, 255);*/
+}	
+.navi-mobile .auth-group{
+	padding: 15px 0px;
+	border-top: 1px solid rgb(200, 200, 200);
+}
+.navi-mobile .auth{
+	width: 50%;
+	float: left;
+    padding-bottom: 15px;
+    background: rgb(255, 255, 255);
+}
+.navi-mobile .auth a{
+	font-size: 16px;
+	font-weight:bold;
+	text-align: center;
+	color:rgb(39, 105, 129) !important;
+	text-decoration: none;
+}
+
+/* base/footer */
+.footer{
+	width : 100%;
+	background: rgb(50, 50, 50);
+	color : rgb(200, 200, 200) !important;
+}
+.footer a{
+	color : rgb(200, 200, 200) !important;
+	text-decoration: none;
+}
+
+/* main/process.css */
+.w-70_slide3{
+    width : 70%!important;
+    margin:auto;
+}
+.Ractangle-4 {
+    background-color: #eff4f6;
+}
+
+.mb_slide3_title{
+    font-family: 'Nanum Square', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    color: #009bfc;
+    font-weight:300;
+}
+.mb_slide3_title_sub{
+    font-size : 18px;
+    color : #626262;
+}
+.mb_main_slide3_container{
+    background : white;
+    margin: auto;
+    width: 165px;
+    height: 165px;
+    border-radius: 95px;
+    margin-bottom: 30px;
+    position:relative;
+}
+.mb_slide3_icons{
+    width : 45%;
+    margin-top : 25%
+}
+.mb_main_slide3_text{
+    font-size : 20px;
+    font-weight : bolder;
+}
+.slide3_sub_text{
+    margin-top : 5px;
+    color : #626262;
+    font-size : 14px;
+}
+
+@media (max-width: 780px) {
+        .mb_slide3_title{
+            font-size : 30px;
+        }
+        .mb_main_slide3_container {
+            width: 100px;
+            height: 100px;
+            border-radius: 65px;
+        }
+
+        .mb_slide3_title_sub{
+            font-size : 15px;
+        }
+
+        .mb_main_slide3_text{
+            font-size : 18px;
+            margin-bottom : 5px;
+    }
+    .mb_main_carousel img {
+        width: 100%;
+    }
+}
+@media (max-width: 578px){
+        .w-70_slide3{
+            width : 100%!important;
+            margin:auto;
+        }
+}
+
+/* main/recommend.css */
+.recommend{
+    background : #ffffff;
+    padding-top : 6rem;
+    padding-bottom : 5rem;
+}
+
+.mb_slide2_title{
+        font-family: 'Nanum Square', sans-serif;
+        font-size: 40px;
+        text-align: center;
+        color: #009bfc;
+        font-weight:300;
+    }
+.mb_slide2_title_sub{
+    font-size:18px;
+    font-weight:300;
+}
+
+.mb_main_slide2_container{
+        max-width: 750px;
+        margin : auto;
+    }
+
+.rec_btn_label{
+    font-weight : bold;
+}
+
+.rec_btn{
+    box-shadow: 0 50px 80px 0 rgba(222, 222, 222, 0.2);
+    border: solid 1.5px #009bfc;
+}
+@media(max-width : 780px){
+    .recommend{
+        padding-top : 3.5rem;
+        padding-bottom : 2rem;
+    }
+    .mb_slide2_title{
+        font-size : 30px;
+    }
+    .mb_slide2_title_sub{
+        font-size : 15px;
+    }
+
+    .rec_review{
+        padding-bottom : 3rem;
+    }
+}
+
+/* main/registration.css */
+.registration{
+	background-color: #FFF;
+	height: 600px;
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-image: url("/static/images/foot-banner.png");
+	font-family : 'Nanum Square', sans-serif;
+}
+.registration_title{
+	font-size:40px;
+	font-weight : 300;
+}
+
+.registration_text{
+	font-family : 'Nanum Gothic', sans-serif;
+	font-size:18px;
+	font-weight : lighter;
+}
+@media(max-width : 780px){
+    .registration{
+        background-image: url("/static/images/m-foot-banner.png");
+    }
+
+	.registration_text{
+		font-size : 15px;
+	}
+}
+
+/* main/slider.css */
+.slide1{
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 0px;
+    top: 0px;
+    background-image: url("/static/images/slide1.png");
+    height: 620px;
+    font-family : "Nanum Square", sans-serif;
+}
+.inner{
+    color: #eee;
+    text-align: center;
+}
+.carousel-indicators{
+    position : initial;
+    height: 50px;
+    padding-top : 23px;
+    margin-bottom : 0;
+}
+.mb_main_carousel{
+    height: 400px;
+}
+
+.slider_title{
+font-weight : 600;
+text-shadow: 0 0 10px rgba(18, 101, 255, 0.8)
+}
+
+.ytp-button:not([aria-disabled=true]):not([disabled]):not([aria-hidden=true]) {
+background: #FFF !important;
+}
+.ytp-large-play-button svg {
+display: none !important;
+}
+

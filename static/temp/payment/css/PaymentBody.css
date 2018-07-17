@@ -1,0 +1,19 @@
+.payment-body{
+    max-width : 500px;
+    margin : auto;
+    margin-top : 20px;
+}
+
+.payment-artist-img{
+    text-align : center;
+    padding-bottom : 20px;
+}
+
+.payment-artist-img img{
+    width : 100%;
+}
+
+.mb_blue{
+    background : #0088ff;
+    color : white;
+}

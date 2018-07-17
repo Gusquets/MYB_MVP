@@ -1,0 +1,47 @@
+.recommend{
+    background : #ffffff;
+    padding-top : 6rem;
+    padding-bottom : 5rem;
+}
+
+.mb_slide2_title{
+        font-family: 'Nanum Square', sans-serif;
+        font-size: 40px;
+        text-align: center;
+        color: #009bfc;
+        font-weight:300;
+    }
+.mb_slide2_title_sub{
+    font-size:18px;
+    font-weight:300;
+}
+
+.mb_main_slide2_container{
+        max-width: 750px;
+        margin : auto;
+    }
+
+.rec_btn_label{
+    font-weight : bold;
+}
+
+.rec_btn{
+    box-shadow: 0 50px 80px 0 rgba(222, 222, 222, 0.2);
+    border: solid 1.5px #009bfc;
+}
+@media(max-width : 780px){
+    .recommend{
+        padding-top : 3.5rem;
+        padding-bottom : 2rem;
+    }
+    .mb_slide2_title{
+        font-size : 30px;
+    }
+    .mb_slide2_title_sub{
+        font-size : 15px;
+    }
+
+    .rec_review{
+        padding-bottom : 3rem;
+    }
+}

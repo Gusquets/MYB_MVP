@@ -3,49 +3,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% block title %}
     <title>:: 마이버스커 - 버스킹 공유 플랫폼 ::</title>
+    {% endblock %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="/media/main/favicon.png"/>
-    <!-- 부트스트랩 CSS/JS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    <!-- 부트스트랩 CSS/JS -->
+    <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.png" %}"/>
+    <!-- 부트스트랩 CSS -->
+    <link rel="stylesheet" href="{% static "plugins/bootstrap/css/bootstrap.css" %}">
+    <!-- 부트스트랩 CSS -->
 
-    <!-- 구글 폰트 추가  -->
-    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans|Nanum+Brush+Script" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <!-- CUSTOM CSS -->
 
     <!-- 폰트 어썸 -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <!-- 예시 -->
-    <!--<link rel="stylesheet" href="{% static 'main/slider.css' %}"/>-->
-    <!--<link rel="stylesheet" href="{% static 'main/title.css' %}"/>-->
-    <link rel="stylesheet" href="{% static 'base/css/style.css' %}"/>
-    <link rel="stylesheet" href="{% static 'base/css/nav.css' %}"/>
-    <link rel="stylesheet" href="{% static 'base/css/footer.css' %}"/>
-
-    <script src="//code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
     <!-- 네비게이션바 추가 -->
-
-    {% include './Nav.html' %}
-    {% include './NavMobile.html' %}
+    {% block nav %}
+        {% include 'base/nav.html' %}
+        {% include 'base/nav_mobile.html' %}
+    {% endblock %}
 
     <!-- 내용 추가 -->
-    {% block content %}
-
-    {% endblock content %}
+    <div class="content-wrapper">
+        {% block content %}
+        <div style="height: 3000px;"></div>
+        {% endblock content %}
+    </div>
 
     <!-- 내용 추가 -->
     {% block extra_body %}
 
     {% endblock extra_body %}
+
     <!-- Footer 추가 -->
-    {% include './Footer.html' %}
-    <script src="{% static 'base/js/nav.js' %}"></script>
+    {% block footer %}
+        {% include 'base/footer.html' %}
+    {% endblock %}
+    <!-- Javascript -->
+    <script src="{% static "plugins/jquery/jquery-3.3.1.min.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="{% static "plugins/bootstrap/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/custom.js" %}"></script>
+    <script src="{% static "js/scrollify.js" %}"></script>
+    {% block extrajs %}
+    {% endblock %}
 </body>
 </html>

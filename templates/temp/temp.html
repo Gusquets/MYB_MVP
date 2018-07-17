@@ -1,0 +1,105 @@
+{% load static %}
+<!-- PC ver NAV -->
+<nav class="navbar navbar-expand-lg navbar-light mobile-none">
+        <div class="container">
+            <div class="col-8 col-sm-2 order-2 order-sm-first center">
+                <a class="navbar-brand m-0" href="{% url "website:home" %}">
+                    <img src="{% static "images/logo.png" %}" alt="">
+                </a>
+            </div>
+            
+            <div class="collapse navbar-collapse center order-5 col-sm-4 order-sm-2" id="navbar-menu" style="background: yellow;">
+                <a class="dropdown-item" href="">버스킹</a>
+                <a class="dropdown-item" href="">아티스트</a>
+                <a class="dropdown-item" href="">고객센터</a>
+                <div class="dropdown-divider mobile-only"></div>
+                {% if request.user.is_authenticated %}
+                <div class="mobile-only-row">
+                    <a class="col-6" href="" class="">프로필</a>
+                    <a class="col-6" href="" class="">포인트</a>
+                </div>
+                {% else %}
+                <div class="mobile-only-row">
+                    <a class="mobile-only col-6" href="" class="">로그인</a>
+                    <a class="mobile-only col-6" href="" class="">회원가입</a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="collapse navbar-collapse order-7 col-sm-6 order-sm-last center" id="navbar-search">
+                <form class="nav-search-form" method="get" action="">
+                    <input class="nav-search" type="text" name="q">
+                    <button class="nav-search-btn"><img src="{% static "images/search.png" %}" width="16px"></button>
+                </form>
+                {% if request.user.is_authenticated %}
+                    <a class="dropdown-item" href="" class="">프로필</a>
+                    <a class="dropdown-item" href="" class="">포인트</a>
+                {% else %}
+                    <a class="dropdown-item" href="" class="">로그인</a>
+                    <a class="dropdown-item" href="" class="">회원가입</a>
+                {% endif %}
+            </div>
+
+            <div class="col-2 order-first mobile-only">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="col-2 order-4 mobile-only">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-search" aria-controls="navbar-search" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+        </div>
+    </nav>
+<!-- PC ver NAV -->
+<nav class="navbar navbar-expand-lg navbar-light mobile-only">
+        <div class="container justify-content-center">
+            <div class="col-2">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse center order-5" id="navbar-menu" style="background: yellow;">
+                <a class="dropdown-item" href="">버스킹</a>
+                <a class="dropdown-item" href="">아티스트</a>
+                <a class="dropdown-item" href="">고객센터</a>
+                <div class="dropdown-divider"></div>
+                {% if request.user.is_authenticated %}
+                <div class="row">
+                    <a class="col-6" href="" class="">프로필</a>
+                    <a class="col-6" href="" class="">포인트</a>
+                </div>
+                {% else %}
+                <div class="row">
+                    <a class="mobile-only col-6" href="" class="">로그인</a>
+                    <a class="mobile-only col-6" href="" class="">회원가입</a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-8 center">
+                <a class="navbar-brand m-0" href="{% url "website:home" %}">
+                    <img src="{% static "images/logo.png" %}" alt="">
+                </a>
+            </div>
+            <div class="col-2">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-search" aria-controls="navbar-search" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            
+            <div class="collapse navbar-collapse order-7 col-sm-6 order-sm-last center" id="navbar-search">
+                <form class="nav-search-form" method="get" action="">
+                    <input class="nav-search" type="text" name="q">
+                    <button class="nav-search-btn"><img src="{% static "images/search.png" %}" width="16px"></button>
+                </form>
+                {% if request.user.is_authenticated %}
+                    <a class="dropdown-item" href="" class="">프로필</a>
+                    <a class="dropdown-item" href="" class="">포인트</a>
+                {% else %}
+                    <a class="dropdown-item" href="" class="">로그인</a>
+                    <a class="dropdown-item" href="" class="">회원가입</a>
+                {% endif %}
+            </div>
+           
+    </div>
+    </nav>

@@ -1,27 +1,58 @@
-{% load socialaccount %}
-로그인
+{% extends "base/base.html" %}
+{% load static socialaccount bootstrap4 %}sss
 
+{% block content %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_table }}
-    <input type="submit">
-</form>
+<link rel="stylesheet" type="text/css" href="{% static "css/_login.css" %}">
 
-<h3>소셜 로그인</h3>
-<ul>
-    {% for provider in providers %}
-        <li>
-            {% if provider.social_app %}
-                <a href="{% provider_login_url provider.id %}">
-                    {{ provider.name }}
-                </a>
-            {% else %}
-                <a>
-                    Provider {{ provider.name }}설정이 필요합니다.
-                </a>
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
-<a href="{% url "password_reset" %}">비밀번호 찾기</a>
+<div class="row login">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+                <form class="row" action="" method="post">
+                    {% csrf_token %}
+                    <!-- 로고 ( 홈 화면으로 링크 )-->
+                    <div class="col-12 login-row pb-5">
+                        <a href="{% url "website:home" %}"><img class="mb_login_logo" src="{% static "images/logo-color@2x.png" %}"></a>
+                    </div>
+                    <!-- 이메일, 비밀번호, 로그인 버튼 -->
+                    {% bootstrap_form_errors form %}
+                    {% bootstrap_field form.username form_group_class='col-12 login-row' placeholder='이메일' show_label=False %}
+                    {% bootstrap_field form.password form_group_class='col-12 login-row' placeholder='비밀번호' show_label=False %}
+                    <div class="col-12 login-row">
+                        <button type="submit" class="btn btn-outline-primary login-button">로그인</button>
+                    </div>
+                    <div class="col-12 login-row">
+                        <a class="btn btn-primary sign-up-button" href="{% url "user_create" %}">회원가입</a>
+                    </div>
+                    <div class="col-6 pb-5">
+                        <a>이메일 찾기</a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{% url "password_reset" %}">비밀번호 재설정</a>
+                    </div>
+                 </form>
+                <!-- 여기 줄 같은 것 하나 들어가야 함 -->
+                 <div class="line-dotted mb-5"></div>
+                <!-- 소셜 로그인 버튼 자세한 수정 필요 -->
+                 <div class="row social-login">
+                     {% for provider in providers %}
+                        {% if provider.social_app %}
+                            <div class="col-12 login-row">
+                                {% if provider.name == "Naver" %}
+                                    <a class="btn btn-outline-primary social-naver txt-pre" href="{% provider_login_url provider.id %}"><img src="{% static "images/naver.png" %}">  네이버로 시작하기</a>
+                                {% elif provider.name == "Kakao" %}
+                                    <a class="btn btn-outline-primary social-kakao txt-pre" href="{% provider_login_url provider.id %}"><img src="{% static "images/kakao.png" %}">  카카오톡으로 시작하기</a>
+                                {% elif provider.name == "Facebook" %}
+                                    <a class="btn btn-outline-primary social-facebook txt-pre" href="{% provider_login_url provider.id %}"><img src="{% static "images/facebook.png" %}">  페이스북으로 시작하기</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                     {% endfor %}
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}sss

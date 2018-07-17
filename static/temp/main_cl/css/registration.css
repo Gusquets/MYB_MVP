@@ -1,0 +1,28 @@
+.registration{
+	background-color: #FFF;
+	height: 600px;
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-image: url("/media/main/foot-banner.png");
+	font-family : 'Nanum Square', sans-serif;
+}
+.registration_title{
+	font-size:40px;
+	font-weight : 300;
+}
+
+.registration_text{
+	font-family : 'Nanum Gothic', sans-serif;
+	font-size:18px;
+	font-weight : lighter;
+}
+@media(max-width : 780px){
+    .registration{
+        background-image: url("/media/main/m-foot-banner.png");
+    }
+
+	.registration_text{
+		font-size : 15px;
+	}
+}
