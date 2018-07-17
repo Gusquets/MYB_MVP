@@ -17,11 +17,20 @@
                 </li>
             </ul>
             {% if user.is_authenticated %}
+            <div class="nav">
+                <li class="nav-item">
+                    <form class="nav-search-form" method="get" action="">
+                        <input class="nav-search" type="text" name="q">
+                        <button class="nav-search-btn"><img src="{% static "images/search.png" %}" width="16px"></button>
+                    </form>
+                </li>
+            </div> 
             <li class="nav nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-sm text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ request.user.nickname }}님
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url "profile" %}">프로필</a>
                     <a class="dropdown-item" href="{% url "logout" %}?next={{ request.path }}">로그아웃</a>
                 </div>
             </li>
