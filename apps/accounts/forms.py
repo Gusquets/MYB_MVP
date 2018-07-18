@@ -56,6 +56,14 @@ class ArtistCreateForm(forms.ModelForm):
     class Meta:
         model = Artist
         fields = '__all__'
+        widgets = {
+            'description': forms.Textarea(attrs={
+                'rows': 3,
+            }),
+            'image': forms.ClearableFileInput(attrs={
+                'multiple': True,
+            })
+        }
 
 
 class UserUpdateForm(forms.ModelForm):

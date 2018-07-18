@@ -26,18 +26,13 @@ class UserManager(BaseUserManager):
 
 
 def artist_image_upload_to(instance, filename):
-    return '/'.join([instance.artist.name, 'images'])
-
+    return '/'.join([instance.name, 'title_images/', filename])
 
 class Artist(models.Model):
     name = models.CharField('아티스트명', max_length = 50)
     description = models.TextField('아티스트 소개')
     is_verify = models.BooleanField('아티스트 인증여부', default = False)
-    image_1 = models.ImageField('사진 1', upload_to=artist_image_upload_to, blank = True, null = True)
-    image_2 = models.ImageField('사진 2', upload_to=artist_image_upload_to, blank = True, null = True)
-    image_3 = models.ImageField('사진 3', upload_to=artist_image_upload_to, blank = True, null = True)
-    image_4 = models.ImageField('사진 4', upload_to=artist_image_upload_to, blank = True, null = True)
-    image_5 = models.ImageField('사진 5', upload_to=artist_image_upload_to, blank = True, null = True)
+    image = models.ImageField('사진', upload_to = artist_image_upload_to)
     movie_1 = models.URLField('Youtube 영상 1', blank = True, null = True)
     movie_2 = models.URLField('Youtube 영상 2', blank = True, null = True)
     movie_3 = models.URLField('Youtube 영상 3', blank = True, null = True)
@@ -94,3 +89,15 @@ class User(AbstractUser):
     
     def get_user_type(self):
         return self.usertype
+
+
+def artist_image_upload_to_2(instance, filename):
+    return '/'.join([instance.artist.name, 'images/', filename])
+
+class ArtistImages(models.Model):
+    artist = models.ForeignKey(Artist, verbose_name = '아티스트', on_delete = models.CASCADE)
+    image = models.ImageField('사진 1', upload_to=artist_image_upload_to_2)
+
+    class Meta:
+        verbose_name = '아티스트 사진'
+        verbose_name_plural = '아티스트 사진'

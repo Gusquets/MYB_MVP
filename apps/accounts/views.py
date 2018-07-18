@@ -16,7 +16,7 @@ from allauth.socialaccount.models import SocialApp
 from allauth.socialaccount.templatetags.socialaccount import get_providers
 
 from .forms import UserCreateForm, ArtistCreateForm, UserUpdateForm, SetPasswordForm, PasswordChangeForm
-from .models import Artist
+from .models import Artist, ArtistImages
 from apps.common.mixins import LoginRequiredMixin
 
 User = get_user_model()
@@ -81,6 +81,11 @@ class ArtistCreate(CreateView):
         artist = self.object
 
         self.request.user.artist = artist
+
+        files = self.request.FILES.getlist('image')
+        for f in files:
+            ArtistImages.objects.create(artist = artist, image = f)
+        
         self.request.user.save()
         return response
 

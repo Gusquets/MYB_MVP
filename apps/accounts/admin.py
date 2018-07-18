@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils.safestring import mark_safe
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserCreationForm
-from .models import Artist
+from .models import Artist, ArtistImages
 User = get_user_model()
 
 
@@ -59,11 +59,6 @@ class ArtistAdmin(admin.ModelAdmin):
             'description',
         ]}),
         ('아티스트 소개', {'fields': [
-            'image_1',
-            'image_2',
-            'image_3',
-            'image_4',
-            'image_5',
             'movie_1',
             'movie_2',
             'movie_3',
@@ -81,3 +76,10 @@ class ArtistAdmin(admin.ModelAdmin):
         return len(artist.user_set.all())
 
     get_user_number.short_description = '회원수'
+
+
+@admin.register(ArtistImages)
+class ArtistImagesAdmin(admin.ModelAdmin):
+    list_display = ['artist']
+    list_display_links = ['artist']
+    search_fields = ['artist']

@@ -1,4 +1,97 @@
+{% extends "base/base.html" %}
+{% load static bootstrap4 %}
+
+{% block nav %}
+{% endblock %}
+{% block content %}
+<div class="Signup_2 row">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+                <form id="artist_create" class="row mb-5 form-group" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- 로고는 홈으로 연결 -->
+                    <div class="col-12 Signup-title">
+                        <a href="{% url "website:home" %}"><img src="{% static "images/logo-color.png" %}"></a>
+                    </div>
+                    <label for="id_name">아티스트 이름</label><br>
+                    {% bootstrap_field form.name form_group_class='col-12 p-0' show_label=False placeholder='아티스트 이름' %}
+                    <label for="id_description">간단한 소개</label><br>
+                    {% bootstrap_field form.description  form_group_class='col-12 p-0' show_label=False placeholder='간단한 소개' %}
+                    <label for="id_image">사진 (최대 5장)</label><br>
+                    {% bootstrap_field form.image form_group_class='col-12 p-0' show_label=False %}
+                    <label for="id_movie_1">영상 (최대 3개)</label><br>
+                    {% bootstrap_field form.movie_1 form_group_class='col-12 p-0' show_label=False placeholder='youtube 영상주소 1' %}
+                    {% bootstrap_field form.movie_2 form_group_class='col-12 p-0' show_label=False placeholder='youtube 영상주소 2' %}
+                    {% bootstrap_field form.movie_3 form_group_class='col-12 p-0' show_label=False placeholder='youtube 영상주소 3' %}
+
+                    <label for="id_social_fb">SNS 주소</label><br>
+                    {% bootstrap_field form.social_fb form_group_class='col-12 p-0' show_label=False placeholder='페이스북' %}
+                    {% bootstrap_field form.social_youtube form_group_class='col-12 p-0' show_label=False placeholder='유튜브' %}
+                    {% bootstrap_field form.social_insta form_group_class='col-12 p-0' show_label=False placeholder='인스타그램' %}
+
+                    <div class="Signup_submit">
+                    <input type="submit" value="회원가입하기" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block extrajs %}
+<script>
+    $('.form-control').addClass('Signup_form mb-4');
+    $('#id_movie_1').removeClass('mb-4');
+    $('#id_movie_2').removeClass('mb-4');
+    $('#id_social_fb').removeClass('mb-4');
+    $('#id_social_youtube').removeClass('mb-4');
+    $(function(){
+        $("input[type='submit']").click(function(e){
+            e.preventDefault();
+            var $fileUpload = $("input[type='file']");
+            if (parseInt($fileUpload.get(0).files.length)>5){
+             alert("사진은 최대 5장까지 등록할 수 있습니다.");
+            }
+            else{
+                $('#artist_create').submit();
+            }
+        });    
+    });
+</script>
+{% endblock %}
+{% csrf_token %}
+    <!-- 로고는 홈으로 연결 -->
+    <div class="col-12 Signup-title">
+        <a href="{% url "website:home" %}"><img src="{% static "images/logo-color.png" %}"></a>
+    </div>
+    <label for="id_email">이메일</label><br>
+    {% bootstrap_field form.email form_group_class='col-12 p-0' show_help=False show_label=False %}
+    <label for="id_password1">비밀번호</label><br>
+    {% bootstrap_field form.password1 form_group_class='col-12 p-0' show_help=False show_label=False %}
+    {% bootstrap_field form.password2 form_group_class='col-12 p-0' show_help=False show_label=False %}
+    <label for="id_phone_number">휴대폰 번호</label><br>
+    {% bootstrap_field form.phone_number form_group_class='col-12 p-0' placeholder='(-) 제외' show_help=False show_label=False %}
+    <label for="nickname">닉네임</label><br>
+    {% bootstrap_field form.nickname form_group_class='col-12 p-0' placeholder='마이버스커에서 사용할 닉네임' show_help=False show_label=False %}
+    {% bootstrap_field form.usertype form_group_class='col-12 p-0' placeholder='마이버스커에서 사용할 닉네임' show_help=False show_label=False %}
+
+
+
+
+
+
+
 아티스트회원가입
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit" value="아티스트등록">
+</form>
 
 <form action="" method="post">
     {% csrf_token %}

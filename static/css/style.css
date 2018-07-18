@@ -40,8 +40,8 @@ input[type='checkbox'] {
     background: #009bfc;
 }
 .checkbox input[type='checkbox']:checked + label::before {
-    background: url('/static/images/check.png');
-    background-position: 18px 0;
+    background: url('/static/images/checked.png');
+    background-position: 0 0;
 }
 
 .line-dotted {
@@ -693,6 +693,47 @@ display: none !important;
 
 @media(max-width : 780px) {
     .Signup_1 {
+        min-height: 500px;
+        max-width: 320px;
+        padding-bottom: 20px;
+    }
+
+    .Signup-agree {
+        font-size : 15px;
+    }
+}
+
+/* account/signup_2.css */
+.Signup_2{
+    min-height : 750px;
+    max-width  : 400px;
+    margin : auto;
+    text-align: center;
+}
+
+.Signup-title{
+    padding-top : 3rem;
+    padding-bottom : 3rem;
+}
+
+.Signup_form{
+    margin-bottom: 5px;
+}
+
+.Signup_submit {
+    padding-top : 15px;
+    padding-bottom : 5px;
+    width : 100%;
+}
+
+.Signup_submit input{
+    width : 100%;
+    padding-top : 10px;
+    padding-bottom : 10px;
+}
+
+@media(max-width : 780px) {
+    .Signup_2 {
         min-height: 500px;
         max-width: 320px;
         padding-bottom: 20px;
