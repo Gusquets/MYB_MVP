@@ -1,8 +1,25 @@
-profile
+{% extends "base/base.html" %}
+{% load static %}
 
-{{ request.user.email }}
-{{ request.user.nickname }}
-<br/>
-<a href="{% url "user_update" %}">프로필 수정</a>
-<a href="{% url "password_change" %}">비밀번호 변경</a>
-<a href="{% url "website:home" %}">홈으로</a>
+{% block content %}
+<!-- 타이틀 영역 -->
+<div>
+        {% include 'accounts/partials/profile_header.html' %}
+        </div>
+        
+        <!-- 마이페이지 본문 -->
+        
+        <div class="row mypage-grid">
+            <div class="col-12 _mobile">
+                {% include 'accounts/partials/profile_buttons_mobile.html' %}
+            </div>
+            <div class="col-md-9 col-12 mobile-pd0">
+                {% include 'accounts/partials/profile_body.html' %}
+            </div>
+        <!--마이페이지 우측 버튼 -->
+            <div class="col-md-3 col-12 _desktop">
+                {% include 'accounts/partials/profile_buttons.html' %}
+            </div>
+        </div>
+        
+{% endblock %}

@@ -59,6 +59,7 @@ class ArtistAdmin(admin.ModelAdmin):
             'description',
         ]}),
         ('아티스트 소개', {'fields': [
+            'image',
             'movie_1',
             'movie_2',
             'movie_3',

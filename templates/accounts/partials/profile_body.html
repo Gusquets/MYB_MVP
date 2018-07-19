@@ -7,50 +7,57 @@
         <div class="col-12 mypage-subtitle">
             공연
         </div>
-        <div class="col-md-6 col-12 row">
-            <div class="col-6">
-                여기는 사진
+        {% for basket in basket_concert %}
+            <div class="col-md-6 col-12 row">
+                <div class="col-6">
+                    <a class="txt-black" href="{% url "concert:concert_detail" basket.concert.id %}">
+                    <img src="{{ basket.concert.artist.image.url }}" width="100%" alt="">
+                    </a>
+                </div>
+                <div class="col-6">
+                    <a class="txt-black" href="{% url "concert:concert_detail" basket.concert.id %}">
+                    {{ basket.concert.artist.name }}<br>
+                    {{ basket.concert.date }}<br>
+                    {{ basket.concert.location_1 }}
+                    </a>
+                </div>
             </div>
-            <div class="col-6">
-                아티스트 이름<br>
-                공연 날짜<br>
-                공연 장소
+        {% empty %}
+        <div class="row align-items-center m-height-220">
+            <div class="col-12">
+                    찜한 공연이 없습니다.
             </div>
         </div>
-        <div class="col-md-6 col-12 row">
-            <div class="col-6">
-                여기는 사진
-            </div>
-            <div class="col-6">
-                아티스트 이름<br>
-                공연 날짜<br>
-                공연 장소
-            </div>
-        </div>
+        {% endfor %}
         <div class="col-12 mypage-subtitle">
             아티스트
         </div>
+        {% for basket in basket_artist %}
         <div class="col-md-6 col-12 row">
             <div class="col-6">
-                여기는 사진
+                <a class="txt-black" href="{% url "artist_detail" basket.artist.id %}">
+                <img src="{{ basket.artist.image.url }}" width="100%" alt="">
+                </a>
             </div>
             <div class="col-6">
-                아티스트 이름<br>
-                팀소개
+                <a class="txt-black" href="{% url "artist_detail" basket.artist.id %}">
+                {{ basket.artist.name }}<br>
+                {{ basket.artist.description }}
+                </a>
             </div>
         </div>
-        <div class="col-md-6 col-12 row">
-            <div class="col-6">
-                여기는 사진
-            </div>
-            <div class="col-6">
-                아티스트 이름<br>
-                팀소개
+        {% empty %}
+        <div class="row align-items-center m-height-220">
+            <div class="col-12">
+                    찜한 아티스트가 없습니다.
             </div>
         </div>
+        {% endfor %}
     </div>
-    <div class="col-12">
-        <div class="_more txt-center mb-4"> 찜한 내역 더보기 + </div>
+    <div class="col-12 mt-3">
+        <a href="{% url "preference:my_basket" %}">
+            <div class="_more txt-center mb-4"> 찜한 내역 더보기 + </div>
+        </a>
     </div>
     <div class="col-12 mypage-title">
         내가 썼던 후기

@@ -48,6 +48,9 @@ input[type='checkbox'] {
     height: 1px;
     border-bottom: 1px dotted #d5d5d5;
 }
+.m-height-220 {
+    min-height: 220px;
+}
 /* base/style.css */
 body {
 	font-family: 'Nanum Gothic', sans-serif !important;
@@ -98,6 +101,9 @@ label {
 }
 .txt-blue{
     color : #009bfc;
+}
+.txt-black{
+    color: #212529;
 }
 
 .mtb_auto{
@@ -742,4 +748,151 @@ display: none !important;
     .Signup-agree {
         font-size : 15px;
     }
+}
+
+/* accounts/signup_complete.css */
+.signup-complete-outer{
+    max-width : 350px;
+    margin : auto;
+}
+
+.signup-complete-section{
+    min-height : 750px;
+}
+
+.signup-complete-logo{
+    margin-bottom : 2rem;
+}
+
+.signup-complete-title{
+    font-size : 25px;
+    font-family : "Nanum Gothic", sans-serif;
+    font-weight : bold;
+    margin-top: 2rem;
+    padding-bottom : 2rem;
+}
+.signup-complete-img{
+    max-width : 400px;
+    margin :auto;
+}
+
+@media(max-width : 568px){
+    .signup-complete-section{
+        min-height : 700px;
+    }
+
+}
+
+/* accounts/mypage.css */
+.mypage-grid{
+    max-width : 1100px;
+    margin : auto;
+    margin-top : 2rem;
+    margin-bottom : 3rem;
+}
+
+._mobile{
+    display : none;
+}
+
+@media(max-width :780px){
+    ._desktop{
+        display : none;
+    }
+
+    ._mobile{
+        display : block;
+    }
+
+    .mypage-grid{
+        margin-top :0;;
+    }
+}
+
+/* accounts/mypage_body.css */
+.mypage-body{
+    border : solid 1px #dedede;
+    border-radius : 4px;
+    padding-left : 10px;
+    padding-right : 10px
+}
+
+.mypage-title{
+    font-size : 18px;
+    font-weight : bold;
+    color : #0088ff;
+    padding-bottom : 1rem;
+}
+
+.mypage-subtitle{
+    font-size : 16px;
+    font-weight : bold;
+    padding-bottom : 5px;
+}
+
+._more{
+    max-width : 460px;
+    padding-top : 15px;
+    padding-bottom : 15px;
+    color : #707070;
+    margin : auto;
+    border: solid 1px #dedede;
+    border-radius : 5px;
+}
+
+@media(max-width : 567px){
+    .mypage-body{
+        border-radius : 0;
+        border-top : solid 1px #dedede;
+        border-left : none;
+        border-right : none;
+        padding-left : 0;
+        padding-right : 0;
+    }
+    .mobile-pd0{
+        padding : 0;
+    }
+}
+
+/* accounts/mypage_header.css */
+.mypage-section{
+    height : 310px;
+    font-family : 'Nanum Gothic', sans-serif;
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+    background-image: url("../images/sub-top-bg.png");
+    font-weight : bold;
+}
+.mb_sub_title{
+    font-size : 30px;
+    color: white;
+}
+
+.mypage_username{
+    font-size :20px;
+    color : white;
+}
+
+@media(max-width : 780px){
+    .mypage-section{
+        height : 264px;
+    }
+}
+
+/* accounts/mypage_buttons.css */
+.mypage_buttons{
+    max-width : 260px;
+    margin : auto;
+    padding-top : 1rem;
+    padding-bottom : 1rem;
+    border : solid 1px #dedede;
+    border-radius : 4px;
+}
+
+.mypage_buttons .col-12{
+    padding-top : 15px;
+    padding-bottom : 15px;
+    font-size : 16px;
+    font-weight : bold;
 }

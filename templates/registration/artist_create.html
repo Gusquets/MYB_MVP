@@ -63,38 +63,3 @@
     });
 </script>
 {% endblock %}
-{% csrf_token %}
-    <!-- 로고는 홈으로 연결 -->
-    <div class="col-12 Signup-title">
-        <a href="{% url "website:home" %}"><img src="{% static "images/logo-color.png" %}"></a>
-    </div>
-    <label for="id_email">이메일</label><br>
-    {% bootstrap_field form.email form_group_class='col-12 p-0' show_help=False show_label=False %}
-    <label for="id_password1">비밀번호</label><br>
-    {% bootstrap_field form.password1 form_group_class='col-12 p-0' show_help=False show_label=False %}
-    {% bootstrap_field form.password2 form_group_class='col-12 p-0' show_help=False show_label=False %}
-    <label for="id_phone_number">휴대폰 번호</label><br>
-    {% bootstrap_field form.phone_number form_group_class='col-12 p-0' placeholder='(-) 제외' show_help=False show_label=False %}
-    <label for="nickname">닉네임</label><br>
-    {% bootstrap_field form.nickname form_group_class='col-12 p-0' placeholder='마이버스커에서 사용할 닉네임' show_help=False show_label=False %}
-    {% bootstrap_field form.usertype form_group_class='col-12 p-0' placeholder='마이버스커에서 사용할 닉네임' show_help=False show_label=False %}
-
-
-
-
-
-
-
-아티스트회원가입
-
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_table }}
-    <input type="submit" value="아티스트등록">
-</form>
-
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_table }}
-    <input type="submit" value="아티스트등록">
-</form>

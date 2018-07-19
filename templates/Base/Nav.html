@@ -1,7 +1,7 @@
 {% load static %}
 <div style="position: fixed; z-index: 100; width: 100%;" class="navi-bg">
     <nav class="navbar navbar-expand navbar-dark navi container pt-3 pb-3">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url "website:home" %}">
             <img src="{% static "images/logo.png" %}" height="32" class="d-inline-block align-top" alt="">
         </a>
         <div class="collapse navbar-collapse" id="navbarsExample02">
@@ -30,7 +30,7 @@
                     {{ request.user.nickname }}님
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url "profile" %}">프로필</a>
+                    <a class="dropdown-item" href="{% url "profile" %}">마이페이지</a>
                     <a class="dropdown-item" href="{% url "logout" %}?next={{ request.path }}">로그아웃</a>
                 </div>
             </li>

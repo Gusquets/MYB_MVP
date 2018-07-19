@@ -11,6 +11,7 @@ urlpatterns = [
     path('signup/', views.UserCreate.as_view(), name = 'user_create'),
     path('signup/choice/', views.UserCreateChoice.as_view(), name = 'user_create_choice'),
     path('signup/artist/', views.ArtistCreate.as_view(), name = 'artist_create'),
+    path('signup/complete/', views.UserCreateComplete.as_view(), name='user_create_complete'),
 
     path('password/change', views.PasswordChangeView.as_view(), name='password_change'),
 

@@ -18,6 +18,7 @@ from allauth.socialaccount.templatetags.socialaccount import get_providers
 from .forms import UserCreateForm, ArtistCreateForm, UserUpdateForm, SetPasswordForm, PasswordChangeForm
 from .models import Artist, ArtistImages
 from apps.common.mixins import LoginRequiredMixin
+from apps.preference.models import Basket, Review
 
 User = get_user_model()
 
@@ -27,6 +28,12 @@ class Profile(LoginRequiredMixin, TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['basket_concert'] = Basket.objects.filter(user = self.request.user, artist__isnull = True).order_by('-id')[:2]
+        context['basket_artist'] = Basket.objects.filter(user = self.request.user, concert__isnull = True).order_by('-id')[:2]
+        return context
 
 def login(request):
     providers = []
@@ -44,7 +51,7 @@ def login(request):
 class UserCreate(CreateView):
     template_name = 'registration/user_create.html'
     form_class = UserCreateForm
-    success_url = reverse_lazy('website:home')
+    success_url = reverse_lazy('user_create_complete')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         usertype = self.request.GET.get('usertype','')
@@ -74,7 +81,7 @@ class UserCreateChoice(TemplateView):
 class ArtistCreate(CreateView):
     template_name = 'registration/artist_create.html'
     form_class = ArtistCreateForm
-    success_url = reverse_lazy('website:home')
+    success_url = reverse_lazy('user_create_complete')
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -88,6 +95,11 @@ class ArtistCreate(CreateView):
         
         self.request.user.save()
         return response
+
+
+class UserCreateComplete(TemplateView):
+    template_name = 'registration/user_create_complete.html'
+
 
 class UserUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'registration/user_update.html'

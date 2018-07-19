@@ -29,7 +29,7 @@ def artist_image_upload_to(instance, filename):
     return '/'.join([instance.name, 'title_images/', filename])
 
 class Artist(models.Model):
-    name = models.CharField('아티스트명', max_length = 50)
+    name = models.CharField('아티스트명', max_length = 50, unique=True)
     description = models.TextField('아티스트 소개')
     is_verify = models.BooleanField('아티스트 인증여부', default = False)
     image = models.ImageField('사진', upload_to = artist_image_upload_to)
@@ -61,7 +61,7 @@ class User(AbstractUser):
     last_name = None
 
     email = models.EmailField('이메일', unique=True)
-    nickname = models.CharField('닉네임', max_length=50)
+    nickname = models.CharField('닉네임', max_length=50, unique = True)
     phone_number = models.CharField('휴대폰 번호', max_length = 11, validators=[PhoneNumberValidator()])
     regist_dt = models.DateTimeField('등록시간', auto_now_add=True)
     is_agreed_1 = models.BooleanField('이용약관 동의여부', default = False)
