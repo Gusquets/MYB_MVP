@@ -1,3 +1,26 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- 타이틀 영역 -->
+<div class="artist_list_header">
+{% include 'accounts/partials/artist_list_header.html' %}
+</div>
+
+<!-- 필터 영역 -->
+<div class="artist_list_filter">
+{%  include 'accounts/partials/artist_list_filter.html' %}
+</div>
+
+<!-- 이곳부터 아티스트 -->
+<div class="artist_list_grid">
+{% include 'accounts/partials/artist_list_grid.html' %}
+</div>
+<div style="height: 1000px;"></div>
+{% endblock %}
+
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 아티스트 목록
 <br/>

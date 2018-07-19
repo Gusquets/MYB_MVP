@@ -902,3 +902,53 @@ display: none !important;
     font-size : 16px;
     font-weight : bold;
 }
+
+/* artist_list/_header.css */
+.artist-list-section{
+    height : 310px;
+    font-family : 'Nanum Gothic', sans-serif;
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+    background-image: url("../images/sub-top-bg.png");
+    font-weight : bold;
+}
+.artist-list-mb_sub_title{
+    font-size : 30px;
+    color: white;
+}
+
+@media(max-width : 780px){
+    .artist-list-section{
+        height : 264px;
+    }
+}
+
+/* artist_list/_grid.css */
+.artist_list_grid{
+    max-width : 1140px;
+    margin : auto;
+}
+
+/* artist_list/_filter.css */
+.artist_list_filter{
+    max-width : 1140px;
+    margin : auto;
+}
+
+.mb_filter_menu{
+    display : inline-flex;
+    list-style : none;
+    margin : auto;
+}
+
+.mb_filter_menu li{
+    padding-left : 5px;
+    padding-right : 5px;
+    margin-right : 5px;
+}
+
+.mb_sub_search{
+    max-width : 350px;
+    margin : auto;
+}
