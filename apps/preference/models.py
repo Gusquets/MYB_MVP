@@ -25,11 +25,17 @@ class Review(models.Model):
     description = models.TextField('리뷰')
     is_pay = models.BooleanField('후원 여부', default = False)
     regist_dt = models.DateTimeField('작성 시각', auto_now_add = True)
-    like = models.PositiveIntegerField('좋아요', default = 0)
 
     class Meta:
         verbose_name = '후기'
         verbose_name_plural = '후기'
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, verbose_name = '사용자', on_delete = models.CASCADE)
+    review = models.ForeignKey(Review, verbose_name = '리뷰', on_delete = models.CASCADE)
+    regist_dt = models.DateTimeField('작성 시각', auto_now_add = True)
+
 
 class Answer(models.Model):
     user = models.ForeignKey(User, verbose_name = '사용자', on_delete = models.CASCADE)

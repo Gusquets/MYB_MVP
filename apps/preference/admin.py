@@ -8,3 +8,8 @@ class BasketAdmin(admin.ModelAdmin):
     list_filter = ['artist', 'concert']
     search_fields = ['artist', 'concert']
 
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['user', 'artist', 'rate', 'is_pay', 'like']
+
