@@ -20,5 +20,6 @@ urlpatterns = [
     path('email/find/', views.FindEmail.as_view(), name='find_email'),
 
     path('artist/list/', views.ArtistList.as_view(), name = 'artist_list'),
+    path('artist/list/movie/', views.ArtistList.as_view(), name = 'artist_list_movie'),
     path('artist/detail/<int:pk>/', views.ArtistDetail.as_view(), name = 'artist_detail'),
 ]

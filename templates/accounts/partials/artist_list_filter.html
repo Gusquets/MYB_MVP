@@ -1,9 +1,9 @@
 <div class="row pt-5">
         <div class="col-12 col-md-6">
             <ul class="mb_filter_menu view_choice">
-                <li>사진으로 보기</li>
-                <li>영상으로 보기</li>
-                <li>찜한아티스트 보기</li>
+                <li><a {% if request.path == '/accounts/artist/list/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "artist_list" %}">사진으로 보기</a></li>
+                <li><a {% if request.path == '/accounts/artist/list/movie/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "artist_list_movie" %}">영상으로 보기</a></li>
+                <li><a class="txt-black">찜한아티스트 보기</a></li>
             </ul>
         </div>
         <div class="col-12 col-md-6 pb-5">

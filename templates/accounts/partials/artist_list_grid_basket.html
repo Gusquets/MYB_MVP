@@ -1,0 +1,11 @@
+<div class="row">
+    {% for artist in artist_list %}
+        <div class="col-12 col-md-4 txt-center">
+            <a class="txt-black" href="{% url "artist_detail" artist.id %}">
+                <div><img src="{{ artist.image.url }}" width="80%" alt=""></div>
+                <div class="mt-3"><strong>{{ artist.name }}</strong></div>
+                <div class="mt-3">{{ artist.description }}</div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
