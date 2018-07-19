@@ -102,8 +102,14 @@ label {
 .txt-blue{
     color : #009bfc;
 }
+.txt-red{
+    color: #ff0000;
+}
 .txt-black{
     color: #212529;
+}
+.txt-sm{
+    font-size: .5em;
 }
 
 .mtb_auto{

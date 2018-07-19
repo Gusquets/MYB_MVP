@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Basket, Review, Answer
+from .models import Basket, Review, Answer, Like
 
 @admin.register(Basket)
 class BasketAdmin(admin.ModelAdmin):
@@ -11,5 +11,17 @@ class BasketAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ['user', 'artist', 'rate', 'is_pay', 'like']
+    list_display = ['user', 'artist', 'rate', 'is_pay']
+    list_display_links = ['user', 'artist']
+    list_filter = ['rate', 'is_pay']
+    search_fields = ['artist']
+
+
+@admin.register(Like)
+class LikeAdmin(admin.ModelAdmin):
+    list_display = ['user', 'review']
+    search_fields = ['user']
+
+
+
 

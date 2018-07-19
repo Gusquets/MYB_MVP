@@ -33,6 +33,7 @@ class Profile(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['basket_concert'] = Basket.objects.filter(user = self.request.user, artist__isnull = True).order_by('-id')[:2]
         context['basket_artist'] = Basket.objects.filter(user = self.request.user, concert__isnull = True).order_by('-id')[:2]
+        context['review_list'] = Review.objects.filter(user = self.request.user).order_by('-id')[:3]
         return context
 
 def login(request):

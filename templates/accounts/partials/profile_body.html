@@ -62,11 +62,26 @@
     <div class="col-12 mypage-title">
         내가 썼던 후기
     </div>
-    <div class="col-12 row">
-        <div class="col-md-6 col-12 review-profile">리뷰 프로필</div>
-        <div class="col-md-6 col-12 review-meta">댓글 좋아요 대댓글</div>
-        <div class="col-12">댓글 내용</div>
-    </div>
+    {% for review in review_list %}
+        <div class="col-12 mb-2">
+            <div class="card">
+                <div class="row card-header">
+                    <div class="col-10 {% if review.is_pay %}txt-blue{% endif %}">{{ review.user.nickname }} &rarr; {{ review.artist.name }} | {{ review.regist_dt }}</div> <div class="col-2 txt-red">&hearts; {{ review.like_count }}</div>
+                </div>
+                <div class="card-body pt-0">
+                    <span id="star-count-{{ review.id }}" class="txt-sm"></span><br/>
+                    <script>
+                        var star =''
+                        for(var i=0; i < {{ review.rate }}; i++){
+                            star += '★';
+                        }
+                        document.getElementById('star-count-{{ review.id }}').innerText = star
+                    </script>
+                    {{ review.description }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
     <div class="col-12">
         <div class="_more txt-center mb-4"> 후기 더보기 + </div>
     </div>
