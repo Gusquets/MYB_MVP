@@ -1,0 +1,26 @@
+{% load static %}
+<script src="{% static "plugins/jquery/jquery-3.3.1.min.js" %}"></script>
+내 댓글목록
+<br/>
+<hr/>
+{% for review in review_list %}
+{{ review.user}} / {{ review.artist }} / {{ review.like_count }} / <a class="like" href="{% url "preference:like_create" review.id %}">좋아요</a>
+<br/>
+<hr/>
+{% endfor %}
+<script>
+    $(function() {
+        $('.like').click(function() {
+            $.get($(this).attr('href'))
+            .done(function(response) {
+                alert(response.message);
+                location.reload();
+            })
+            .fail(function(response) {
+                console.log('문제가 발생하였습니다. 다시 시도해 주세요.');
+                console.log(response)
+            });
+            return false;
+        });
+    });
+</script>
