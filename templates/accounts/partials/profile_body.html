@@ -83,7 +83,9 @@
         </div>
     {% endfor %}
     <div class="col-12">
-        <div class="_more txt-center mb-4"> 후기 더보기 + </div>
+        <a href="{% url "preference:my_review" %}">
+            <div class="_more txt-center mb-4"> 후기 더보기 + </div>
+        </a>
     </div>
     <div class="col-12 mypage-title">
         내가 전한 후원

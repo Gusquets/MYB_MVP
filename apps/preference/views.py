@@ -7,7 +7,27 @@ from django.views.decorators.http import require_POST
 from apps.common.mixins import LoginRequiredMixin
 from apps.concert.models import Concert
 from apps.accounts.models import Artist
-from .models import Basket
+from .models import Basket, Review, Like
+
+@login_required
+def like_create(request, pk):
+    review = get_object_or_404(Review, id=pk)
+
+    if Like.objects.filter(user = request.user).filter(review = review).exists():
+        Like.objects.filter(user = request.user).filter(review = review).delete()
+        review.like_count = Like.objects.filter(user = request.user).filter(review = review).count()
+        review.save()
+        message = '좋아요 취소.'
+    else:
+        Like.objects.create(user = request.user, review = review)
+        review.like_count = Like.objects.filter(user = request.user).filter(review = review).count()
+        review.save()
+        message = '좋아요.'
+    
+    context = {'message': message,}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
 
 @login_required
 def basket_create_concert(request, id):
@@ -40,9 +60,18 @@ def basket_create_artist(request, id):
 
 class MyBasket(TemplateView):
     template_name = 'preference/basket/my_basket.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['concert_list'] = self.request.user.basket_set.all().filter(artist__isnull = True)
         context['artist_list'] = self.request.user.basket_set.all().filter(concert__isnull = True)
-        context['hi'] = 'hi'
+        return context
+
+
+class MyReview(TemplateView):
+    template_name = 'preference/review/my_review.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['review_list'] = Review.objects.filter(user = self.request.user)
         return context
