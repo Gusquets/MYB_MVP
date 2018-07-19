@@ -314,7 +314,10 @@ label {
 	color : rgb(200, 200, 200) !important;
 	text-decoration: none;
 }
-
+.modal-title{
+    font-weight : bold;
+    font-size : 20px;
+}
 /* main/process.css */
 .w-70_slide3{
     width : 70%!important;
@@ -730,6 +733,10 @@ display: none !important;
     width : 100%;
     padding-top : 10px;
     padding-bottom : 10px;
+}
+
+.Signup_form label{
+    color : black;
 }
 
 @media(max-width : 780px) {
