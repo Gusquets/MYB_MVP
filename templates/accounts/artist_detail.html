@@ -1,6 +1,29 @@
-아티스트 상세
+{% extends "base/base.html" %}
+{% load static %}
 
-{{ artist.name }}
-<br/>
-<hr/>
-{{ artist.description }}
+{% block content %}
+
+<!-- 타이틀 영역 -->
+<div class="artist_detail_header">
+{% include 'accounts/partials/artist_detail_header.html' %}
+</div>
+
+<!-- 본문 영역 -->
+<div class="row artist_detail mb-5">
+    <div class="col-12 detail-mobile">
+        {% include 'accounts/partials/detail_artist_profile_mobile.html' %}
+    </div>
+    <div class="col-md-8 col-12 detail-info">
+        {% include 'accounts/partials/artist_detail_body.html' %}
+    </div>
+    <div class="col-md-4 col-12 detail">
+        {% include 'accounts/partials/detail_artist_profile.html' %}
+    </div>
+</div>
+
+<!-- 이곳부터 아티스트 -->
+<div class="artist_list_grid">
+
+</div>
+
+{% endblock %}

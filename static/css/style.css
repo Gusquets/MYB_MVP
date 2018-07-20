@@ -87,6 +87,43 @@ input[type='checkbox'] {
   button:hover{
     cursor:pointer;
   }
+
+.slider {
+    width: 100%;
+    max-height: 560px;
+    position: relative;
+    padding-top: 380px;
+}
+.slider>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-height: 380px;
+}
+.slider input[name='slide_switch'] {
+    display: none;
+}
+.slider label {
+    margin: 10px;
+    float: left;
+    cursor: pointer;
+    opacity: 0.6;
+}
+.slider lable img {
+    display: block;
+}
+.slider input[name='slide_switch']:checked+label {
+    opacity: 1;
+}
+.slider input[name='slide_switch'] ~ img {
+    opacity: 0;
+    transform: scale(1.1);
+}
+.slider input[name='slide_switch']:checked+label+img {
+    opacity: 1;
+    transform: scale(1);
+}
+
 /* base/style.css */
 body {
 	font-family: 'Nanum Gothic', sans-serif !important;
@@ -992,4 +1029,140 @@ display: none !important;
 
 .mb_sub_search{
     margin : auto;
+}
+
+/* artist_detail/artistdetailbody.css */
+.detail-selector{
+    font-size : 16px;
+    font-weight : bold;
+    border : solid 1px #dadada;
+    border-radius : 4px;
+    padding-top : 10px;
+    padding-bottom : 10px;
+    margin-top : 5px;
+    cursor : pointer;
+}
+
+._selected{
+    background-image: linear-gradient(82deg, #0088ff, #26a6ff);
+    color : white;
+}
+
+.detail-subtitle{
+    font-size : 18px;
+    color : #0088ff;
+    font-weight : bold;
+    text-align : left;
+}
+
+.review-profile{
+    text-align : left;
+}
+.review-meta{
+    text-align : right;
+}
+
+@media(max-width : 780px){
+    .review-meta{
+        text-align : left;
+    }
+}
+
+/* artist_detail/artistdetailheader.css */
+.artist-detail-section{
+    height : 310px;
+    font-family : 'Nanum Gothic', sans-serif;
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+    background-image: url("../images/sub-top-bg.png");
+    font-weight : bold;
+}
+.artist-detail-mb_sub_title{
+    font-size : 20px;
+    color: white;
+    margin-bottom : 5px;
+}
+
+.artist_profile{
+    height : 120px;
+    width : 120px;
+    background: white;
+    border-radius : 80px;
+    margin : auto;
+    overflow: hidden;
+}
+
+.artist_stat{
+    color : white;
+}
+@media(max-width : 780px){
+    .artist-detail-section{
+        height : 264px;
+    }
+
+    .artist_profile{
+        height : 96px;
+        width : 96px;
+        overflow: hidden;
+    }
+}
+
+/* artist_detail/artistdetailpage.css */
+.artist_detail{
+    max-width : 1100px;
+    margin:auto;
+    margin-top: 30px;
+    text-align : center;
+}
+
+.detail-info{
+    border : solid 1px #dedede;
+    border-radius : 4px;
+}
+
+.detail {
+    border-radius : 4px;
+}
+.detail-mobile{
+    display : none;
+}
+
+@media(max-width : 780px){
+    .detail{
+        display :none;
+    }
+
+    .detail-mobile{
+        display : inherit;
+        padding : 0;
+    }
+
+    .artist_detail{
+        margin-top:0;
+    }
+}
+
+/* artist_detail/detailartistprofile_mobile.css */
+.test{
+    position:fixed;
+    bottom : 0px;
+    width : 100%;
+    background : white;
+    z-index : 100;
+}
+
+/* artist_detail/detailartistprofile.css */
+.detail-right{
+    max-width : 280px;
+    border: solid 1px #dedede;
+    margin : auto;
+    border-radius : 5px;
+    position : fixed;
+}
+
+.mb_action_btn{
+    width : 100%;
+    margin-top : 5px;
+    margin-bottom : 5px;
 }

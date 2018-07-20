@@ -1,11 +1,12 @@
+{% load static %}
 <!-- 이부분 fixed로 해놨는데 자바스크립트로 scroll따라 부드럽게 움직이면 좋을듯! -->
 
 <div class="detail-right pt-3 pb-3 row">
     <div class="col-4">
-        <img src="/media/main/facebook.png">
+        <img src="{% static "images/facebook.png" %}">
     </div>
     <div class="col-4">
-        <img src="/media/main/youtube.png">
+        <img src="{% static "images/youtube.png" %}">
     </div>
     <div class="col-4">
         여기는 인스타

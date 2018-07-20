@@ -173,6 +173,12 @@ class ArtistDetail(DetailView):
     template_name = 'accounts/artist_detail.html'
     model = Artist
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['concert_count'] = len(self.object.concert_set.all())
+        context['images'] = self.object.artistimages_set.all()
+        return context
+
 
 class FindEmail(TemplateView):
     template_name = 'accounts/find_id.html'
