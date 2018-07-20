@@ -39,6 +39,7 @@ class Artist(models.Model):
     social_fb = models.URLField('소셜_페이스북', blank = True, null = True)
     social_insta = models.URLField('소셜_인스타그램', blank = True, null = True)
     social_youtube = models.URLField('소셜_유튜브', blank = True, null = True)
+    rate_avg = models.DecimalField('평점', max_digits=2, decimal_places=1, default = 0)
     regist_dt = models.DateTimeField('등록시간',auto_now_add = True)
 
     class Meta:

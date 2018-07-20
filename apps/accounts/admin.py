@@ -66,6 +66,7 @@ class ArtistAdmin(admin.ModelAdmin):
             'social_fb',
             'social_insta',
             'social_youtube',
+            'rate_avg',
         ]}),
         ('권한', {'fields': (
             'is_verify',

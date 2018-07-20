@@ -1,20 +1,27 @@
 {% load static %}
 <div class="row pt-5">
-        <div class="col-12 col-md-6">
-            <ul class="mb_filter_menu view_choice">
-                <li><a {% if request.path == '/accounts/artist/list/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "artist_list" %}">사진으로 보기</a></li>
-                <li>|</li>
-                <li><a {% if request.path == '/accounts/artist/list/movie/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "artist_list_movie" %}">영상으로 보기</a></li>
-                <li>|</li>
-                <li><a {% if request.path == '/accounts/artist/list/basket/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "artist_list_basket" %}">찜한아티스트 보기</a></li>
-            </ul>
-        </div>
-        <div class="col-10 offset-1 offset-md-2 col-md-4 pb-5 txt-right">
-            <form action="" method="get">
-                <div class="btn-inside-form">
-                    <input class="form-control mb_sub_search" type="text" placeholder="아티스트를 입력해주세요" name="q" value="{{ q }}">
-                    <button class="btn-inside"><img src="{% static "images/search.png" %}" width="16px"></button>
-                </div>
-            </form>
-        </div>
+    <div class="col-12 col-md-6">
+        <ul class="mb_filter_menu view_choice">
+            <li><a {% if request.path == '/accounts/artist/list/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "artist_list" %}">사진으로 보기</a></li>
+            <li>|</li>
+            <li><a {% if request.path == '/accounts/artist/list/movie/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "artist_list_movie" %}">영상으로 보기</a></li>
+            <li>|</li>
+            <li><a {% if request.path == '/accounts/artist/list/basket/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "artist_list_basket" %}">찜한아티스트 보기</a></li>
+        </ul>
+    </div>
+    <div class="col-10 offset-1 offset-md-2 col-md-4 pb-2 txt-right">
+        <form action="" method="get">
+            <div class="btn-inside-form">
+                <input class="form-control mb_sub_search" type="text" placeholder="아티스트를 입력해주세요" name="q" value="{{ q }}">
+                <button class="btn-inside"><img src="{% static "images/search.png" %}" width="16px"></button>
+            </div>
+        </form>
+    </div>
+    <div class="col-3 offset-9 txt-right pb-2">
+        <ul class="mb_filter_menu">
+            <li><a>시간순</a></li>
+            <li>|</li>
+            <li><a>평점순</a></li>
+        </ul>
+    </div>
 </div>
