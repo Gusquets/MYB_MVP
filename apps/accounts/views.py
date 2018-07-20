@@ -149,12 +149,23 @@ class ArtistList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['q'] = self.request.GET.get('q','')
-        context['obj_list'] = self.get_queryset()
+        sort = self.request.GET.get('sorted', '')
+        context['sorted'] = sort
+        if sort == 'time':
+            context['artist_list'] = self.get_queryset().order_by('-id')
+        elif sort == 'rate':
+            context['artist_list'] = self.get_queryset().order_by('-rate_avg')
+        else:
+            context['artist_list'] = self.get_queryset()
         q = self.request.GET.get('q', '')
         if q:
             context['basket_list'] = Basket.objects.all().filter(user = self.request.user, concert__isnull = True).filter(artist__name__icontains=q)
         else:
             context['basket_list'] = Basket.objects.all().filter(user = self.request.user, concert__isnull = True)
+        if sort == 'time':
+            context['basket_list'] = context['basket_list'].order_by('-id')
+        elif sort == 'rate':
+            context['basket_list'] = context['basket_list'].order_by('-artist__rate_avg')
         return context
 
 

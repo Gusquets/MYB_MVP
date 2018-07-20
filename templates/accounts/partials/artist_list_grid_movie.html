@@ -1,3 +1,10 @@
+<div class="col-3 offset-9 txt-right pb-2">
+    <ul class="mb_filter_menu">
+        <li><a href="{{ request.path }}?sorted=time" {% if sorted == 'time' %}style="color:#009bfc;"{% endif %} class="txt-black">시간순</a></li>
+        <li>|</li>
+        <li><a href="{{ request.path }}?sorted=rate" {% if sorted == 'rate' %}style="color:#009bfc;"{% endif %} class="txt-black">평점순</a></li>
+    </ul>
+</div>
 <div class="row">
     {% for artist in artist_list %}
         <div class="col-12 col-md-4 txt-center mb-4">
