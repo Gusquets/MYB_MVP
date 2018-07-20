@@ -177,6 +177,8 @@ class ArtistDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['concert_count'] = len(self.object.concert_set.all())
         context['images'] = self.object.artistimages_set.all()
+        context['concert_list'] = self.object.concert_set.all()[:2]
+        context['review_list'] = self.object.review_set.all()[:3]
         return context
 
 

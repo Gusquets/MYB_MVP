@@ -81,6 +81,10 @@
                 </div>
             </div>
         </div>
+    {% empty %}
+        <div class="col-12 mb-2">
+            후기가 없습니다.
+        </div>
     {% endfor %}
     <div class="col-12">
         <a href="{% url "preference:my_review" %}">

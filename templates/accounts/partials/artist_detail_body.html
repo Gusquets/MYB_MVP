@@ -16,25 +16,37 @@
 </div>
 
 <!-- 팀소개 회원가입시 입력한 간단한 소개 등장 -->
-<div class="team_info row">
+<div class="team_info row mt-3">
     <div class="detail-subtitle col-12">팀 소개</div>
-    <div class="team_text col-12">간략한 소개</div>
+    <div class="team_text col-12">
+        <div class="card">
+            <div class="card-body">
+                {{ artist.description }}
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- 공연 일정 리스트 -->
-<div class="performance_schedule row">
+<div class="performance_schedule row mt-3">
     <div class="col-12 detail-subtitle">공연일정</div>
-    <div class="col-md-6 col-12">
-        <div>공연 날짜, 장소<br>
-            <button> 공연 자세히 보기</button>
+    {% for concert in concert_list %}
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    {{ concert.date }} | {{ concert.location_1 }}<br/>
+                    <a href="{% url "concert:concert_detail" concert.id %}" class="txt-white btn btn-dark mt-2">
+                        공연 자세히 보기
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-6 col-12">
-        <div>공연 날짜, 장소<br>
-            <button> 공연 자세히 보기</button>
+    {% empty %}
+        <div class="col-12">
+            공연정보가 없습니다.
         </div>
-    </div>
-    <div class="col-12">
+    {% endfor %}
+    <div class="col-12 mt-3">
         <div class="_more"> 공연일정 더보기+ </div>
     </div>
 </div>
@@ -42,16 +54,30 @@
 <!-- 리뷰 -->
 <div class="artist_review row pb-3">
     <div class="col-12 detail-subtitle">후기</div>
-    <div class="col-12 row">
-        <div class="col-md-6 col-12 review-profile">리뷰 프로필 및</div>
-        <div class="col-md-6 col-12 review-meta">댓글 좋아요 대댓글</div>
-        <div class="col-12">댓글 내용</div>
+    {% for review in review_list %}
+    <div class="col-12 mb-2">
+        <div class="card">
+            <div class="row card-header">
+                <div class="col-10 {% if review.is_pay %}txt-blue{% endif %}">{{ review.user.nickname }} &rarr; {{ review.artist.name }} | {{ review.regist_dt }}</div> <div class="col-2 txt-red">&hearts; {{ review.like_count }}</div>
+            </div>
+            <div class="card-body txt-left pt-0">
+                <span id="star-count-{{ review.id }}" class="txt-sm"></span><br/>
+                <script>
+                    var star =''
+                    for(var i=0; i < {{ review.rate }}; i++){
+                        star += '★';
+                    }
+                    document.getElementById('star-count-{{ review.id }}').innerText = star
+                </script>
+                {{ review.description }}
+            </div>
+        </div>
     </div>
-    <div class="col-12 row">
-        <div class="col-md-6 col-12 review-profile">리뷰 프로필2 및</div>
-        <div class="col-md-6 col-12 review-meta">댓글 좋아요 대댓글</div>
-        <div class="col-12">댓글 내용2</div>
+    {% empty %}
+    <div class="col-12 mb-2">
+        후기가 없습니다.
     </div>
+    {% endfor %}
     <div class="col-12">
         <div class="_more"> 리뷰 더보기 + </div>
     </div>
