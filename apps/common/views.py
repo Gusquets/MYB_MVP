@@ -7,7 +7,7 @@ class SearchView(ListView):
         q = self.request.GET.get('q', '')
 
         if q:
-            obj_list = self.model.objects.filter(tags__icontains=q)
+            obj_list = self.model.objects.filter(name__icontains=q)
 
         return obj_list
     
@@ -15,4 +15,4 @@ class SearchView(ListView):
         context = super().get_context_data(**kwargs)
         context['q'] = self.request.GET.get('q','')
         context['obj_list'] = self.get_queryset()
-        return contextsss
+        return context

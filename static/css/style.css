@@ -64,6 +64,29 @@ input[type='checkbox'] {
 .m-height-220 {
     min-height: 220px;
 }
+.btn-inside-form {
+    position: relative;
+}
+.btn-inside-form input {
+    width: 100%;
+}
+.btn-inside{
+    position:absolute;
+    right: 10px;
+    top: 4px;
+    border:none;
+    height:20px;
+    width:20px;
+    border-radius:100%;
+    outline:none;
+    text-align:center;
+    font-weight:bold;
+    padding:2px;
+    background: none;
+  }
+  button:hover{
+    cursor:pointer;
+  }
 /* base/style.css */
 body {
 	font-family: 'Nanum Gothic', sans-serif !important;
@@ -968,6 +991,5 @@ display: none !important;
 }
 
 .mb_sub_search{
-    max-width : 350px;
     margin : auto;
 }

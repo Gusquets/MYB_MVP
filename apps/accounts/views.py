@@ -131,14 +131,31 @@ class PasswordChangeView(BasePasswordChangeView):
 
 
 class ArtistList(ListView):
+    model = Artist
     template_name = 'accounts/artist_list.html'
-    paginate_by = 10
+    paginate_by = 12
 
     name = 'artist_list'
 
-
     def get_queryset(self):
-        return Artist.objects.all()
+        obj_list = self.model.objects.all()
+        q = self.request.GET.get('q', '')
+
+        if q:
+            obj_list = self.model.objects.filter(name__icontains=q)
+
+        return obj_list
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] = self.request.GET.get('q','')
+        context['obj_list'] = self.get_queryset()
+        q = self.request.GET.get('q', '')
+        if q:
+            context['basket_list'] = Basket.objects.all().filter(user = self.request.user, concert__isnull = True).filter(artist__name__icontains=q)
+        else:
+            context['basket_list'] = Basket.objects.all().filter(user = self.request.user, concert__isnull = True)
+        return context
 
 
 class ArtistDetail(DetailView):
