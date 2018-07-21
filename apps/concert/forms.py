@@ -7,5 +7,5 @@ class ConcertCreateForm(forms.ModelForm):
         model = Concert
         fields = '__all__'
         widgets = {
-            'location_2': NaverMapPointWidget(),
+            'location_2': NaverMapPointWidget(attrs={'width': '100%'}),
             }

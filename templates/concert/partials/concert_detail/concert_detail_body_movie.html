@@ -1,8 +1,9 @@
 {% load common %}
 <!-- 첫번째 섹션 사진, 영상 -->
 <div class="photo_video row pt-3">
-        <a href="{% url "concert:concert_detail" concert.id %}" class="txt-black col-6 detail-selector"> 사진 </a>
-        <a href="{% url "concert:concert_detail" concert.id %}?view=movie" class="txt-white col-6 detail-selector _selected"> 영상 </a>
+        <a href="{% url "concert:concert_detail" concert.id %}" class="txt-black col-4 detail-selector"> 공연장소 보기 </a>
+        <a href="{% url "concert:concert_detail" concert.id %}?view=image" class="txt-black col-4 detail-selector"> 사진 </a>
+        <a href="{% url "concert:concert_detail" concert.id %}?view=movie" class="txt-white col-4 detail-selector _selected"> 영상 </a>
         <div class="col-12 mt-1">
             <div class="slider">
                 {% if concert.artist.movie_1 %}

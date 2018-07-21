@@ -16,6 +16,8 @@
     <div class="col-md-8 col-12 detail-info">
         {% if view == 'movie' %}
             {% include 'concert/partials/concert_detail/concert_detail_body_movie.html' %}
+        {% elif view == 'image' %}
+            {% include 'concert/partials/concert_detail/concert_detail_body_image.html' %}
         {% else %}
             {% include 'concert/partials/concert_detail/concert_detail_body.html' %}
         {% endif %}
@@ -46,5 +48,6 @@
             return false;
         });
     });
+    $('#id_location_2').attr({'type': 'hidden'});
 </script>
 {% endblock %}
