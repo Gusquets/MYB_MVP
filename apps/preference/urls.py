@@ -10,4 +10,5 @@ urlpatterns = [
 
     path('my/basket/', views.MyBasket.as_view(), name = 'my_basket'),
     path('my/review/', views.MyReview.as_view(), name = 'my_review'),
+    path('my/reviewed/', views.MyReview.as_view(), name = 'my_reviewed'),
 ]

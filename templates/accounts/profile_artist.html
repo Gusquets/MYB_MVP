@@ -1,1 +1,25 @@
-ddd
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- 타이틀 영역 -->
+<div>
+        {% include 'accounts/partials/profile/profile_artist_header.html' %}
+        </div>
+        
+        <!-- 마이페이지 본문 -->
+        
+        <div class="row mypage-grid">
+            <div class="col-12 _mobile">
+                {% include 'accounts/partials/profile/profile_buttons_mobile.html' %}
+            </div>
+            <div class="col-md-9 col-12 mobile-pd0">
+                {% include 'accounts/partials/profile/profile_artist_body.html' %}
+            </div>
+        <!--마이페이지 우측 버튼 -->
+            <div class="col-md-3 col-12 _desktop">
+                {% include 'accounts/partials/profile/profile_buttons.html' %}
+            </div>
+        </div>
+        
+{% endblock %}

@@ -1,0 +1,126 @@
+<div class="row pt-4 pb-4 mypage-body">
+    <div class="col-12 mypage-title">
+        내 평가
+    </div>
+    <div class="col-12 mb-2">
+        <div class="card">
+            <div class="card-body txt-center">
+                <span id="rate-count"></span><br/>
+                <div class="row">
+                    <div class="col-6">
+                        총 평가수<br/>
+                        <h2>{% if reviewed_count %}{{ reviewed_count }}{% else %}0{% endif %}</h2>
+                    </div>
+                    <div class="col-6">
+                        평균<br/>
+                        <h2>{{ request.user.artist.rate_avg }} <span class="txt-sm">/ 5.0</span></h2>
+                    </div>
+                </div>
+                <script>
+                    var star =''
+                    for(var i=0; i < Math.round({{ request.user.artist.rate_avg }}); i++){
+                        star += '★';
+                    }
+                    if (Math.round({{ request.user.artist.rate_avg }}) < 5){
+                        for(var i=0; i< 5-Math.round({{ request.user.artist.rate_avg }}); i++){
+                            star += '☆';
+                        }
+                    }
+                    document.getElementById('rate-count').innerText = star
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mypage-title">
+        내 리뷰
+    </div>
+    {% for review in reviewed_list %}
+        <div class="col-12 mb-2">
+            <div class="card">
+                <div class="row card-header">
+                    <div class="col-10 {% if review.is_pay %}txt-blue{% endif %}">{{ review.user.nickname }} &rarr; {{ review.artist.name }} | {{ review.regist_dt }}</div> <div class="col-2 txt-red">&hearts; {{ review.like_count }}</div>
+                </div>
+                <div class="card-body pt-0">
+                    <span id="star-count-{{ review.id }}" class="txt-sm"></span><br/>
+                    <script>
+                        var star =''
+                        for(var i=0; i < {{ review.rate }}; i++){
+                            star += '★';
+                        }
+                        document.getElementById('star-count-{{ review.id }}').innerText = star
+                    </script>
+                    {{ review.description }}
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12 mb-2 txt-center">
+            후기가 없습니다.
+        </div>
+    {% endfor %}
+    <div class="col-12">
+        <a href="{% url "preference:my_reviewed" %}">
+            <div class="_more txt-center mb-4"> 후기 더보기 + </div>
+        </a>
+    </div>
+        <div class="col-12 mypage-title">
+            내가 찜한 내역
+        </div>
+        <!-- 두개 씩 제시하고 나머지는 더 보기에서 -->
+        <div class="col-12 row pl-3">
+            <div class="col-12 mypage-subtitle">
+                공연
+            </div>
+            {% for basket in basket_concert %}
+                <div class="col-md-6 col-12 row">
+                    <div class="col-6">
+                        <a class="txt-black" href="{% url "concert:concert_detail" basket.concert.id %}">
+                        <img src="{{ basket.concert.artist.image.url }}" width="100%" alt="">
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a class="txt-black" href="{% url "concert:concert_detail" basket.concert.id %}">
+                        {{ basket.concert.artist.name }}<br>
+                        {{ basket.concert.date }}<br>
+                        {{ basket.concert.location_1 }}
+                        </a>
+                    </div>
+                </div>
+            {% empty %}
+            <div class="row align-items-center m-height-220">
+                <div class="col-12 txt-center">
+                        찜한 공연이 없습니다.
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-12 mypage-subtitle">
+                아티스트
+            </div>
+            {% for basket in basket_artist %}
+            <div class="col-md-6 col-12 row">
+                <div class="col-6">
+                    <a class="txt-black" href="{% url "artist_detail" basket.artist.id %}">
+                    <img src="{{ basket.artist.image.url }}" width="100%" alt="">
+                    </a>
+                </div>
+                <div class="col-6">
+                    <a class="txt-black" href="{% url "artist_detail" basket.artist.id %}">
+                    {{ basket.artist.name }}<br>
+                    {{ basket.artist.description }}
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="row align-items-center m-height-220">
+                <div class="col-12 txt-center">
+                        찜한 아티스트가 없습니다.
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-12 mt-3">
+            <a href="{% url "preference:my_basket" %}">
+                <div class="_more txt-center mb-4"> 찜한 내역 더보기 + </div>
+            </a>
+        </div>
+    </div>

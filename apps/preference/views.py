@@ -73,5 +73,10 @@ class MyReview(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['review_list'] = Review.objects.filter(user = self.request.user)
+        if self.request.path == '/preference/my/review/':
+            context['review_list'] = Review.objects.filter(user = self.request.user)
+        elif self.request.path == '/preference/my/reviewed/':
+            context['review_list'] = Review.objects.filter(artist = self.request.user.artist)
+        else:
+            context['review_list'] = Review.objects.filter(user = self.request.user)
         return context

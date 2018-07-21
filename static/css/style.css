@@ -228,6 +228,9 @@ label {
 .txt-sm{
     font-size: .5em;
 }
+.txt-md{
+    font-size: 1em;
+}
 .txt-bold{
     font-weight: 600;
 }
