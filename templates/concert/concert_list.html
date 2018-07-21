@@ -1,32 +1,28 @@
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-공연 목록
-<br/>
-{% for concert in concert_list %}
-<hr/>
-<a href="{% url "concert:concert_detail" concert.id %}">{{ concert.date }} / {{ concert.time }} / {{ concert.location_1 }} / {{ concert.artist }} / {{ concert.robability }}</a>
-<a class="basket_create_concert" href="{% url "preference:basket_create_concert" concert.id %}">/찜하기</a>
-<hr/>
-<br/>
-{% endfor %}
-<br/>
-<br/>
-<hr/>
-{% if user.is_authenticated %}
-<a href="{% url "concert:concert_create" %}">공연등록하기</a>
-<a href="{% url "concert:concert_list" %}">공연목록으로</a>
-<a href="{% url "website:home" %}">홈으로</a>
-{% endif %}
-<script>
-    $(function() {
-        $('.basket_create_concert').click(function() {
-            $.get($(this).attr('href'))
-            .done(function(response) {
-                alert(response.message)
-            })
-            .fail(function(response) {
-                console.log('문제가 발생하였습니다. 다시 시도해 주세요.');
-            });
-            return false;
-        });
-    });
-</script>
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- 타이틀 영역 -->
+<div class="artist_list_header">
+    {% include 'concert/partials/concert_list_header.html' %}
+</div>
+
+<!-- 필터 영역 -->
+<div class="artist_list_filter">
+    {%  include 'concert/partials/concert_list_filter.html' %}
+</div>
+
+<!-- 이곳부터 아티스트 -->
+<div id="artist_list_grid" class="artist_list_grid">
+    {% if request.path == '/concert/list/' %}
+        {% include 'concert/partials/concert_list_grid_image.html' %}
+    {% elif request.path == '/concert/list/movie/' %}
+        {% include 'concert/partials/concert_list_grid_movie.html' %}
+    {% elif request.path == '/concert/list/basket/' %}
+        {% include 'concert/partials/concert_list_grid_basket.html' %}
+    {% else %}
+        {% include 'concert/partials/concert_list_grid_image.html' %}
+    {% endif %}
+</div>
+{% endblock %}

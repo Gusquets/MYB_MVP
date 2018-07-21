@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 from django.contrib.messages.views import SuccessMessageMixin
-from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin
+from django.db.models import Q
 
+from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin
+from apps.preference.models import Basket
 from .forms import ConcertCreateForm
 from .models import Concert
 
@@ -22,6 +24,7 @@ class ConcertCreate(LoginRequiredMixin, ArtistRequiredMixin, SuccessMessageMixin
 
 
 class ConcertList(ListView):
+    model = Concert
     template_name = 'concert/concert_list.html'
     paginate_by = 10
 
@@ -29,7 +32,39 @@ class ConcertList(ListView):
 
 
     def get_queryset(self):
-        return Concert.objects.all()
+        obj_list = self.model.objects.all()
+        q = self.request.GET.get('q', '')
+        date = self.request.GET.get('date', '')
+        location = self.request.GET.get('location', '')
+
+        if q:
+            obj_list = self.model.objects.filter(Q(artist__name__icontains=q)|Q(date__icontains=date)|Q(location_1__icontains=location))
+
+        return obj_list
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        q = self.request.GET.get('q', '')
+        context['q'] = q
+        context['date'] = self.request.GET.get('date', '')
+        context['location'] = self.request.GET.get('location', '')
+        sort = self.request.GET.get('sorted', '')
+        context['sorted'] = sort
+        if sort == 'time':
+            context['concert_list'] = self.get_queryset().order_by('-id')
+        elif sort == 'rate':
+            context['concert_list'] = self.get_queryset().order_by('-artist__rate_avg')
+        else:
+            context['concert_list'] = self.get_queryset()
+        if q:
+            context['basket_list'] = Basket.objects.all().filter(user = self.request.user, artist__isnull = True).filter(concert__artist__name__icontains=q)
+        else:
+            context['basket_list'] = Basket.objects.all().filter(user = self.request.user, artist__isnull = True)
+        if sort == 'time':
+            context['basket_list'] = context['basket_list'].order_by('-id')
+        elif sort == 'rate':
+            context['basket_list'] = context['basket_list'].order_by('-concert__artist__rate_avg')
+        return context
 
 
 class ConcertDetail(DetailView):
