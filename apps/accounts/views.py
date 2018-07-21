@@ -24,10 +24,15 @@ User = get_user_model()
 
 
 class Profile(LoginRequiredMixin, TemplateView):
-    template_name = 'accounts/profile.html'
 
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
+    def get_template_names(self):
+        if self.request.user.artist:
+            return ['accounts/profile_artist.html']
+        else:
+            return ['accounts/profile.html']
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

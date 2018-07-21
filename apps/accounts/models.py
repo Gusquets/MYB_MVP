@@ -1,7 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from apps.common.validators import PhoneNumberValidator
+from apps.common.validators import PhoneNumberValidator, validate_movie_url
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -33,9 +33,9 @@ class Artist(models.Model):
     description = models.TextField('아티스트 소개')
     is_verify = models.BooleanField('아티스트 인증여부', default = False)
     image = models.ImageField('사진', upload_to = artist_image_upload_to)
-    movie_1 = models.URLField('Youtube 영상 1', blank = True, null = True)
-    movie_2 = models.URLField('Youtube 영상 2', blank = True, null = True)
-    movie_3 = models.URLField('Youtube 영상 3', blank = True, null = True)
+    movie_1 = models.URLField('Youtube 영상 1', blank = True, null = True, validators = [validate_movie_url])
+    movie_2 = models.URLField('Youtube 영상 2', blank = True, null = True, validators = [validate_movie_url])
+    movie_3 = models.URLField('Youtube 영상 3', blank = True, null = True, validators = [validate_movie_url])
     social_fb = models.URLField('소셜_페이스북', blank = True, null = True)
     social_insta = models.URLField('소셜_인스타그램', blank = True, null = True)
     social_youtube = models.URLField('소셜_유튜브', blank = True, null = True)

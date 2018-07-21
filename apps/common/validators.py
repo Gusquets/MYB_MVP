@@ -17,3 +17,9 @@ class PhoneNumberValidator(RegexValidator):
     message = '올바른 형식의 휴대폰번호를 입력하세요.'
     code = 'invalid'
 
+
+def validate_movie_url(value):
+    find_embed = value.find('embed')
+
+    if not find_embed:
+        raise ValidationError('Embed용 youtube 주소를 입력해 주세요.')
