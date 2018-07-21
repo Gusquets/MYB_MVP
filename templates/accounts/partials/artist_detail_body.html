@@ -1,7 +1,7 @@
 <!-- 첫번째 섹션 사진, 영상 -->
 <div class="photo_video row pt-3">
-    <div class="col-6 detail-selector _selected"> 사진 </div>
-    <div class="col-6 detail-selector"> 영상 </div>
+    <div class="col-6 detail-selector _selected"><a href="{% url "artist_detail" artist.id %}" class="txt-white"> 사진 </a></div>
+    <div class="col-6 detail-selector"><a href="{% url "artist_detail" artist.id %}?view=movie" class="txt-black"> 영상 </a></div>
     <div class="col-12 mt-1">
         <div class="slider">
             {% for image in images %}

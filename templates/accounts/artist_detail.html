@@ -14,7 +14,11 @@
         {% include 'accounts/partials/detail_artist_profile_mobile.html' %}
     </div>
     <div class="col-md-8 col-12 detail-info">
-        {% include 'accounts/partials/artist_detail_body.html' %}
+        {% if view == 'movie' %}
+            {% include 'accounts/partials/artist_detail_body_movie.html' %}
+        {% else %}
+            {% include 'accounts/partials/artist_detail_body.html' %}
+        {% endif %}
     </div>
     <div class="col-md-4 col-12 detail">
         {% include 'accounts/partials/detail_artist_profile.html' %}
