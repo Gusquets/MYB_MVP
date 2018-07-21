@@ -64,6 +64,9 @@ input[type='checkbox'] {
 .m-height-220 {
     min-height: 220px;
 }
+.max-height-280 img {
+    max-height: 280px;
+}
 .btn-inside-form {
     position: relative;
 }
@@ -225,10 +228,16 @@ label {
 .txt-sm{
     font-size: .5em;
 }
-
+.txt-bold{
+    font-weight: 600;
+}
 .mtb_auto{
     margin-top : auto;
     margin-bottom : auto;
+}
+.border-thead {
+    border: 1px solid #ededed;
+    background: #fafafa;
 }
 
 /* 꾸밈 선 */

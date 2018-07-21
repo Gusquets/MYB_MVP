@@ -1,0 +1,85 @@
+<!-- 첫번째 섹션 사진, 영상 -->
+<div class="photo_video row pt-3">
+    <a href="{% url "concert:concert_detail" concert.id %}" class="txt-white col-6 detail-selector _selected"> 사진 </a>
+    <a href="{% url "concert:concert_detail" concert.id %}?view=movie" class="txt-black col-6 detail-selector"> 영상 </a>
+    <div class="col-12 mt-1">
+        <div class="slider">
+            {% for image in images %}
+            <input type="radio" name="slide_switch" id="{{ forloop.counter }}" {% if forloop.first %}checked{% endif %}>
+            <label for="{{ forloop.counter }}">
+                <img src="{{ image.image.url }}" alt="" width="100" height="100">
+            </label>
+            <img class="" src="{{ image.image.url }}" width="100%" height="100%" alt="">
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- 팀소개 회원가입시 입력한 간단한 소개 등장 -->
+<div class="team_info row mt-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <p class="txt-bold">아티스트의 한마디</p>
+                <h2>{{ concert.artist.description }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 공연 일정 리스트 -->
+<div class="performance_schedule row mt-3">
+    <div class="col-12 detail-subtitle">Set List</div>
+    <table class="col-12">
+        <thead class="border-thead">
+            <th width="10%">No.</th>
+            <th width="40%">곡명</th>
+            <th width="50%">정보</th>
+        </thead>
+        <tbody>
+            {% for song in song_list %}
+            <tr class="line-dotted">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ song.name }}</td>
+                <td>{{ song.info }}</td>
+            </tr>
+            {% empty %}
+            <tr class="line-dotted">
+                <td colspan="3">공연곡 정보가 없습니다.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- 리뷰 -->
+<div class="artist_review row pb-3 mt-3">
+    <div class="col-12 detail-subtitle">후기</div>
+    {% for review in review_list %}
+    <div class="col-12 mb-2">
+        <div class="card">
+            <div class="row card-header">
+                <div class="col-10 {% if review.is_pay %}txt-blue{% endif %}">{{ review.user.nickname }} &rarr; {{ review.artist.name }} | {{ review.regist_dt }}</div> <div class="col-2 txt-red">&hearts; {{ review.like_count }}</div>
+            </div>
+            <div class="card-body txt-left pt-0">
+                <span id="star-count-{{ review.id }}" class="txt-sm"></span><br/>
+                <script>
+                    var star =''
+                    for(var i=0; i < {{ review.rate }}; i++){
+                        star += '★';
+                    }
+                    document.getElementById('star-count-{{ review.id }}').innerText = star
+                </script>
+                {{ review.description }}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 mb-2">
+        후기가 없습니다.
+    </div>
+    {% endfor %}
+    <div class="col-12">
+        <div class="_more"> 리뷰 더보기 + </div>
+    </div>
+</div>

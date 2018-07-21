@@ -70,3 +70,11 @@ class ConcertList(ListView):
 class ConcertDetail(DetailView):
     template_name = 'concert/concert_detail.html'
     model = Concert
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['images'] = self.object.artist.artistimages_set.all()
+        context['song_list'] = self.object.concertsonglist_set.all()
+        context['review_list'] = self.object.artist.review_set.all()[:3]
+        context['view'] = self.request.GET.get('view', '')
+        return context

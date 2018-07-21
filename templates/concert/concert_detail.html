@@ -1,6 +1,50 @@
-공연 상세
+{% extends "base/base.html" %}
+{% load static %}
 
-{{ concert.id }}
-<br/>
-<hr/>
-{{ concert.description }}
+{% block content %}
+
+<!-- 타이틀 영역 -->
+<div class="artist_detail_header">
+{% include 'concert/partials/concert_detail/concert_detail_header.html' %}
+</div>
+
+<!-- 본문 영역 -->
+<div class="row artist_detail mb-5">
+    <div class="col-12 detail-mobile">
+        {% include 'concert/partials/concert_detail/detail_concert_profile_mobile.html' %}
+    </div>
+    <div class="col-md-8 col-12 detail-info">
+        {% if view == 'movie' %}
+            {% include 'concert/partials/concert_detail/concert_detail_body_movie.html' %}
+        {% else %}
+            {% include 'concert/partials/concert_detail/concert_detail_body.html' %}
+        {% endif %}
+    </div>
+    <div class="col-md-4 col-12 detail">
+        {% include 'concert/partials/concert_detail/detail_concert_profile.html' %}
+    </div>
+</div>
+
+<!-- 이곳부터 아티스트 -->
+<div class="artist_list_grid">
+
+</div>
+
+{% endblock %}
+{% block extrajs %}
+<script>
+    $(function() {
+        $('.basket').click(function() {
+            $.get($(this).attr('href'))
+            .done(function(response) {
+                alert(response.message)
+            })
+            .fail(function(response) {
+                console.log('문제가 발생하였습니다. 다시 시도해 주세요.');
+                console.log(response)
+            });
+            return false;
+        });
+    });
+</script>
+{% endblock %}

@@ -16,11 +16,12 @@ class Concert(models.Model):
         verbose_name_plural = '공연 정보'
 
     def __str__(self):
-        return self.location_1
+        return str(self.artist) + '/' + str(self.date)
 
 class ConcertSongList(models.Model):
     concert = models.ForeignKey(Concert, verbose_name = '공연', on_delete = models.CASCADE)
     name = models.CharField('곡 제목', max_length = 50)
+    info = models.CharField('곡 정보' , max_length = 50)
 
     class Meta:
         verbose_name ='공연 곡'

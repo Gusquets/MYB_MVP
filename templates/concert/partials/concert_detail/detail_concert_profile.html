@@ -1,0 +1,23 @@
+{% load static %}
+<!-- 이부분 fixed로 해놨는데 자바스크립트로 scroll따라 부드럽게 움직이면 좋을듯! -->
+
+<div class="detail-right pt-3 pb-3 row">
+    <div class="col-4">
+        <img src="{% static "images/facebook.png" %}">
+    </div>
+    <div class="col-4">
+        <img src="{% static "images/youtube.png" %}">
+    </div>
+    <div class="col-4">
+        여기는 인스타
+    </div>
+    <div class="col-12">
+        <a class="basket" href="{% url "preference:basket_create_concert" concert.id %}"><button class="btn btn-primary mb_action_btn">찜하기 </button></a>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary mb_action_btn">후기쓰기 </button>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary mb_action_btn">후원하기 </button>
+    </div>
+</div>

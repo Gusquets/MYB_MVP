@@ -5,24 +5,24 @@
 
 <!-- 타이틀 영역 -->
 <div class="artist_list_header">
-    {% include 'concert/partials/concert_list_header.html' %}
+    {% include 'concert/partials/concert_list/concert_list_header.html' %}
 </div>
 
 <!-- 필터 영역 -->
 <div class="artist_list_filter">
-    {%  include 'concert/partials/concert_list_filter.html' %}
+    {%  include 'concert/partials/concert_list/concert_list_filter.html' %}
 </div>
 
 <!-- 이곳부터 아티스트 -->
 <div id="artist_list_grid" class="artist_list_grid">
     {% if request.path == '/concert/list/' %}
-        {% include 'concert/partials/concert_list_grid_image.html' %}
+        {% include 'concert/partials/concert_list/concert_list_grid_image.html' %}
     {% elif request.path == '/concert/list/movie/' %}
-        {% include 'concert/partials/concert_list_grid_movie.html' %}
+        {% include 'concert/partials/concert_list/concert_list_grid_movie.html' %}
     {% elif request.path == '/concert/list/basket/' %}
-        {% include 'concert/partials/concert_list_grid_basket.html' %}
+        {% include 'concert/partials/concert_list/concert_list_grid_basket.html' %}
     {% else %}
-        {% include 'concert/partials/concert_list_grid_image.html' %}
+        {% include 'concert/partials/concert_list/concert_list_grid_image.html' %}
     {% endif %}
 </div>
 {% endblock %}
