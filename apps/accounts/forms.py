@@ -52,10 +52,22 @@ class UserCreateForm(forms.ModelForm):
             user.save()
 
         return user
+
+        
 class ArtistCreateForm(forms.ModelForm):
     class Meta:
         model = Artist
-        fields = '__all__'
+        fields = [
+            'name',
+            'description',
+            'image',
+            'movie_1',
+            'movie_2',
+            'movie_3',
+            'social_fb',
+            'social_insta',
+            'social_youtube',
+        ]
         widgets = {
             'description': forms.Textarea(attrs={
                 'rows': 3,
