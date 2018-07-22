@@ -11,4 +11,6 @@ urlpatterns = [
     path('my/basket/', views.MyBasket.as_view(), name = 'my_basket'),
     path('my/review/', views.MyReview.as_view(), name = 'my_review'),
     path('my/reviewed/', views.MyReview.as_view(), name = 'my_reviewed'),
+
+    path('review/create/<int:artist_id>/', views.ReviewCreate.as_view(), name = 'review_create'),
 ]

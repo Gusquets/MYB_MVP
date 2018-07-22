@@ -1,0 +1,12 @@
+{% load bootstrap4 %}
+쓰기-ajax
+
+<form action="" method="post">
+    {% csrf_token %}
+    {% bootstrap_field form.rate layout=horizontal show_label=False form_group_class='col-12 mb-2' %}
+    {% bootstrap_field form.description show_label=False form_group_class='col-12' %}
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="submit" class="btn btn-primary">작성하기</button>
+    </div>
+</form>

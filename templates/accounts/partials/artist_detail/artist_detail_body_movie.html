@@ -100,6 +100,8 @@
         </div>
         {% endfor %}
         <div class="col-12">
-            <div class="_more"> 리뷰 더보기 + </div>
+            <a href="{% url "preference:my_review" %}">
+                <div class="_more txt-black"> 리뷰 더보기 + </div>
+            </a>
         </div>
     </div>

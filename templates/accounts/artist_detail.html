@@ -30,6 +30,22 @@
 
 </div>
 
+<div class="modal fade" id="review_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="modal-title" id="exampleModalLabel">후기</a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="review-modal-body" class="modal-body">
+                {% include 'preference/review/review_create.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 {% block extrajs %}
 <script>
@@ -44,6 +60,99 @@
                 console.log(response)
             });
             return false;
+        });
+    });
+    /*$(document).on('click', '#review_btn', function(e) {
+
+        var url = $(this).attr('href')
+        $.get(url)
+        .done(function(html) {
+            $('#review-modal-body').html(html);
+            var state_obj = {};
+            var url = "?page={{ page_number }}";
+
+            history.pushState(state_obj, url);
+        })
+        .fail(function(xhr, textStatus, error) {
+            console.log('failed : ' +error );
+        });
+
+        return false;
+    })*/
+    $(function() {
+        $(document).on('click', '.modal-form-btn', function(e) {
+            e.preventDefault();
+
+            var action_url = $(this).attr('href');
+            var target_id = $(this).data('target-id');
+
+            $.get(action_url)
+            .done(function(form_html) {
+                var $modal = $('#review_create');
+
+                $modal.find('.modal-body').html(form_html);
+                $form = $modal.find('.modal-body form');
+                $form.attr('action', action_url);
+
+                if (target_id) {
+                    $form.attr('data-target-id', target_id);
+                }
+                else {
+                    $form.removeData('target-id');
+                }
+
+                $modal.on('shown.bs.modal', function(e) {
+                    $(this).find('textarea:first').focus();
+                });
+
+                $modal.modal();
+            })
+            .fail(function(xhr, textStatus, error) {
+                alert('failed : ' + error);
+            });
+        });
+
+        $(document).on('submit', '#modal-form-modal form', function(e) {
+            e.preventDefault();
+
+            var $form = $(this);
+            var $submit = $form.find('[type=submit]');
+
+            $submit.prop('disabled', true);
+
+            $form.ajaxSubmit({
+                success: function(response, statusText, xhr, $form) {
+                    if (response.next_url) {
+                        window.location = response.next_url;
+                        return;
+                    }
+
+                    var html = response;
+                    var $resp = $(html);
+                    var target_id = $form.data('target-id');
+    
+                    if ( $resp.find('.has-error').length > 0) {
+                        var fields_html = $resp.html();
+                        $('#modal-form-modal .modal-body form').html(fields_html);
+                    }
+                    else {
+                        if (target_id) {
+                            $('#'+ target_id ).html($resp.html());
+                        }
+                        else {
+                            $resp.prependTo('#comment-list');
+                        }
+                        $('#modal-form-modal').modal('hide');
+                        $form[0].reset();
+                    }
+                },
+                error: function(xhr, textStatus, error) {
+                    alert('failed : '+ error);
+                },
+                complete: function(xhr, textStatus) {
+                    //$submit.prop('disabled', false);                    
+                }
+            });
         });
     });
 </script>

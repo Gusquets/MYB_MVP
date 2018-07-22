@@ -16,9 +16,9 @@
     <a class="col-4 txt-black basket" href="{% url "preference:basket_create_artist" artist.id %}">
         찜하기
     </a>
-    <div class="col-4">
+    <a id="review_btn" class="col-4 txt-black modal-form-btn" href="{% url "preference:review_create" artist.id %}" data-toggle="modal" data-target="#review_create">
         후기쓰기
-    </div>
+    </a>
     <div class="col-4">
         후원하기
     </div>

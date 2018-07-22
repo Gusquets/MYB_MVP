@@ -4,10 +4,14 @@ from django.http import HttpResponse
 from django.views.generic import CreateView, TemplateView
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.urls import reverse
+
 from apps.common.mixins import LoginRequiredMixin
 from apps.concert.models import Concert
 from apps.accounts.models import Artist
+
 from .models import Basket, Review, Like
+from .forms import ReviewForm
 
 @login_required
 def like_create(request, pk):
@@ -80,3 +84,27 @@ class MyReview(TemplateView):
         else:
             context['review_list'] = Review.objects.filter(user = self.request.user)
         return context
+
+
+class ReviewCreate(LoginRequiredMixin, CreateView):
+    model = Review
+    form_class = ReviewForm
+    
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return ['preference/review/_review_create.html']
+        return ['preference/review/review_create.html'] 
+
+    def get_success_url(self):
+        return reverse('artist_detail', kwargs = {'pk': self.object.artist.id})
+    
+    def form_valid(self, form):
+        review = form.save(commit=False)
+        review.user = self.request.user
+        review.artist = Artist.objects.get(id = self.kwargs['artist_id'])
+        review.is_pay = False
+
+        review.save()
+        response = super().form_valid(form)
+
+        return response
