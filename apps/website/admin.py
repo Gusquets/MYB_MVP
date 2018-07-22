@@ -11,4 +11,4 @@ class CSServiceAdmin(admin.ModelAdmin):
 
 @admin.register(Terms)
 class TermsAdmin(admin.ModelAdmin):
-    list_display = ['catogory']
+    list_display = ['category']

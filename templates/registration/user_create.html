@@ -27,7 +27,7 @@
                     <div class="checkbox">
                         <input type="checkbox" id="Signup-agree" required>
                         <label for="Signup-agree" class="Signup-agree" required>
-                            <a href="#">이용약관</a>과 <a href="#">개인정보처리방침</a>에 동의합니다.
+                            <a href="{% url "website:term_access" %}" target="_blank">이용약관</a>과 <a href="{% url "website:term_information" %}" target="_blank">개인정보처리방침</a>에 동의합니다.
                         </label>
                     </div>
                     <div class="checkbox">

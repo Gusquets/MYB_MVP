@@ -27,6 +27,7 @@ urlpatterns = [
     path('preference/', include('apps.preference.urls', namespace = 'preference')),
 
     path('accounts/', include('allauth.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:

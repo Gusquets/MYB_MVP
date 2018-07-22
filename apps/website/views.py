@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 
-from .models import CSService
+from .models import CSService, Terms
 from .forms import CSServiceForm
 
 class HomeView(TemplateView):
@@ -21,3 +21,19 @@ class CSServiceCreateView(SuccessMessageMixin , CreateView):
     success_message = '문의가 성공적으로 접수되었습니다.'
 
     name = 'cs_create'
+
+
+class TermView(TemplateView):
+    template_name = 'website/terms.html'
+    
+    def get_context_data(self, **kwargs):
+        contents = super().get_context_data(**kwargs)
+        if self.request.path == '/terms/access/':
+            category = 1
+        elif self.request.path == '/terms/information/':
+            category = 2
+
+        contents['description'] = Terms.objects.get(category = category).description
+
+        return contents
+        
