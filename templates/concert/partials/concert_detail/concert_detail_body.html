@@ -72,7 +72,7 @@
             후기가 없습니다.
         </div>
         {% endfor %}
-        <div class="col-12">
-            <div class="_more"> 리뷰 더보기 + </div>
-        </div>
+        <a href="{% url "preference:artist_review" concert.artist.id %}">
+            <div class="_more txt-black"> 리뷰 더보기 + </div>
+        </a>
     </div>
