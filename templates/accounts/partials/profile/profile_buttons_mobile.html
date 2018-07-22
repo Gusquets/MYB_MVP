@@ -11,4 +11,9 @@
     <div class="col">
         <a class="txt-black" href="{% url "user_update" %}">정보수정</a>
     </div>
+    {% if request.user.usertype == 2 %}
+    <div class="col">
+        <a class="txt-black" href="{% url "concert:concert_create" %}">공연 등록</a>
+    </div>
+    {% endif %}
 </div>

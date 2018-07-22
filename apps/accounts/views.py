@@ -29,7 +29,7 @@ class Profile(LoginRequiredMixin, TemplateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_template_names(self):
-        if self.request.user.artist:
+        if self.request.user.usertype == 2:
             return ['accounts/profile_artist.html']
         else:
             return ['accounts/profile.html']
@@ -165,10 +165,11 @@ class ArtistList(ListView):
         else:
             context['artist_list'] = self.get_queryset()
         q = self.request.GET.get('q', '')
-        if q:
-            context['basket_list'] = Basket.objects.all().filter(user = self.request.user, concert__isnull = True).filter(artist__name__icontains=q)
-        else:
-            context['basket_list'] = Basket.objects.all().filter(user = self.request.user, concert__isnull = True)
+        if self.request.user.is_authenticated:
+            if q:
+                context['basket_list'] = Basket.objects.all().filter(user = self.request.user, concert__isnull = True).filter(artist__name__icontains=q)
+            else:
+                context['basket_list'] = Basket.objects.all().filter(user = self.request.user, concert__isnull = True)
         if sort == 'time':
             context['basket_list'] = context['basket_list'].order_by('-id')
         elif sort == 'rate':

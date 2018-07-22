@@ -56,10 +56,11 @@ class ConcertList(ListView):
             context['concert_list'] = self.get_queryset().order_by('-artist__rate_avg')
         else:
             context['concert_list'] = self.get_queryset()
-        if q:
-            context['basket_list'] = Basket.objects.all().filter(user = self.request.user, artist__isnull = True).filter(concert__artist__name__icontains=q)
-        else:
-            context['basket_list'] = Basket.objects.all().filter(user = self.request.user, artist__isnull = True)
+        if self.request.user.is_authenticated:
+            if q:
+                context['basket_list'] = Basket.objects.all().filter(user = self.request.user, artist__isnull = True).filter(concert__artist__name__icontains=q)
+            else:
+                context['basket_list'] = Basket.objects.all().filter(user = self.request.user, artist__isnull = True)
         if sort == 'time':
             context['basket_list'] = context['basket_list'].order_by('-id')
         elif sort == 'rate':

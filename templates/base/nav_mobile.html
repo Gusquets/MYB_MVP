@@ -22,6 +22,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url "website:cs_create" %}">고객센터</a>
             </li>
+            {% if request.user.usertype == 2 %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url "concert:concert_create" %}">공연 등록</a>
+            </li>
+            {% endif %}
         </ul>
         <div class="auth-group">
             {% if user.is_authenticated %}

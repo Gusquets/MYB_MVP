@@ -34,3 +34,12 @@
         </div>
     {% endfor %}
 </div>
+
+{% if request.user.usertype == 2 %}
+<hr>
+<div class="col-12 txt-center mb-5">
+    <a class="btn btn-primary" href="{% url "concert:concert_create" %}">
+        공연 등록
+    </a>
+</div>
+{% endif %}

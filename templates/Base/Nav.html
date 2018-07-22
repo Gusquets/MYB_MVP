@@ -31,6 +31,9 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url "profile" %}">마이페이지</a>
+                    {% if request.user.usertype == 2 %}
+                    <a class="dropdown-item" href="{% url "concert:concert_create" %}">공연 등록</a>
+                    {% endif %}
                     <a class="dropdown-item" href="{% url "logout" %}?next={{ request.path }}">로그아웃</a>
                 </div>
             </li>
