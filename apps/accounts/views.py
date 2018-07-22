@@ -185,7 +185,7 @@ class ArtistDetail(DetailView):
         context['concert_count'] = len(self.object.concert_set.all())
         context['images'] = self.object.artistimages_set.all()
         context['concert_list'] = self.object.concert_set.all()[:2]
-        context['review_list'] = self.object.review_set.all()[:3]
+        context['review_list'] = self.object.review_set.all().order_by('-id')[:3]
         context['view'] = self.request.GET.get('view', '')
         return context
 

@@ -81,8 +81,9 @@ class MyReview(TemplateView):
             context['review_list'] = Review.objects.filter(user = self.request.user)
         elif self.request.path == '/preference/my/reviewed/':
             context['review_list'] = Review.objects.filter(artist = self.request.user.artist)
-        else:
-            context['review_list'] = Review.objects.filter(user = self.request.user)
+        elif self.kwargs['pk']:
+            artist = Artist.objects.get(id = self.kwargs['pk'])
+            context['review_list'] = Review.objects.filter(artist = artist)
         return context
 
 
@@ -100,11 +101,20 @@ class ReviewCreate(LoginRequiredMixin, CreateView):
     
     def form_valid(self, form):
         review = form.save(commit=False)
+        artist = Artist.objects.get(id = self.kwargs['artist_id'])
         review.user = self.request.user
-        review.artist = Artist.objects.get(id = self.kwargs['artist_id'])
+        review.artist = artist
         review.is_pay = False
 
         review.save()
+
+        rates = Review.objects.all().filter(artist = artist)
+        rates_list = []
+        for rate  in rates:
+            rates_list.append(rate.rate)
+        artist.rate_avg = sum(rates_list) / len(rates_list)
+        artist.save()
+
         response = super().form_valid(form)
 
         return response
