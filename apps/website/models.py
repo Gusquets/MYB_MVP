@@ -12,7 +12,7 @@ class CSService(models.Model):
 
 
 class Terms(models.Model):
-    catogory = models.IntegerField('종류', choices=((1.'이용약관'),(2,'개인정보처리방침')))
+    catogory = models.IntegerField('종류', choices=((1,'이용약관'),(2,'개인정보처리방침')))
     description = RichTextUploadingField('내용')
 
     class Meta:
