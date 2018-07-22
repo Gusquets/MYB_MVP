@@ -170,9 +170,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'resources/media')
 
 EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
 EMAIL_HOST_USER = 'mybusker.dev@gmail.com'
 EMAIL_HOST_PASSWORD = get_secret("EMAIL_PW")
-EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 NAVER_CLIENT_ID = get_secret("NAVER_CLIENT_ID")

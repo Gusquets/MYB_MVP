@@ -17,7 +17,7 @@ class CSServiceCreateView(SuccessMessageMixin , CreateView):
     model = CSService
     template_name = 'website/cs_create.html'
     form_class = CSServiceForm
-    success_url = reverse_lazy('website:cs_create')
+    success_url = reverse_lazy('website:home')
     success_message = '문의가 성공적으로 접수되었습니다.'
 
     name = 'cs_create'
