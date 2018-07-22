@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- 타이틀 영역 -->
+<div class="artist_list_header">
+    {% include 'website/partials/search_list/search_list_header.html' %}
+</div>
+
+<!-- 이곳부터 아티스트 -->
+<div id="artist_list_grid" class="artist_list_grid">
+    {% include 'website/partials/search_list/search_list_body.html' %}
+</div>
+{% endblock %}

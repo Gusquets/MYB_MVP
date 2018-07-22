@@ -19,7 +19,7 @@
             {% if user.is_authenticated %}
             <div class="nav">
                 <li class="nav-item">
-                    <form class="nav-search-form" method="get" action="">
+                    <form class="nav-search-form" method="get" action="{% url "website:search_list" %}">
                         <input class="nav-search" type="text" name="q">
                         <button class="nav-search-btn"><img src="{% static "images/search.png" %}" width="16px"></button>
                     </form>
