@@ -63,7 +63,7 @@ class User(AbstractUser):
 
     email = models.EmailField('이메일', unique=True)
     nickname = models.CharField('닉네임', max_length=50, unique = True)
-    phone_number = models.CharField('휴대폰 번호', max_length = 11, validators=[PhoneNumberValidator()])
+    phone_number = models.CharField('휴대폰 번호', max_length = 11, validators=[PhoneNumberValidator()], unique = True)
     regist_dt = models.DateTimeField('등록시간', auto_now_add=True)
     is_agreed_1 = models.BooleanField('이용약관 동의여부', default = False)
     is_agreed_2 = models.BooleanField('개인정보 처리방침 동의여부', default = False)

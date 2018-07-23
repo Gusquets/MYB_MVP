@@ -1,1 +1,20 @@
-이메일 찾기
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- 타이틀 영역 -->
+<div>
+    {% include 'accounts/partials/find_id/find_id_header.html' %}
+</div>
+
+<!-- 마이페이지 본문 -->
+
+<div class="concert_create_grid">
+    {% if not result_step %}
+        {% include 'accounts/partials/find_id/find_id_body.html' %}
+    {% else %}
+        {% include 'accounts/partials/find_id/find_id_result.html' %}
+    {% endif %}
+</div>
+
+{% endblock %}

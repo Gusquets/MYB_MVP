@@ -209,7 +209,9 @@ class FindEmail(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        phone_number = self.request.GET.get('phone_number')
-        if User.objects.all().filter(phone_number = phone_number):
-            context['result'] = User.objects.all().filter(phone_number = phone_number)
+        phone_number = self.request.GET.get('phone_number','')
+        if phone_number:
+            context['result_step'] = True   
+            if User.objects.all().filter(phone_number = phone_number):
+                context['result'] = User.objects.all().get(phone_number = phone_number).email
         return context
