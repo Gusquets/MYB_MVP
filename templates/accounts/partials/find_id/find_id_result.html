@@ -2,7 +2,15 @@
     {% if result %}
     <h4>회원님의 이메일은 아래와 같습니다.</h4>
     <input type="text" class="mt-3 form-control" value="{{ result }}" readonly>
+    <div class="col-12 txt-center">
+        <a class="btn btn-primary m-3" href="{% url "login" %}">로그인</a>
+        <a class="btn btn-primary m-3" href="{% url "password_reset" %}">비밀번호 찾기</a>
+    </div>
     {% else %}
     <h4 class="col-12 txt-center">일치하는 이메일이 존재하지 않습니다.</h4>
+    <div class="col-12 txt-center">
+        <a class="btn btn-primary m-3" href="{% url "find_email" %}">이메일 찾기</a>
+        <a class="btn btn-primary m-3" href="{% url "website:home" %}">홈으로</a>
+    </div>
     {% endif %}
 </div>
