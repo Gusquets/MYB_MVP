@@ -17,9 +17,9 @@
 <div id="artist_list_grid" class="artist_list_grid">
     {% if request.path == '/concert/list/' %}
         {% include 'concert/partials/concert_list/concert_list_grid_image.html' %}
-    {% elif request.path == '/concert/list/movie/' %}
+    {% elif movie %}
         {% include 'concert/partials/concert_list/concert_list_grid_movie.html' %}
-    {% elif request.path == '/concert/list/basket/' %}
+    {% elif basket %}
         {% include 'concert/partials/concert_list/concert_list_grid_basket.html' %}
     {% else %}
         {% include 'concert/partials/concert_list/concert_list_grid_image.html' %}

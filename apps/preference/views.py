@@ -89,18 +89,34 @@ class MyBasketConcert(LoginRequiredMixin, ListView):
         return self.request.user.basket_set.all().filter(artist__isnull = True)
 
 
-class MyReview(TemplateView):
+class MyReview(ListView):
+    model = Review
     template_name = 'preference/review/my_review.html'
+    paginate_by = 10
 
+    name = 'review_list'
+
+    def get_queryset(self):
+        if self.request.path == '/preference/my/review/':
+            obj_list = Review.objects.filter(user = self.request.user)
+        elif self.request.path == '/preference/my/reviewed/':
+            obj_list = Review.objects.filter(artist = self.request.user.artist)
+        elif self.kwargs['pk']:
+            artist = Artist.objects.get(id = self.kwargs['pk'])
+            obj_list = Review.objects.filter(artist = artist)
+        
+        return obj_list
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.path == '/preference/my/review/':
-            context['review_list'] = Review.objects.filter(user = self.request.user)
+            context['type'] = 'review'
         elif self.request.path == '/preference/my/reviewed/':
-            context['review_list'] = Review.objects.filter(artist = self.request.user.artist)
+            context['type'] = 'reviewed'
         elif self.kwargs['pk']:
-            artist = Artist.objects.get(id = self.kwargs['pk'])
-            context['review_list'] = Review.objects.filter(artist = artist)
+            context['type'] = 'artist'
+            context['artist_name'] = Artist.objects.get(id = self.kwargs['pk']).name
+        
         return context
 
 

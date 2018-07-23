@@ -47,7 +47,9 @@
         </div>
     {% endfor %}
     <div class="col-12 mt-3">
-        <div class="_more"> 공연일정 더보기+ </div>
+        <a class="txt-black" href="{% url "concert:concert_list_artist" artist.id %}">
+            <div class="_more"> 공연일정 더보기+ </div>
+        </a>
     </div>
 </div>
 

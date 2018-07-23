@@ -6,6 +6,7 @@ from django.db.models import Q
 
 from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin
 from apps.preference.models import Basket
+from apps.accounts.models import Artist
 from .forms import ConcertCreateForm
 from .models import Concert
 
@@ -39,7 +40,7 @@ class ConcertCreateComplete(TemplateView):
 class ConcertList(ListView):
     model = Concert
     template_name = 'concert/concert_list.html'
-    paginate_by = 3
+    paginate_by = 9
 
     name = 'concert_list'
 
@@ -60,6 +61,14 @@ class ConcertList(ListView):
                     obj_list = obj_list.order_by('-concert__artist__rate_avg')
             else:
                 obj_list = None
+        elif self.kwargs['pk']:
+            artist = Artist.objects.get(id = self.kwargs['pk'])
+            obj_list = self.model.objects.filter(artist = artist)
+            if q:
+                obj_list = obj_list.filter(artist__name__icontains=q)
+            if sort == 'time':
+                obj_list = obj_list.order_by('-date')
+
         else:
             obj_list = self.model.objects.all()
             if q:
@@ -78,6 +87,12 @@ class ConcertList(ListView):
         context['date'] = self.request.GET.get('date', '')
         context['location'] = self.request.GET.get('location', '')
         context['sorted'] = self.request.GET.get('sorted', '')
+        if self.kwargs['pk']:
+            context['list_artist'] = Artist.objects.get(id = self.kwargs['pk'])
+        if self.request.path.find('movie') > 0:
+            context['movie'] = True
+        if self.request.path.find('basket') > 0:
+            context['basket'] = True
 
         return context
 
