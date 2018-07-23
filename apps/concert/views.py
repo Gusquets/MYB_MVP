@@ -39,45 +39,46 @@ class ConcertCreateComplete(TemplateView):
 class ConcertList(ListView):
     model = Concert
     template_name = 'concert/concert_list.html'
-    paginate_by = 10
+    paginate_by = 3
 
     name = 'concert_list'
 
-
     def get_queryset(self):
-        obj_list = self.model.objects.all()
         q = self.request.GET.get('q', '')
+        sort = self.request.GET.get('sorted', '')
         date = self.request.GET.get('date', '')
         location = self.request.GET.get('location', '')
 
-        if q:
-            obj_list = self.model.objects.filter(Q(artist__name__icontains=q)|Q(date__icontains=date)|Q(location_1__icontains=location))
+        if self.request.path == '/concert/list/basket/':
+            if self.request.user.is_authenticated:
+                obj_list = Basket.objects.all().filter(user = self.request.user, artist__isnull = True)
+                if q:
+                    obj_list = obj_list.filter(concert__artist__name__icontains=q)
+                if sort == 'time':
+                    obj_list = obj_list.order_by('-concert__date')
+                elif sort == 'rate':
+                    obj_list = obj_list.order_by('-concert__artist__rate_avg')
+            else:
+                obj_list = None
+        else:
+            obj_list = self.model.objects.all()
+            if q:
+                obj_list = obj_list.filter(artist__name__icontains=q)
+
+            if sort == 'time':
+                obj_list = obj_list.order_by('-date')
+            elif sort == 'rate':
+                obj_list = obj_list.order_by('-artist__rate_avg')
 
         return obj_list
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        q = self.request.GET.get('q', '')
-        context['q'] = q
+        context['q'] = self.request.GET.get('q', '')
         context['date'] = self.request.GET.get('date', '')
         context['location'] = self.request.GET.get('location', '')
-        sort = self.request.GET.get('sorted', '')
-        context['sorted'] = sort
-        if sort == 'time':
-            context['concert_list'] = self.get_queryset().order_by('-id')
-        elif sort == 'rate':
-            context['concert_list'] = self.get_queryset().order_by('-artist__rate_avg')
-        else:
-            context['concert_list'] = self.get_queryset()
-        if self.request.user.is_authenticated:
-            if q:
-                context['basket_list'] = Basket.objects.all().filter(user = self.request.user, artist__isnull = True).filter(concert__artist__name__icontains=q)
-            else:
-                context['basket_list'] = Basket.objects.all().filter(user = self.request.user, artist__isnull = True)
-        if sort == 'time':
-            context['basket_list'] = context['basket_list'].order_by('-id')
-        elif sort == 'rate':
-            context['basket_list'] = context['basket_list'].order_by('-concert__artist__rate_avg')
+        context['sorted'] = self.request.GET.get('sorted', '')
+
         return context
 
 

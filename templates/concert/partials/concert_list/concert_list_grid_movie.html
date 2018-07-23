@@ -1,3 +1,4 @@
+{% load bootstrap4 %}
 <div class="col-3 offset-9 txt-right pb-2">
     <ul class="mb_filter_menu">
         <li><a href="{{ request.path }}?sorted=time" {% if sorted == 'time' %}style="color:#009bfc;"{% endif %} class="txt-black">시간순</a></li>
@@ -35,6 +36,12 @@
         </div>
     {% endfor %}
 </div>
+<div class="row">
+    <div style="margin: 0 auto;">
+        {% bootstrap_pagination page_obj %}
+    </div>
+</div>
+
 {% if request.user.usertype == 2 %}
 <hr>
 <div class="col-12 txt-center mb-5">
