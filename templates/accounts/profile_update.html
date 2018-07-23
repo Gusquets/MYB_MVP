@@ -16,6 +16,8 @@
 {% endblock %}
 {% block extrajs %}
 <script>
-    $('#id_email').val('{{ user.email}}')
+    $('#id_email').val('{{ user.email}}');
+    $('#id_nickname').val('{{ user.nickname }}');
+    $('#id_phone_number').val('{{ user.phone_number }}')
 </script>
 {% endblock %}
