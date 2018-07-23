@@ -232,6 +232,9 @@ label {
 .txt-sm{
     font-size: .5em;
 }
+.txt-smd{
+    font-size: .8em;
+}
 .txt-md{
     font-size: 1em;
 }
@@ -246,6 +249,16 @@ label {
     border: 1px solid #ededed;
     background: #fafafa;
 }
+.answer-show-btn.show {
+    display: block;
+}
+.answer-show-btn.none {
+    display: none;
+}
+.answer-body {
+    overflow: hidden;
+    display: none;
+  }
 
 /* 꾸밈 선 */
 .upper_sm_line{

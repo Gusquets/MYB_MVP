@@ -10,8 +10,8 @@ from apps.common.mixins import LoginRequiredMixin
 from apps.concert.models import Concert
 from apps.accounts.models import Artist
 
-from .models import Basket, Review, Like
-from .forms import ReviewForm
+from .models import Basket, Review, Like, Answer
+from .forms import ReviewForm, AnswerForm
 
 @login_required
 def like_create(request, pk):
@@ -147,6 +147,31 @@ class ReviewCreate(LoginRequiredMixin, CreateView):
             rates_list.append(rate.rate)
         artist.rate_avg = sum(rates_list) / len(rates_list)
         artist.save()
+
+        response = super().form_valid(form)
+
+        return response
+
+
+class AnswerCreate(CreateView):
+    model = Answer
+    form_class = AnswerForm
+    
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return ['preference/review/_answer_create.html']
+        return ['preference/review/answer_create.html'] 
+
+    def get_success_url(self):
+        return reverse('website:home')
+    
+    def form_valid(self, form):
+        answer = form.save(commit=False)
+        review = Review.objects.get(id = self.kwargs['review_id'])
+        answer.user = self.request.user
+        answer.review = review
+
+        answer.save()
 
         response = super().form_valid(form)
 

@@ -56,3 +56,6 @@ class Answer(models.Model):
     class Meta:
         verbose_name = '답변'
         verbose_name_plural = '답변'
+
+    def __str__(self):
+        return self.description
