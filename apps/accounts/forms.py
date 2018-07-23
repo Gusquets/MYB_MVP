@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import SetPasswordForm as BaseSetPasswordForm, PasswordChangeForm as BasePasswordChangeForm
 from django.utils.safestring import mark_safe
 
-from apps.common.validators import validate_password
+from apps.common.validators import validate_password, PhoneNumberValidator
 from .models import Artist
 
 User = get_user_model()
@@ -127,10 +127,48 @@ class PasswordChangeForm(BasePasswordChangeForm):
         label='새 비밀번호',
         widget=forms.PasswordInput(attrs={'placeholder': '6~32자리의 영문, 숫자를 혼합하여 사용하세요.'}),
         strip=False,
+        required=False,
         validators=[validate_password],
     )
     new_password2 = forms.CharField(
         label='새 비밀번호 확인',
         strip=False,
+        required=False,
         widget=forms.PasswordInput,
     )
+    email = forms.EmailField(required=False, widget = forms.TextInput(attrs={'readonly': ''}))
+    nickname = forms.CharField(required=False)
+    phone_number = forms.CharField(required=False, max_length = 11, validators=[PhoneNumberValidator()])
+    
+    def clean_new_password2(self):
+        password = self.cleaned_data.get('old_password')
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError(
+                    self.error_messages['password_mismatch'],
+                    code='password_mismatch',
+                )
+            else:
+                password_validation.validate_password(password2, self.user)
+                return password2
+
+        return password
+
+    def save(self, commit=True):
+        if self.cleaned_data.get('new_password1'):
+            password = self.cleaned_data["new_password1"]
+        else:
+            password = self.cleaned_data['old_password']
+        nickname = self.cleaned_data['nickname']
+        phone_number = self.cleaned_data['phone_number']
+
+        if nickname:
+            self.user.nickname = nickname
+        if phone_number:
+            self.user.phone_number = phone_number
+        self.user.set_password(password)
+        if commit:
+            self.user.save()
+        return self.user

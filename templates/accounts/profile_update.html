@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- 타이틀 영역 -->
+<div>
+    {% include 'accounts/partials/profile/profile_update_header.html' %}
+</div>
+
+<!-- 마이페이지 본문 -->
+
+<div id="concert_create_grid" class="concert_create_grid">
+    {% include 'accounts/partials/profile/profile_update_body.html' %}
+</div>
+
+{% endblock %}
+{% block extrajs %}
+<script>
+    $('#id_email').val('{{ user.email}}')
+</script>
+{% endblock %}

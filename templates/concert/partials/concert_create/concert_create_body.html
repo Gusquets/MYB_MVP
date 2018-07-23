@@ -25,18 +25,3 @@
         </form>
     </div>
 </div>
-<script src="{% static "plugins/jquery/jquery-3.3.1.min.js" %}"></script>
-<script>
-    function else_text(value){
-        console.log(value);
-        if(value == '그외'){
-            $('#id_location_else').val('');
-            $('#id_location_else').attr({'readonly': false});
-        }
-        else{
-            $('#id_location_else').attr({'readonly': true});
-        }
-    }
-    $('#id_location_1').attr({'onchange': 'else_text(this.value)'});
-    $('#id_location_2').attr({'style': 'display: none;'});
-</script>

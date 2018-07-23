@@ -109,19 +109,6 @@ class UserCreateComplete(TemplateView):
     template_name = 'registration/user_create_complete.html'
 
 
-class UserUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    template_name = 'registration/user_update.html'
-    form_class = UserUpdateForm
-    model = User
-    success_url = reverse_lazy('profile')
-    success_message = '성공적으로 내 정보를 저장했습니다.'
-
-    name = 'user_update'
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-
 class PasswordResetView(BasePasswordResetView):
     html_email_template_name = 'registration/password_reset_email.html'
 
@@ -129,12 +116,6 @@ class PasswordResetView(BasePasswordResetView):
 class PasswordResetConfirmView(BasePasswordResetConfirmView):
     form_class = SetPasswordForm
 
-
-class PasswordChangeView(BasePasswordChangeView):
-    form_class = PasswordChangeForm
-    success_url = reverse_lazy('profile')
-
-    name = 'password_change'
 
 
 class ArtistList(ListView):

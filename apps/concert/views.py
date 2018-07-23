@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, TemplateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 
@@ -12,7 +12,7 @@ from .models import Concert
 class ConcertCreate(LoginRequiredMixin, ArtistRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'concert/concert_create.html'
     form_class = ConcertCreateForm
-    success_url = reverse_lazy('concert:concert_list')
+    success_url = reverse_lazy('concert:concert_create_complete')
     success_message = '성공적으로 공연이 등록되었습니다.'
 
     name = 'concert_create'
@@ -31,6 +31,9 @@ class ConcertCreate(LoginRequiredMixin, ArtistRequiredMixin, SuccessMessageMixin
 
         return response
 
+
+class ConcertCreateComplete(TemplateView):
+    template_name = 'concert/concert_create_complete.html'
 
 
 class ConcertList(ListView):
