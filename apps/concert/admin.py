@@ -6,7 +6,7 @@ class ConcertAdmin(admin.ModelAdmin):
     list_display = ['id', 'date', 'location_1', 'artist', 'probability']
     list_display_links = ['id', 'date', 'artist']
     list_filter = ['date', 'location_1', 'artist']
-    search_fields = ['location_1', 'artist']
+    search_fields = ['location_1', 'artist__name']
 
 
 @admin.register(ConcertSongList)

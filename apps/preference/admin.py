@@ -23,5 +23,11 @@ class LikeAdmin(admin.ModelAdmin):
     search_fields = ['user']
 
 
+@admin.register(Answer)
+class AnswerAdmin(admin.ModelAdmin):
+    list_display = ['user', 'review']
+    search_fields = ['user']
+
+
 
 
