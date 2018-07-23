@@ -17,7 +17,7 @@ from allauth.socialaccount.templatetags.socialaccount import get_providers
 
 from .forms import UserCreateForm, ArtistCreateForm, UserUpdateForm, SetPasswordForm, PasswordChangeForm
 from .models import Artist, ArtistImages
-from apps.common.mixins import LoginRequiredMixin
+from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin
 from apps.preference.models import Basket, Review
 
 User = get_user_model()
@@ -158,7 +158,7 @@ class ArtistList(ListView):
         return context
 
 
-class ArtistDetail(DetailView):
+class ArtistDetail(ArtistRequiredMixin, DetailView):
     template_name = 'accounts/artist_detail.html'
     model = Artist
 
@@ -172,7 +172,7 @@ class ArtistDetail(DetailView):
         return context
 
 
-class ArtistUpdate(UpdateView):
+class ArtistUpdate(ArtistRequiredMixin, UpdateView):
     template_name = 'accounts/artist_update.html'
     model = Artist
     form_class = ArtistCreateForm
