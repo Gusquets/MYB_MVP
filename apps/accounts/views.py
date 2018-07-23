@@ -158,7 +158,7 @@ class ArtistList(ListView):
         return context
 
 
-class ArtistDetail(ArtistRequiredMixin, DetailView):
+class ArtistDetail(LoginRequiredMixin, DetailView):
     template_name = 'accounts/artist_detail.html'
     model = Artist
 

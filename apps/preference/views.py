@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, ListView
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.urls import reverse
@@ -67,9 +67,26 @@ class MyBasket(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['concert_list'] = self.request.user.basket_set.all().filter(artist__isnull = True)
-        context['artist_list'] = self.request.user.basket_set.all().filter(concert__isnull = True)
+        context['concert_list'] = self.request.user.basket_set.all().filter(artist__isnull = True)[:6]
+        context['artist_list'] = self.request.user.basket_set.all().filter(concert__isnull = True)[:6]
         return context
+
+class MyBasketArtist(LoginRequiredMixin, ListView):
+    model = Basket
+    template_name = 'preference/basket/my_basket_artist.html'
+    paginate_by = 12
+
+    def get_queryset(self):
+        return self.request.user.basket_set.all().filter(concert__isnull = True)
+
+
+class MyBasketConcert(LoginRequiredMixin, ListView):
+    model = Basket
+    template_name = 'preference/basket/my_basket_concert.html'
+    paginate_by = 12
+
+    def get_queryset(self):
+        return self.request.user.basket_set.all().filter(artist__isnull = True)
 
 
 class MyReview(TemplateView):
