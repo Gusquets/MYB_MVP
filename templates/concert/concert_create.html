@@ -1,6 +1,15 @@
-공연 등록
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_table }}
-    <input type="submit" value="공연등록">
-</form>
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- 타이틀 영역 -->
+<div class="artist_list_header">
+    {% include 'concert/partials/concert_create/concert_create_header.html' %}
+</div>
+
+<!-- 이곳부터 아티스트 -->
+<div id="concert_create_grid" class="concert_create_grid">
+    {% include 'concert/partials/concert_create/concert_create_body.html' %}
+</div>
+{% endblock %}

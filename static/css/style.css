@@ -1216,3 +1216,8 @@ display: none !important;
     margin-top : 5px;
     margin-bottom : 5px;
 }
+
+.concert_create_grid{
+    max-width: 700px;
+    margin: auto;
+}

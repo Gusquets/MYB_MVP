@@ -23,3 +23,8 @@ def validate_movie_url(value):
 
     if find_embed == -1:
         raise ValidationError('Embed용 youtube 주소를 입력해 주세요.')
+
+class ProbabilityValidator(RegexValidator):
+    regex = r'^(?:(\d{2})|(100))*$'
+    message = '0-100의 값을 입력해 주세요'
+    code = 'invalid'

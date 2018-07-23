@@ -1,5 +1,6 @@
 from django.db import models
 from apps.accounts.models import Artist
+from django.core.validators import MaxValueValidator
 
 
 class Concert(models.Model):
@@ -7,9 +8,10 @@ class Concert(models.Model):
     time = models.TimeField('공연 시간')
     location_1 = models.CharField('공연 장소 1', max_length = 50, choices = (('신촌','신촌'),('홍대','홍대'),('강남','강남'),('이태원','이태원'),('건대','건대'),('한강','한강'),('그외','그외')))
     location_2 = models.CharField('공연 장소 2', max_length = 100)
+    location_else = models.CharField('공연장소 그외', max_length = 50, default = '해당없음')
     artist = models.ForeignKey(Artist, verbose_name = '아티스트', on_delete = models.CASCADE)
-    description = models.TextField('공연 설명')
-    probability = models.IntegerField('공연 확률')
+    description = models.TextField('공연 설명', blank = True, null = True)
+    probability = models.PositiveIntegerField('공연 확률', validators = [MaxValueValidator(100)])
 
     class Meta:
         verbose_name = '공연 정보'

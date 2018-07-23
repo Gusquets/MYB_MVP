@@ -21,6 +21,16 @@ class ConcertCreate(LoginRequiredMixin, ArtistRequiredMixin, SuccessMessageMixin
         context = super().get_context_data(**kwargs)
         context['artist'] = self.request.user.artist
         return context
+    
+    def form_valid(self, form):
+        concert = form.save(commit=False)
+        concert.artist = self.request.user.artist
+
+        concert.save()
+        response = super().form_valid(form)
+
+        return response
+
 
 
 class ConcertList(ListView):

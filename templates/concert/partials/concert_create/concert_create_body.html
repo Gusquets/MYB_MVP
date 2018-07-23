@@ -1,0 +1,42 @@
+{% load bootstrap4 static %}
+
+<div class="row my-5">
+    <div class="col-12">
+        <form action="" method="post">
+            {% csrf_token %}
+            <h4>날짜 및 시간</h4>
+            <div class="row">
+                {% bootstrap_field form.date show_label=False form_group_class='col-6 mb-4' %}
+                {% bootstrap_field form.time show_label=False form_group_class='col-6 mb-4' placeholder='12:34:56 형태로 입력해 주세요.' %}
+            </div>
+            <h4>장소</h4>
+            <div class="row">
+                {% bootstrap_field form.location_1 show_label=False form_group_class='col-6 mb-4' %}
+                {% bootstrap_field form.location_else show_label=False form_group_class='col-6 mb-4' placeholder='그외의 경우 입력해 주세요.' %}
+            </div>
+            {% bootstrap_field form.location_2 show_label=False form_group_class='col-12 mb-4' %}
+            <h4>공연 확률</h4>
+            {% bootstrap_field form.probability show_label=False form_group_class='col-12 mb-4' %}
+            <h4>간단한 공연 설명 (선택)</h4>
+            {% bootstrap_field form.description show_label=False form_group_class='col-12 mb-4' %}
+            <div class="txt-center">
+                <input type="submit" value="등록" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</div>
+<script src="{% static "plugins/jquery/jquery-3.3.1.min.js" %}"></script>
+<script>
+    function else_text(value){
+        console.log(value);
+        if(value == '그외'){
+            $('#id_location_else').val('');
+            $('#id_location_else').attr({'readonly': false});
+        }
+        else{
+            $('#id_location_else').attr({'readonly': true});
+        }
+    }
+    $('#id_location_1').attr({'onchange': 'else_text(this.value)'});
+    $('#id_location_2').attr({'style': 'display: none;'});
+</script>

@@ -14,7 +14,7 @@
             <div class="card">
                 <div class="card-body">
                     <p class="txt-bold">아티스트의 한마디</p>
-                    <h2>{{ concert.artist.description }}</h2>
+                    <h2>{{ concert.description }}</h2>
                 </div>
             </div>
         </div>
@@ -72,7 +72,9 @@
             후기가 없습니다.
         </div>
         {% endfor %}
-        <a href="{% url "preference:artist_review" concert.artist.id %}">
-            <div class="_more txt-black"> 리뷰 더보기 + </div>
-        </a>
+        <div class="col-12">
+            <a href="{% url "preference:artist_review" concert.artist.id %}">
+                <div class="_more txt-black"> 리뷰 더보기 + </div>
+            </a>
+        </div>
     </div>
