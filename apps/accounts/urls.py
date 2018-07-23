@@ -15,7 +15,9 @@ urlpatterns = [
     path('signup/complete/', views.UserCreateComplete.as_view(), name='user_create_complete'),
 
     path('password/reset/', views.PasswordResetView.as_view(), name='password_reset'),
-    path('reset/<uidb64>/<token>/', views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('password/reset/done/', auth_views.PasswordResetDoneView.as_view(), name = 'password_reset_done'),
+    path('password/reset/<uidb64>/<token>/', views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('pathword/reset/complete/', auth_views.PasswordResetCompleteView.as_view(), name = 'password_reset_complete'),
     path('email/find/', views.FindEmail.as_view(), name='find_email'),
     path('email/find/result/', views.FindEmail.as_view(), name = 'find_email_result'),
 
