@@ -139,7 +139,7 @@ class PasswordChangeForm(BasePasswordChangeForm):
     email = forms.EmailField(required=False, widget = forms.TextInput(attrs={'readonly': ''}))
     nickname = forms.CharField(required=False)
     phone_number = forms.CharField(required=False, max_length = 11, validators=[PhoneNumberValidator()])
-    
+
     def clean_new_password2(self):
         password = self.cleaned_data.get('old_password')
         password1 = self.cleaned_data.get('new_password1')

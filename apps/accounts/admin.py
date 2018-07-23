@@ -84,4 +84,4 @@ class ArtistAdmin(admin.ModelAdmin):
 class ArtistImagesAdmin(admin.ModelAdmin):
     list_display = ['artist']
     list_display_links = ['artist']
-    search_fields = ['artist']
+    search_fields = ['artist__name']

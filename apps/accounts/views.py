@@ -172,6 +172,37 @@ class ArtistDetail(DetailView):
         return context
 
 
+class ArtistUpdate(UpdateView):
+    template_name = 'accounts/artist_update.html'
+    model = Artist
+    form_class = ArtistCreateForm
+    success_url = reverse_lazy('profile')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['images'] = self.object.artistimages_set.all()
+
+        return context
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        artist = self.object
+
+        files = self.request.FILES.getlist('image')
+        for f in files:
+            ArtistImages.objects.create(artist = artist, image = f)
+        
+        images = self.object.artistimages_set.all().order_by('id')
+
+        if len(images) > 5:
+            while len(images) > 5:
+                images.first().delete()
+                images = self.object.artistimages_set.all().order_by('id')
+
+        return response
+
+
+
 class FindEmail(TemplateView):
     template_name = 'accounts/find_id.html'
 

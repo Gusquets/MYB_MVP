@@ -13,6 +13,9 @@
     </div>
     {% if request.user.usertype == 2 %}
     <div class="col">
+        <a class="txt-black" href="{% url "artist_update" request.user.artist.id %}">아티스트정보 수정</a>
+    </div>
+    <div class="col">
         <a class="txt-black" href="{% url "concert:concert_create" %}">공연 등록</a>
     </div>
     {% endif %}
