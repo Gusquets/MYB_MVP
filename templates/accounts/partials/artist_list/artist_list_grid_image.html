@@ -1,4 +1,4 @@
-{% load bootstrap4 %}
+{% load bootstrap4 static %}
 <div class="col-3 offset-9 txt-right pb-2">
     <ul class="mb_filter_menu">
         <li><a href="{{ request.path }}?sorted=time" {% if sorted == 'time' %}style="color:#009bfc;"{% endif %} class="txt-black">시간순</a></li>
@@ -15,16 +15,14 @@
                 <div class="mt-3">{{ artist.description }}</div>
                 <div id="rate-{{ artist.id }}" class="mt-3"></div>
                 <script>
-                    var star =''
                     for(var i=0; i < Math.round({{ artist.rate_avg }}); i++){
-                        star += '★';
+                        document.getElementById('rate-{{ artist.id }}').innerHTML += '<img src="{% static "images/star-p.png" %}" width="12">'
                     }
                     if (Math.round({{ artist.rate_avg }}) < 5){
                         for(var i=0; i< 5-Math.round({{ artist.rate_avg }}); i++){
-                            star += '☆';
+                            document.getElementById('rate-{{ artist.id }}').innerHTML += '<img src="{% static "images/star-n.png" %}" width="12">'
                         }
                     }
-                    document.getElementById('rate-{{ artist.id }}').innerText = star
                 </script>
             </a>
         </div>

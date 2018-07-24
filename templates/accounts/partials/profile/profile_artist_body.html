@@ -18,16 +18,14 @@
                     </div>
                 </div>
                 <script>
-                    var star =''
                     for(var i=0; i < Math.round({{ request.user.artist.rate_avg }}); i++){
-                        star += '★';
+                        document.getElementById('rate-count').innerHTML += '<img src="{% static "images/star-p.png" %}" width="12">'
                     }
                     if (Math.round({{ request.user.artist.rate_avg }}) < 5){
                         for(var i=0; i< 5-Math.round({{ request.user.artist.rate_avg }}); i++){
-                            star += '☆';
+                            document.getElementById('rate-count').innerHTML += '<img src="{% static "images/star-n.png" %}" width="12">'
                         }
                     }
-                    document.getElementById('rate-count').innerText = star
                 </script>
             </div>
         </div>
