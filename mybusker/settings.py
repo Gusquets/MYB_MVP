@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'apps.concert',
     'apps.common',
     'apps.preference',
+    'apps.payment',
 ]
 
 MIDDLEWARE = [

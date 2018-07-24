@@ -25,6 +25,7 @@ urlpatterns = [
     path('accounts/', include('apps.accounts.urls')),
     path('concert/', include('apps.concert.urls', namespace = 'concert')),
     path('preference/', include('apps.preference.urls', namespace = 'preference')),
+    path('payment/', include('apps.payment.urls', namespace = 'payment')),
 
     path('accounts/', include('allauth.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
