@@ -1,3 +1,4 @@
+{% load static %}
 <!-- 첫번째 섹션 사진, 영상 -->
 <div class="photo_video row pt-3">
     <a href="{% url "concert:concert_detail" concert.id %}" class="txt-black col-4 detail-selector"> 공연장소 보기 </a>
@@ -57,28 +58,69 @@
 <div class="artist_review row pb-3 mt-3">
     <div class="col-12 detail-subtitle">후기</div>
     {% for review in review_list %}
-    <div class="col-12 mb-2">
-        <div class="card">
-            <div class="row card-header">
-                <div class="col-10 {% if review.is_pay %}txt-blue{% endif %}">{{ review.user.nickname }} &rarr; {{ review.artist.name }} | {{ review.regist_dt }}</div> <div class="col-2 txt-red">&hearts; {{ review.like_count }}</div>
+        <div class="col-12 mb-2">
+            <div class="card">
+                <div class="row card-header align-items-center">
+                    <div class="col-8 txt-left {% if review.is_pay %}txt-blue{% endif %}">
+                        {{ review.user.nickname }}<br/>
+                        <span id="star-count-{{ review.id }}" class="txt-sm"></span>
+                        <script>
+                            var star =''
+                            for(var i=0; i < {{ review.rate }}; i++){
+                                document.getElementById('star-count-{{ review.id }}').innerHTML += '<img src="{% static "images/star-p.png" %}" width="12">'
+                            }
+                            if ({{ review.rate }} < 5){
+                                for(var i=0; i< 5-{{ review.rate }}; i++){
+                                    document.getElementById('star-count-{{ review.id }}').innerHTML += '<img src="{% static "images/star-n.png" %}" width="12">'
+                                }
+                            }
+                        </script>
+                    </div>
+                    <div class="col-4 txt-right">
+                        <a id="answer-new-{{ review.id }}" class="modal-form-btn-answer txt-smd" href="{% url "preference:answer_create" review.id %}" data-toggle="modal" data-target="#answer_create">댓글달기</a>
+                        <a class="btn btn-sm btn-secondary like" href="{% url "preference:like_create" review.id %}"><img src="{% static "images/thumb.png" %}" alt=""> {{ review.like_count }}</a>
+                        <a id="answer-btn-{{ review.id }}" class="btn btn-sm btn-outline-secondary" href=""><img src="{% static "images/reply.png" %}" alt=""> {{ review.answer_set.all|length }}</a>
+                    </div>
+                </div>
+                <div class="card-body py-0 txt-left">
+                    {{ review.description }}<br/>
+                    <span class="txt-sm">{{ review.regist_dt }} {{ review.artist.name }}의 공연</span>
+                </div>
             </div>
-            <div class="card-body txt-left pt-0">
-                <span id="star-count-{{ review.id }}" class="txt-sm"></span><br/>
-                <script>
-                    var star =''
-                    for(var i=0; i < {{ review.rate }}; i++){
-                        star += '★';
+            <div id="answer-{{ review.id }}" class="card answer-body">
+                {% for answer in review.answer_set.all %}
+                <div class="card-body">
+                    &#10149; {{ answer.user.nickname }} : {{ answer.description }}
+                </div>
+                {% empty %}
+                <div class="card-body txt-left">
+                    답변이 없습니다.
+                </div>
+                {% endfor %}
+            </div>
+            <script src="{% static "plugins/jquery/jquery-3.3.1.min.js" %}"></script>
+            <script>
+                $('#answer-btn-{{ review.id }}').click(function(e) {
+                    e.preventDefault();
+                
+                    var $this = $(this);
+                    
+                    if ($('#answer-{{ review.id }}').hasClass('show')) {
+                        $('#answer-{{ review.id }}').removeClass('show');
+                        $('#answer-{{ review.id }}').slideUp(350);
+                    } else {
+                        $('#answer-{{ review.id }}').removeClass('show');
+                        $('#answer-{{ review.id }}').slideUp(350);
+                        $('#answer-{{ review.id }}').toggleClass('show');
+                        $('#answer-{{ review.id }}').slideToggle(350);
                     }
-                    document.getElementById('star-count-{{ review.id }}').innerText = star
-                </script>
-                {{ review.description }}
-            </div>
+                    });
+            </script>
         </div>
-    </div>
     {% empty %}
-    <div class="col-12 mb-2">
-        후기가 없습니다.
-    </div>
+        <div class="col-12 mb-2 txt-center">
+            후기가 없습니다.
+        </div>
     {% endfor %}
     <div class="col-12">
         <a href="{% url "preference:artist_review" concert.artist.id %}">

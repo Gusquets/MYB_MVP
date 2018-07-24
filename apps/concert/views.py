@@ -61,7 +61,7 @@ class ConcertList(ListView):
                     obj_list = obj_list.order_by('-concert__artist__rate_avg')
             else:
                 obj_list = None
-        elif self.kwargs['pk']:
+        elif self.kwargs.get('pk',''):
             artist = Artist.objects.get(id = self.kwargs['pk'])
             obj_list = self.model.objects.filter(artist = artist)
             if q:
@@ -87,7 +87,7 @@ class ConcertList(ListView):
         context['date'] = self.request.GET.get('date', '')
         context['location'] = self.request.GET.get('location', '')
         context['sorted'] = self.request.GET.get('sorted', '')
-        if self.kwargs['pk']:
+        if self.kwargs.get('pk',''):
             context['list_artist'] = Artist.objects.get(id = self.kwargs['pk'])
         if self.request.path.find('movie') > 0:
             context['movie'] = True
