@@ -20,10 +20,10 @@
                     {% bootstrap_field form.username form_group_class='col-12 login-row' placeholder='이메일' show_label=False %}
                     {% bootstrap_field form.password form_group_class='col-12 login-row' placeholder='비밀번호' show_label=False %}
                     <div class="col-12 login-row">
-                        <button type="submit" class="btn btn-outline-primary login-button">로그인</button>
+                        <button type="submit" class="btn btn-outline-primary login-button pt-2 pb-2">로그인</button>
                     </div>
                     <div class="col-12 login-row">
-                        <a class="btn btn-primary sign-up-button" href="{% url "user_create_choice" %}">회원가입</a>
+                        <a class="btn btn-primary sign-up-button pt-2 pb-2" href="{% url "user_create_choice" %}">회원가입</a>
                     </div>
                     <div class="col-6 pb-5">
                         <a href="{% url "find_email" %}">이메일 찾기</a>

@@ -2,6 +2,9 @@ a {
     text-decoration : none;
 }
 
+a:hover{
+    text-decoration: none;
+}
 .mobile-only {
     display: block;
 }
@@ -909,7 +912,7 @@ display: none !important;
 }
 
 .signup-complete-section{
-    min-height : 750px;
+    height : 750px;
 }
 
 .signup-complete-logo{
@@ -930,7 +933,9 @@ display: none !important;
 
 @media(max-width : 568px){
     .signup-complete-section{
-        min-height : 700px;
+        min-height : 600px;
+        display : block;
+        padding-top :2rem;
     }
 
 }
@@ -1237,4 +1242,9 @@ display: none !important;
 .concert_create_grid{
     max-width: 700px;
     margin: auto;
+}
+
+.cs_body{
+    max-width : 900px;
+    margin : auto;
 }
