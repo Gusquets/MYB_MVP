@@ -69,8 +69,10 @@
                             </script>
                         </div>
                         <div class="col-4 txt-right">
+                            {% if request.user.is_authenticated %}
                             <a id="answer-new-{{ review.id }}" class="modal-form-btn-answer txt-smd" href="{% url "preference:answer_create" review.id 4 %}" data-toggle="modal" data-target="#answer_create">댓글달기</a>
-                            <a class="btn btn-sm btn-secondary like" href="{% url "preference:like_create" review.id %}"><img src="{% static "images/thumb.png" %}" alt=""> {{ review.like_count }}</a>
+                            {% endif %}
+                            <a class="btn btn-sm btn-secondary {% if request.user.is_authenticated %}like{% endif %}" href="{% if request.user.is_authenticated %}{% url "preference:like_create" review.id %}{% endif %}"><img src="{% static "images/thumb.png" %}" alt=""> {{ review.like_count }}</a>
                             <a id="answer-btn-{{ review.id }}" class="btn btn-sm btn-outline-secondary" href=""><img src="{% static "images/reply.png" %}" alt=""> {{ review.answer_set.all|length }}</a>
                         </div>
                     </div>
