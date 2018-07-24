@@ -1,27 +1,30 @@
-{% extends "Base/Base.html" %}
+{% extends "base/base.html" %}
+{% load static %}
+
 {% block nav %}
 {% endblock %}
 {% block content %}
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static '/payment/css/PaymentComplete.css' %}">
 
 <div class="signup-complete-outer signup-complete-section txt-center">
     <div class="middle">
         <div class="row">
             <div class="col-12 signup-complete-logo">
-                <img src="/media/main/logo-color@2x.png">
+                <a href="{% url "website:home" %}">
+                    <img src="{% static "images/logo-color@2x.png" %}">
+                </a>
             </div>
             <div class="col-12 signup-complete-img">
-                <img class="w-100" src="/media/main/note.png">
+                <img class="w-100" src="{% static "images/note.png" %}">
             </div>
             <div class="col-12 payment-complete-title">
                 후원이 완료 되었습니다
             </div>
             <div class="col-12">
-                <button class="btn btn-outline-primary w-100">
-                    홈으로
-                </button>
+                <a href="{% url "website:home" %}">
+                    <button class="btn btn-outline-primary w-100">
+                        홈으로
+                    </button>
+                </a>
             </div>
         </div>
     </div>

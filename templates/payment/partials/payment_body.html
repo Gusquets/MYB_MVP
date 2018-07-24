@@ -1,0 +1,33 @@
+{% load bootstrap4 static %}
+
+<form id="sponsor_create_form" action="" method="post" class="form-group row payment-body">
+    {% csrf_token %}
+    <div class="col-12 payment-artist-img">
+        <img src="{{ artist.image.url }}" width="100%"><br>
+    </div>
+    <div class="col-12">
+        <label for="id_user_name">후원자 이름</label>
+        {% bootstrap_field form.user_name form_group_class='mb-3' placeholder='누구라고 전해드릴까요?' show_label=False %}
+    </div>
+    
+    <div class="col-12">
+        <label for="id_amount">금액</label>
+        {% bootstrap_field form.amount form_group_class='mb-3' show_label=False %}
+    </div>
+    <div class="col-12">
+        <label for="id_message">함께 전할 메세지(선택)</label>
+        {% bootstrap_field form.message form_group_class='mb-3' placeholder='함께 전할 메시지가 있나요?' show_label=False %}
+    </div>
+    <div class="col-12">
+        <label for="id_pay_type">결제수단</label>
+        {% bootstrap_field form.pay_type form_group_class='mb-3' show_label=False %}
+    </div>
+    {% bootstrap_field form.user %}
+    {% bootstrap_field form.artist %}
+    {% bootstrap_field form.imp_uid %}
+    {% bootstrap_field form.merchant_uid %}
+    <div class="col-12 pt-4 txt-center">
+        <button id="sponsor_create_btn" class="btn mb_main_button mb_blue mb-3" type="submit">결제하기</button><br>
+        구매조건을 확인하였으며 <a href="#">결제 대행 서비스 약관</a>에<br>동의하여 결제를 진행합니다.
+    </div>
+</form>

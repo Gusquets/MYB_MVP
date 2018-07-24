@@ -1,17 +1,25 @@
-후원하기
+{% extends "base/base.html" %}
+{% load static %}
 
-<form id="sponsor_create_form" action="" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input id="sponsor_create_btn" type="submit">
-</form>
+{% block content %}
 
+<div class="payment_header">
+    {% include 'payment/partials/payment_header.html' %}
+</div>
+
+<div class="mb-5">
+    {% include 'payment/partials/payment_body.html' %}
+</div>
+
+{% endblock %}
+{% block extrajs %}
 <script src="http://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
 $('#sponsor_create_btn').on('click',(function(e) {
         e.preventDefault();
         var $form = $('#sponsor_create_form');
         var params = {
+            pg : $form.find('[name=pay_type]').val(),
             name: '{{ artist.name }}',
             amount: $form.find('[name=amount]').val(),
             merchant_uid: '{{ merchant_uid }}',
@@ -39,3 +47,4 @@ $('#sponsor_create_btn').on('click',(function(e) {
         });
     }));
 </script>
+{% endblock %}
