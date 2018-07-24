@@ -32,7 +32,7 @@
 
 </div>
 
-<div class="modal fade" id="review_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-form-modal-review" id="review_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -47,7 +47,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="answer_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-form-modal-answer" id="answer_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -127,7 +127,7 @@
             });
         });
 
-        $(document).on('submit', '#modal-form-modal form', function(e) {
+        $(document).on('submit', '.modal-form-modal-review form', function(e) {
             e.preventDefault();
 
             var $form = $(this);
@@ -137,29 +137,7 @@
 
             $form.ajaxSubmit({
                 success: function(response, statusText, xhr, $form) {
-                    if (response.next_url) {
-                        window.location = response.next_url;
-                        return;
-                    }
-
-                    var html = response;
-                    var $resp = $(html);
-                    var target_id = $form.data('target-id');
-    
-                    if ( $resp.find('.has-error').length > 0) {
-                        var fields_html = $resp.html();
-                        $('#modal-form-modal .modal-body form').html(fields_html);
-                    }
-                    else {
-                        if (target_id) {
-                            $('#'+ target_id ).html($resp.html());
-                        }
-                        else {
-                            $resp.prependTo('#comment-list');
-                        }
-                        $('#modal-form-modal').modal('hide');
-                        $form[0].reset();
-                    }
+                    window.location.reload();
                 },
                 error: function(xhr, textStatus, error) {
                     alert('failed : '+ error);
@@ -204,7 +182,7 @@
             });
         });
 
-        $(document).on('submit', '#modal-form-modal form', function(e) {
+        $(document).on('submit', '.modal-form-modal-answer form', function(e) {
             e.preventDefault();
 
             var $form = $(this);
@@ -214,29 +192,7 @@
 
             $form.ajaxSubmit({
                 success: function(response, statusText, xhr, $form) {
-                    if (response.next_url) {
-                        window.location = response.next_url;
-                        return;
-                    }
-
-                    var html = response;
-                    var $resp = $(html);
-                    var target_id = $form.data('target-id');
-    
-                    if ( $resp.find('.has-error').length > 0) {
-                        var fields_html = $resp.html();
-                        $('#modal-form-modal .modal-body form').html(fields_html);
-                    }
-                    else {
-                        if (target_id) {
-                            $('#'+ target_id ).html($resp.html());
-                        }
-                        else {
-                            $resp.prependTo('#comment-list');
-                        }
-                        $('#modal-form-modal').modal('hide');
-                        $form[0].reset();
-                    }
+                    window.location.reload();
                 },
                 error: function(xhr, textStatus, error) {
                     alert('failed : '+ error);

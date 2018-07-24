@@ -163,18 +163,7 @@ class AnswerCreate(CreateView):
         return ['preference/review/answer_create.html'] 
 
     def get_success_url(self):
-        redirect_type = self.kwargs['redirect']
-
-        if redirect_type == 1:
-            return reverse_lazy('profile')
-        elif redirect_type == 3:
-            return reverse('artist_detail', kwargs={'pk': self.object.review.artist.id})
-        elif redirect_type == 4:
-            return reverse('preference:artist_review', kwargs={'pk': self.object.review.artist.id})
-        elif redirect_type == 5:
-            return reverse_lazy('preference:my_review')
-        else:
-            return reverse_lazy('website:home')
+        return reverse_lazy('website:home')
     
     def form_valid(self, form):
         answer = form.save(commit=False)
