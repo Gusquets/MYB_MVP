@@ -16,6 +16,10 @@ class SponsorCreate(CreateView):
     def get_initial(self):
         pk = self.kwargs['artist_id']
         artist = get_object_or_404(Artist, id = pk)
+        if self.request.user.is_authenticated:
+            user = self.request.user
+        else:
+            user = None
         initial = {'user': self.request.user, 'artist': artist}
         return initial
 
