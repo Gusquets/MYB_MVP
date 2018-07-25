@@ -137,6 +137,7 @@ class ReviewCreate(LoginRequiredMixin, CreateView):
         review = form.save(commit=False)
         artist = Artist.objects.get(id = self.kwargs['artist_id'])
         review.user = self.request.user
+        review.user_name = self.request.user.nickname
         review.artist = artist
         review.is_pay = False
 

@@ -68,7 +68,7 @@
             <div class="card">
                 <div class="row card-header align-items-center">
                     <div class="col-8 {% if review.is_pay %}txt-blue{% endif %}">
-                        {{ review.user.nickname }}<br/>
+                        {{ review.user_name }}<br/>
                         <span id="star-count-{{ review.id }}" class="txt-sm"></span>
                         <script>
                             var star =''
