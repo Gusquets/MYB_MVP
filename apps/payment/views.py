@@ -51,7 +51,8 @@ def sponsor_create(request, artist_id):
             artist.rate_avg = sum(rates_list) / len(rates_list)
             artist.save()
 
-            Review.objects.filter(artist = artist)
+            Review.objects.create(user = user, user_name = form.instance.user_name, artist = form.instance.artist, rate = form.instance.rate, description = form.instance.message, is_pay = True, amount = form.instance.amount)
+
             return redirect('payment:pay_complete')
     else:
         form = SponsorForm(initial = initial)
