@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import TemplateView, ListView
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
 from django.conf import settings
@@ -7,6 +7,7 @@ from uuid import uuid4
 
 from apps.accounts.models import Artist
 from apps.preference.models import Review
+from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin
 
 from .forms import SponsorForm
 from .models import Sponsor
@@ -104,3 +105,44 @@ def sponsor_pay(request, artist_id, merchant_uid):
         'merchant_uid': sponsor.merchant_uid,
     })
 
+
+class SponsorList(LoginRequiredMixin, ListView):
+    model = Sponsor
+    template_name = 'payment/sponsor_list.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        obj_list = Sponsor.objects.filter(user = self.request.user, status = 'paid').order_by('-regist_dt')
+
+        return obj_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        obj_list = self.get_queryset()
+        amount_list = []
+        for obj in obj_list:
+            amount_list.append(obj.amount)
+        context['sponsor_total'] = sum(amount_list)
+
+        return context
+
+
+class SponsorListTo(ArtistRequiredMixin, ListView):
+    model = Sponsor
+    template_name = 'payment/sponsor_list_to.html'
+    paginate_by = 2
+
+    def get_queryset(self):
+        obj_list = Review.objects.filter(artist = self.request.user.artist, is_pay = True).order_by('-regist_dt')
+
+        return obj_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        obj_list = Sponsor.objects.filter(artist = self.request.user.artist, status = 'paid')
+        amount_list = []
+        for obj in obj_list:
+            amount_list.append(obj.amount)
+        context['sponsor_total'] = sum(amount_list)
+
+        return context

@@ -68,8 +68,8 @@ class MyBasket(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['concert_list'] = self.request.user.basket_set.all().filter(artist__isnull = True).order_by('-regist_dt')[:6]
-        context['artist_list'] = self.request.user.basket_set.all().filter(concert__isnull = True).order_by('-regist_dt')[:6]
+        context['concert_list'] = self.request.user.basket_set.all().filter(artist__isnull = True)[:6]
+        context['artist_list'] = self.request.user.basket_set.all().filter(concert__isnull = True)[:6]
         return context
 
 class MyBasketArtist(LoginRequiredMixin, ListView):
@@ -78,7 +78,7 @@ class MyBasketArtist(LoginRequiredMixin, ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        return self.request.user.basket_set.all().filter(concert__isnull = True).order_by('-regist_dt')
+        return self.request.user.basket_set.all().filter(concert__isnull = True)
 
 
 class MyBasketConcert(LoginRequiredMixin, ListView):
@@ -87,7 +87,7 @@ class MyBasketConcert(LoginRequiredMixin, ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        return self.request.user.basket_set.all().filter(artist__isnull = True).order_by('-regist_dt')
+        return self.request.user.basket_set.all().filter(artist__isnull = True)
 
 
 class MyReview(LoginRequiredMixin, ListView):

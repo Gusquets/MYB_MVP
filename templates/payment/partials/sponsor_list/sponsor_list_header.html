@@ -1,0 +1,12 @@
+{% load humanize %}
+<div class="artist-detail-section">
+        <div class="outer">
+            <div class="middle">
+                <div class="inner txt-center pt-5">
+                    <p class="payment-name">후원한 내역</p>
+                    <p class="payment-subtitle">{{ request.user.nickname}}</p>
+                    <p class="payment-subtitle">총 후원한 금액 : {{ sponsor_total|intcomma }}원</p>
+                </div>
+            </div>
+        </div>
+    </div>

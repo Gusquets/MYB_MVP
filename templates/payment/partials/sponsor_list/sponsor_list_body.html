@@ -1,0 +1,37 @@
+{% load bootstrap4 static humanize %}
+<div class="row my-5">
+    <div class="col-12 txt-center mb-3">
+        <h4>
+            내가 전한 후원
+        </h4>
+    </div>
+    <div class="col-12">
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">날짜</th>
+                <th scope="col">아티스트</th>
+                <th scope="col">금액</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for sponsor in sponsor_list %}
+            <tr>
+                <td>{{ sponsor.regist_dt|date:"Y.m.d" }}</td>
+                <td>{{ sponsor.artist.name }}</td>
+                <td>{{ sponsor.amount|intcomma }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">전한 후원이 없습니다</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="row">
+            <div style="margin: 0 auto;">
+                {% bootstrap_pagination page_obj %}
+            </div>
+        </div>
+    </div>
+</div>

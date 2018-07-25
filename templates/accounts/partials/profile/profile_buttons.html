@@ -1,6 +1,6 @@
 <div class="row mypage_buttons">
     <div class="col-12">
-        · 내가 전한 후원
+        <a class="txt-black" href="{% url "payment:sponsor_list" %}">· 내가 전한 후원</a>
     </div>
     <div class="col-12">
         <a class="txt-black" href="{% url "preference:my_basket" %}">· 내가 찜한 내역</a>
@@ -17,6 +17,9 @@
     </div>
     <div class="col-12">
         <a class="txt-black" href="{% url "concert:concert_create" %}">· 공연 등록</a>
+    </div>
+    <div class="col-12">
+        <a class="txt-black" href="{% url "payment:sponsor_list_to" %}">· 내게 전달된 후원</a>
     </div>
     {% endif %}
 </div>
