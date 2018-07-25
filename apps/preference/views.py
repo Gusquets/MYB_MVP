@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import CreateView, TemplateView, ListView
 from django.contrib.auth.decorators import login_required
@@ -68,8 +68,8 @@ class MyBasket(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['concert_list'] = self.request.user.basket_set.all().filter(artist__isnull = True)[:6]
-        context['artist_list'] = self.request.user.basket_set.all().filter(concert__isnull = True)[:6]
+        context['concert_list'] = self.request.user.basket_set.all().filter(artist__isnull = True).order_by('-regist_dt')[:6]
+        context['artist_list'] = self.request.user.basket_set.all().filter(concert__isnull = True).order_by('-regist_dt')[:6]
         return context
 
 class MyBasketArtist(LoginRequiredMixin, ListView):
@@ -78,7 +78,7 @@ class MyBasketArtist(LoginRequiredMixin, ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        return self.request.user.basket_set.all().filter(concert__isnull = True)
+        return self.request.user.basket_set.all().filter(concert__isnull = True).order_by('-regist_dt')
 
 
 class MyBasketConcert(LoginRequiredMixin, ListView):
@@ -87,10 +87,10 @@ class MyBasketConcert(LoginRequiredMixin, ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        return self.request.user.basket_set.all().filter(artist__isnull = True)
+        return self.request.user.basket_set.all().filter(artist__isnull = True).order_by('-regist_dt')
 
 
-class MyReview(ListView):
+class MyReview(LoginRequiredMixin, ListView):
     model = Review
     template_name = 'preference/review/my_review.html'
     paginate_by = 10
@@ -99,12 +99,12 @@ class MyReview(ListView):
 
     def get_queryset(self):
         if self.request.path == '/preference/my/review/':
-            obj_list = Review.objects.filter(user = self.request.user)
+            obj_list = Review.objects.filter(user = self.request.user).order_by('-regist_dt')
         elif self.request.path == '/preference/my/reviewed/':
-            obj_list = Review.objects.filter(artist = self.request.user.artist)
+            obj_list = Review.objects.filter(artist = self.request.user.artist).order_by('-regist_dt')
         elif self.kwargs['pk']:
             artist = Artist.objects.get(id = self.kwargs['pk'])
-            obj_list = Review.objects.filter(artist = artist)
+            obj_list = Review.objects.filter(artist = artist).order_by('-regist_dt')
         
         return obj_list
     
@@ -114,10 +114,29 @@ class MyReview(ListView):
             context['type'] = 'review'
         elif self.request.path == '/preference/my/reviewed/':
             context['type'] = 'reviewed'
-        elif self.kwargs['pk']:
+        elif self.kwargs.get('pk',''):
             context['type'] = 'artist'
             context['artist_name'] = Artist.objects.get(id = self.kwargs['pk']).name
         
+        return context
+
+
+class ArtistReview(ListView):
+    model = Review
+    template_name = 'preference/review/my_review.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        artist = Artist.objects.get(id = self.kwargs['pk'])
+        obj_list = Review.objects.filter(artist = artist).order_by('-regist_dt')
+
+        return obj_list
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['type'] = 'artist'
+        context['artist_name'] = Artist.objects.get(id = self.kwargs['pk']).name
+
         return context
 
 
