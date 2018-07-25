@@ -14,6 +14,7 @@ class SponsorForm(forms.ModelForm):
             'user',
             'artist',
             'user_name',
+            'rate',
             'message',
             'amount',
             'pay_type',

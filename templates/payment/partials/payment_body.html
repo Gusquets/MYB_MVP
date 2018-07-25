@@ -15,6 +15,10 @@
         {% bootstrap_field form.amount form_group_class='mb-3' show_label=False %}
     </div>
     <div class="col-12">
+        <label for="id_rate">평점</label>
+        {% bootstrap_field form.rate form_group_class='mb-3' show_label=False %}
+    </div>
+    <div class="col-12">
         <label for="id_message">함께 전할 메세지(선택)</label>
         {% bootstrap_field form.message form_group_class='mb-3' placeholder='함께 전할 메시지가 있나요?' show_label=False %}
     </div>
