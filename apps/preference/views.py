@@ -9,6 +9,7 @@ from django.urls import reverse, reverse_lazy
 from apps.common.mixins import LoginRequiredMixin
 from apps.concert.models import Concert
 from apps.accounts.models import Artist
+from apps.payment.models import Sponsor
 
 from .models import Basket, Review, Like, Answer
 from .forms import ReviewForm, AnswerForm
@@ -141,9 +142,12 @@ class ReviewCreate(LoginRequiredMixin, CreateView):
 
         review.save()
 
-        rates = Review.objects.all().filter(artist = artist)
+        rates_review = Review.objects.all().filter(artist = artist)
+        rates_sponsor = Sponsor.objects.all().filter(artist = artist)
         rates_list = []
-        for rate  in rates:
+        for rate  in rates_review:
+            rates_list.append(rate.rate)
+        for rate in rates_sponsor:
             rates_list.append(rate.rate)
         artist.rate_avg = sum(rates_list) / len(rates_list)
         artist.save()

@@ -32,6 +32,8 @@ class SponsorForm(forms.ModelForm):
     
     def save(self):
         sponsor = super().save(commit = False)
+        if not self.cleaned_data['message']:
+            sponsor.message = '멋진 공연이었습니다.'
         sponsor.update()
 
         return sponsor

@@ -6,6 +6,7 @@ from django.conf import settings
 from uuid import uuid4
 
 from apps.accounts.models import Artist
+from apps.preference.models import Review
 
 from .forms import SponsorForm
 from .models import Sponsor
@@ -39,6 +40,18 @@ def sponsor_create(request, artist_id):
         form = SponsorForm(request.POST, initial = initial)
         if form.is_valid():
             form.save()
+
+            rates_review = Review.objects.all().filter(artist = artist)
+            rates_sponsor = Sponsor.objects.all().filter(artist = artist)
+            rates_list = []
+            for rate  in rates_review:
+                rates_list.append(rate.rate)
+            for rate in rates_sponsor:
+                rates_list.append(rate.rate)
+            artist.rate_avg = sum(rates_list) / len(rates_list)
+            artist.save()
+
+            Review.objects.filter(artist = artist)
             return redirect('payment:pay_complete')
     else:
         form = SponsorForm(initial = initial)
