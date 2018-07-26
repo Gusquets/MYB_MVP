@@ -1244,7 +1244,59 @@ display: none !important;
     margin: auto;
 }
 
+<<<<<<< HEAD
 .cs_body{
     max-width : 900px;
     margin : auto;
+=======
+/* payment/pamentbody.css */
+.payment-body{
+    max-width : 500px;
+    margin : auto;
+    margin-top : 20px;
+}
+
+.payment-artist-img{
+    text-align : center;
+    padding-bottom : 20px;
+}
+
+.payment-artist-img img{
+    width : 100%;
+}
+
+.mb_blue{
+    background : #0088ff;
+    color : white;
+}
+
+/* payment/paymentcomplete.css */
+.payment-complete-title{
+    font-size : 30px;
+    font-family : "Nanum Gothic", sans-serif;
+    font-weight : bold;
+    margin-top: 2rem;
+    padding-bottom : 2rem;
+}
+@media(max-width : 568px){
+    .payment-complete-title{
+        font-size : 25px;
+    }
+
+}
+
+/* payment/paymentheader.css */
+
+.payment-name{
+    padding-top : 15px;
+    font-size : 30px;
+    margin-bottom : 0px;
+    color: white;
+}
+
+.payment-subtitle{
+    padding-top : 5px;
+    font-size : 20px;
+    color : white;
+>>>>>>> 1824e45bfe6337ff812b1793324587a5a364afbd
 }
