@@ -11,13 +11,15 @@
     <div class="col-4">
         여기는 인스타
     </div>
+    {% if request.user.is_authenticated %}
     <div class="col-12">
         <a class="basket" href="{% url "preference:basket_create_concert" concert.id %}"><button class="btn btn-primary mb_action_btn">찜하기 </button></a>
     </div>
     <div class="col-12">
-        <button class="btn btn-primary mb_action_btn">후기쓰기 </button>
+        <a id="review_btn" class="modal-form-btn" href="{% url "preference:review_create" concert.artist.id %}" data-toggle="modal" data-target="#review_create"><button class="btn btn-primary mb_action_btn" data-toggle="modal" data-target="#review_create">후기쓰기 </button></a>
     </div>
+    {% endif %}
     <div class="col-12">
-        <button class="btn btn-primary mb_action_btn">후원하기 </button>
+        <a href="{% url "payment:sponsor_create" concert.artist.id %}"><button class="btn btn-primary mb_action_btn">후원하기 </button></a>
     </div>
 </div>

@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="payment_header">
+    {% include 'payment/partials/sponsor_list/sponsor_list_header.html' %}
+</div>
+
+<div class="mb-5 concert_create_grid">
+    {% include 'payment/partials/sponsor_list/sponsor_list_body.html' %}
+</div>
+
+{% endblock %}

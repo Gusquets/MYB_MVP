@@ -13,9 +13,9 @@ urlpatterns = [
     path('my/basket/concert', views.MyBasketConcert.as_view(), name = 'my_basket_concert'),
     path('my/review/', views.MyReview.as_view(), name = 'my_review'),
     path('my/reviewed/', views.MyReview.as_view(), name = 'my_reviewed'),
-    path('artist/review/<int:pk>', views.MyReview.as_view(), name='artist_review'),
+    path('artist/review/<int:pk>', views.ArtistReview.as_view(), name='artist_review'),
 
     path('review/create/<int:artist_id>/', views.ReviewCreate.as_view(), name = 'review_create'),
 
-    path('answer/create/<int:review_id>/', views.AnswerCreate.as_view(), name = 'answer_create'),
+    path('answer/create/<int:review_id>/<int:redirect>/', views.AnswerCreate.as_view(), name = 'answer_create'),
 ]

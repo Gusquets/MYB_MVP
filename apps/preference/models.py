@@ -19,11 +19,13 @@ class Basket(models.Model):
 
 
 class Review(models.Model):
-    user = models.ForeignKey(User, verbose_name = '사용자', on_delete = models.CASCADE)
+    user = models.ForeignKey(User, verbose_name = '사용자', on_delete = models.CASCADE, blank=True, null=True)
+    user_name = models.CharField('사용자 이름', max_length = 50)
     artist = models.ForeignKey(Artist, verbose_name = '아티스트', on_delete = models.CASCADE)
     rate = models.IntegerField('별점', choices = ((0,'☆☆☆☆☆'),(1,'★☆☆☆☆'),(2,'★★☆☆☆'),(3,'★★★☆☆'),(4,'★★★★☆'),(5,'★★★★★')), default = 0)
     description = models.TextField('리뷰')
     is_pay = models.BooleanField('후원 여부', default = False)
+    amount = models.PositiveIntegerField('후원 금액', blank = True, null = True)
     regist_dt = models.DateTimeField('작성 시각', auto_now_add = True)
     like_count = models.PositiveIntegerField('좋아요', default = 0)
 

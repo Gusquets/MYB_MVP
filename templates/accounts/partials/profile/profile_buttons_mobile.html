@@ -6,7 +6,7 @@
         <a class="txt-black" href="{% url "preference:my_review" %}">내 후기</a>
     </div>
     <div class="col">
-        내 후원
+        <a class="txt-black" href="{% url "payment:sponsor_list" %}">내 후원</a>
     </div>
     <div class="col">
         <a class="txt-black" href="{% url "user_update" %}">정보수정</a>
@@ -17,6 +17,9 @@
     </div>
     <div class="col">
         <a class="txt-black" href="{% url "concert:concert_create" %}">공연 등록</a>
+    </div>
+    <div class="col">
+        <a class="txt-black" href="{% url "payment:sponsor_list_to" %}">내게 전달된 후원</a>
     </div>
     {% endif %}
 </div>

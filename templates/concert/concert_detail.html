@@ -32,6 +32,37 @@
 
 </div>
 
+<div class="modal fade modal-form-modal-review" id="review_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="modal-title" id="exampleModalLabel">후기</a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="review-modal-body" class="modal-body">
+                {% include 'preference/review/review_create.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modal-form-modal-answer" id="answer_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="modal-title" id="exampleModalLabel">답변</a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="review-modal-body" class="modal-body">
+                {% include 'preference/review/answer_create.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 {% block extrajs %}
 <script>
@@ -49,5 +80,128 @@
         });
     });
     $('#id_location_2').attr({'type': 'hidden'});
+    $(function() {
+        $('.like').click(function() {
+            $.get($(this).attr('href'))
+            .done(function(response) {
+                alert(response.message);
+                location.reload();
+            })
+            .fail(function(response) {
+                console.log('문제가 발생하였습니다. 다시 시도해 주세요.');
+                console.log(response)
+            });
+            return false;
+        });
+    });
+    $(function() {
+        $(document).on('click', '.modal-form-btn', function(e) {
+            e.preventDefault();
+
+            var action_url = $(this).attr('href');
+            var target_id = $(this).data('target-id');
+
+            $.get(action_url)
+            .done(function(form_html) {
+                var $modal = $('#review_create');
+
+                $modal.find('.modal-body').html(form_html);
+                $form = $modal.find('.modal-body form');
+                $form.attr('action', action_url);
+
+                if (target_id) {
+                    $form.attr('data-target-id', target_id);
+                }
+                else {
+                    $form.removeData('target-id');
+                }
+
+                $modal.on('shown.bs.modal', function(e) {
+                    $(this).find('textarea:first').focus();
+                });
+
+                $modal.modal();
+            })
+            .fail(function(xhr, textStatus, error) {
+                alert('failed : ' + error);
+            });
+        });
+
+        $(document).on('submit', '.modal-form-modal-review form', function(e) {
+            e.preventDefault();
+
+            var $form = $(this);
+            var $submit = $form.find('[type=submit]');
+
+            $submit.prop('disabled', true);
+
+            $form.ajaxSubmit({
+                success: function(response, statusText, xhr, $form) {
+                    window.location.reload();
+                },
+                error: function(xhr, textStatus, error) {
+                    alert('failed : '+ error);
+                },
+                complete: function(xhr, textStatus) {
+                    //$submit.prop('disabled', false);                    
+                }
+            });
+        });
+    });
+    $(function() {
+        $(document).on('click', '.modal-form-btn-answer', function(e) {
+            e.preventDefault();
+
+            var action_url = $(this).attr('href');
+            var target_id = $(this).data('target-id');
+
+            $.get(action_url)
+            .done(function(form_html) {
+                var $modal = $('#answer_create');
+
+                $modal.find('.modal-body').html(form_html);
+                $form = $modal.find('.modal-body form');
+                $form.attr('action', action_url);
+
+                if (target_id) {
+                    $form.attr('data-target-id', target_id);
+                }
+                else {
+                    $form.removeData('target-id');
+                }
+
+                $modal.on('shown.bs.modal', function(e) {
+                    $(this).find('textarea:first').focus();
+                });
+
+                $modal.modal();
+            })
+            .fail(function(xhr, textStatus, error) {
+                console.log(error, xhr);
+                alert('failed : ' + error);
+            });
+        });
+
+        $(document).on('submit', '.modal-form-modal-answer form', function(e) {
+            e.preventDefault();
+
+            var $form = $(this);
+            var $submit = $form.find('[type=submit]');
+
+            $submit.prop('disabled', true);
+
+            $form.ajaxSubmit({
+                success: function(response, statusText, xhr, $form) {
+                    window.location.reload();
+                },
+                error: function(xhr, textStatus, error) {
+                    alert('failed : '+ error);
+                },
+                complete: function(xhr, textStatus) {
+                    //$submit.prop('disabled', false);                    
+                }
+            });
+        });
+    });
 </script>
 {% endblock %}

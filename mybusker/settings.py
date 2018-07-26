@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.humanize',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
     'apps.concert',
     'apps.common',
     'apps.preference',
+    'apps.payment',
 ]
 
 MIDDLEWARE = [
@@ -178,6 +180,10 @@ EMAIL_HOST_PASSWORD = get_secret("EMAIL_PW")
 EMAIL_USE_TLS = True
 
 NAVER_CLIENT_ID = get_secret("NAVER_CLIENT_ID")
+
+IAMPORT_SHOP_ID = get_secret("IAMPORT_SHOP_ID")
+IAMPORT_API_KEY = get_secret("IAMPORT_API_KEY")
+IAMPORT_API_SECRET = get_secret("IAMPORT_API_SECRET")
 
 
 CKEDITOR_UPLOAD_PATH = "uploads/"

@@ -1,14 +1,15 @@
 import json
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import CreateView, TemplateView, ListView
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from apps.common.mixins import LoginRequiredMixin
 from apps.concert.models import Concert
 from apps.accounts.models import Artist
+from apps.payment.models import Sponsor
 
 from .models import Basket, Review, Like, Answer
 from .forms import ReviewForm, AnswerForm
@@ -89,7 +90,7 @@ class MyBasketConcert(LoginRequiredMixin, ListView):
         return self.request.user.basket_set.all().filter(artist__isnull = True)
 
 
-class MyReview(ListView):
+class MyReview(LoginRequiredMixin, ListView):
     model = Review
     template_name = 'preference/review/my_review.html'
     paginate_by = 10
@@ -98,12 +99,12 @@ class MyReview(ListView):
 
     def get_queryset(self):
         if self.request.path == '/preference/my/review/':
-            obj_list = Review.objects.filter(user = self.request.user)
+            obj_list = Review.objects.filter(user = self.request.user).order_by('-regist_dt')
         elif self.request.path == '/preference/my/reviewed/':
-            obj_list = Review.objects.filter(artist = self.request.user.artist)
+            obj_list = Review.objects.filter(artist = self.request.user.artist).order_by('-regist_dt')
         elif self.kwargs['pk']:
             artist = Artist.objects.get(id = self.kwargs['pk'])
-            obj_list = Review.objects.filter(artist = artist)
+            obj_list = Review.objects.filter(artist = artist).order_by('-regist_dt')
         
         return obj_list
     
@@ -113,10 +114,29 @@ class MyReview(ListView):
             context['type'] = 'review'
         elif self.request.path == '/preference/my/reviewed/':
             context['type'] = 'reviewed'
-        elif self.kwargs['pk']:
+        elif self.kwargs.get('pk',''):
             context['type'] = 'artist'
             context['artist_name'] = Artist.objects.get(id = self.kwargs['pk']).name
         
+        return context
+
+
+class ArtistReview(ListView):
+    model = Review
+    template_name = 'preference/review/my_review.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        artist = Artist.objects.get(id = self.kwargs['pk'])
+        obj_list = Review.objects.filter(artist = artist).order_by('-regist_dt')
+
+        return obj_list
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['type'] = 'artist'
+        context['artist_name'] = Artist.objects.get(id = self.kwargs['pk']).name
+
         return context
 
 
@@ -130,20 +150,24 @@ class ReviewCreate(LoginRequiredMixin, CreateView):
         return ['preference/review/review_create.html'] 
 
     def get_success_url(self):
-        return reverse('artist_detail', kwargs = {'pk': self.object.artist.id})
+        return reverse('preference:artist_review', kwargs = {'pk': self.object.artist.id})
     
     def form_valid(self, form):
         review = form.save(commit=False)
         artist = Artist.objects.get(id = self.kwargs['artist_id'])
         review.user = self.request.user
+        review.user_name = self.request.user.nickname
         review.artist = artist
         review.is_pay = False
 
         review.save()
 
-        rates = Review.objects.all().filter(artist = artist)
+        rates_review = Review.objects.all().filter(artist = artist)
+        rates_sponsor = Sponsor.objects.all().filter(artist = artist)
         rates_list = []
-        for rate  in rates:
+        for rate  in rates_review:
+            rates_list.append(rate.rate)
+        for rate in rates_sponsor:
             rates_list.append(rate.rate)
         artist.rate_avg = sum(rates_list) / len(rates_list)
         artist.save()
@@ -163,7 +187,7 @@ class AnswerCreate(CreateView):
         return ['preference/review/answer_create.html'] 
 
     def get_success_url(self):
-        return reverse('website:home')
+        return reverse_lazy('website:home')
     
     def form_valid(self, form):
         answer = form.save(commit=False)
