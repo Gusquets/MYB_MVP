@@ -1091,6 +1091,7 @@ display: none !important;
     display : inline-flex;
     list-style : none;
     margin : auto;
+    margin-bottom : 1rem;
 }
 
 .mb_filter_menu li{
@@ -1102,6 +1103,15 @@ display: none !important;
 .mb_sub_search{
     margin : auto;
 }
+@media(max-width : 576px){
+    .mb_filter_menu{
+        padding-left: 0;
+        text-align : center;
+    }
+}
+
+}
+
 
 /* artist_detail/artistdetailbody.css */
 .detail-selector{
@@ -1125,6 +1135,7 @@ display: none !important;
     color : #0088ff;
     font-weight : bold;
     text-align : left;
+    margin-bottom : 1rem;
 }
 
 .review-profile{
