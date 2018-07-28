@@ -1,16 +1,16 @@
 {% load bootstrap4 %}
 <div class="txt-center mt-5">
-    <strong> 플러스 친구를 활용하면 더욱 편하게 질문을 하고, 빠르게 답을 받을 수 있습니다.</strong>
+    <strong> 플러스 친구를 활용하면<br>더욱 빠르게 답을 받을 수 있습니다.</strong>
 </div>
 <div class="row mt-5 txt-center mb-5">
-    <div class="col-8 offset-2">
+    <div class="col-12">
         <form action="" method="post">
             {% csrf_token %}
             {% bootstrap_field form.from_email form_group_class='col-12 mb-2' show_label=False  placeholder='연락받으실 E-mail' %}
             {% bootstrap_field form.name form_group_class='col-12 mb-2' show_label=False placeholder='문의자 성함' %}
             {% bootstrap_field form.title form_group_class='col-12 mb-2' show_label=False placeholder='제목' %}
             {% bootstrap_field form.description form_group_class='col-12 mb-2' show_label=False placeholder='내용' %}
-            <input type="submit" value="문의하기" class="btn mb_main_button rec_btn mt-2">
+            <input type="submit" value="문의하기" class="btn mb_main_button rec_btn mt-4">
         </form>
     </div>
 </div>

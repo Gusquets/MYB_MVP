@@ -6,6 +6,9 @@ a {
     margin-right: auto;
 }
 
+a:hover{
+    text-decoration: none;
+}
 .mobile-only {
     display: block;
 }
@@ -913,7 +916,7 @@ display: none !important;
 }
 
 .signup-complete-section{
-    min-height : 750px;
+    height : 750px;
 }
 
 .signup-complete-logo{
@@ -934,7 +937,9 @@ display: none !important;
 
 @media(max-width : 568px){
     .signup-complete-section{
-        min-height : 700px;
+        min-height : 600px;
+        display : block;
+        padding-top :2rem;
     }
 
 }
@@ -1090,6 +1095,7 @@ display: none !important;
     display : inline-flex;
     list-style : none;
     margin : auto;
+    margin-bottom : 1rem;
 }
 
 .mb_filter_menu li{
@@ -1101,6 +1107,15 @@ display: none !important;
 .mb_sub_search{
     margin : auto;
 }
+@media(max-width : 576px){
+    .mb_filter_menu{
+        padding-left: 0;
+        text-align : center;
+    }
+}
+
+}
+
 
 /* artist_detail/artistdetailbody.css */
 .detail-selector{
@@ -1124,6 +1139,7 @@ display: none !important;
     color : #0088ff;
     font-weight : bold;
     text-align : left;
+    margin-bottom : 1rem;
 }
 
 .review-profile{
@@ -1243,6 +1259,14 @@ display: none !important;
     margin: auto;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+.cs_body{
+    max-width : 900px;
+    margin : auto;
+=======
+=======
+>>>>>>> 1824e45bfe6337ff812b1793324587a5a364afbd
 /* payment/pamentbody.css */
 .payment-body{
     max-width : 500px;
@@ -1292,4 +1316,8 @@ display: none !important;
     padding-top : 5px;
     font-size : 20px;
     color : white;
+<<<<<<< HEAD
+>>>>>>> 1824e45bfe6337ff812b1793324587a5a364afbd
+=======
+>>>>>>> 1824e45bfe6337ff812b1793324587a5a364afbd
 }
