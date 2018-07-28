@@ -5,112 +5,23 @@
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <div class="col-12">
                                 <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                            <div class="mb_main_carousel w-70">
-                                                <div class="row">
-                                                <div class="col-12 txt-center mb-5">
-                                                    <h2 class="slider_title">'홍대'의 버스킹</h2>
-                                                </div>
-                                                    <div class="col-md-6 col-12 txt-right">
-                                                        <iframe width="450" height="240" src="https://www.youtube.com/embed/VYOjWnS4cMY?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                                </div>
-                                                    <div class="col-md-6 col-12 txt-center">
-                                                        아티스트 | 시간
-                                                </div>
-                                                </div>
-                                            </div>
-                                    </div>
-
-                                    <div class="carousel-item">
+                                    {% for concert in slider_concert %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
                                         <div class="mb_main_carousel w-70">
                                             <div class="row">
-                                                <div class="col-12 txt-center">
-                                                    <h2>'신촌'의 버스킹</h2>
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    사진
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    시간
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    아티스트
-                                                </div>
-                                                </div>
+                                            <div class="col-12 txt-center mb-5">
+                                                <h2 class="slider_title">'{% if not concert.location_1 == '그외' %}{{ concert.location_1 }}{% else %}{{ concert.location_else }}{% endif %}'의 버스킹</h2>
+                                            </div>
+                                                <div class="col-md-6 col-12 txt-right">
+                                                    <iframe width="450" height="240" src="{% if concert.artist.movie_1 %}{{ concert.artist.movie_1 }}{% elif concert.artist.movie_2 %}{{ concert.artist.movie_2 }}{% else %}{{ concert.artist.movie_3 }}{% endif %}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                                <div class="col-md-6 col-12 txt-center">
+                                                    {{ concert.artist.name }} | {{ concert.time }}
+                                            </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="carousel-item">
-                                        <div class="mb_main_carousel w-70">
-                                        <div class="row">
-                                                <div class="col-12 txt-center">
-                                                    <h2>'강남'의 버스킹</h2>
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    사진
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    시간
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    아티스트
-                                                </div>
-                                                </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="mb_main_carousel w-70">
-                                        <div class="row">
-                                                <div class="col-12 txt-center">
-                                                    <h2>'한강'의 버스킹</h2>
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    사진
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    시간
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    아티스트
-                                                </div>
-                                                </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="mb_main_carousel w-70">
-                                        <div class="row">
-                                                <div class="col-12 txt-center">
-                                                    <h2>'이태원'의 버스킹</h2>
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    사진
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    시간
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    아티스트
-                                                </div>
-                                                </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="mb_main_carousel w-70">
-                                        <div class="row">
-                                                <div class="col-12 txt-center">
-                                                    <h2>'건대'의 버스킹</h2>
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    사진
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    시간
-                                                </div>
-                                                    <div class="col-12 txt-center">
-                                                    아티스트
-                                                </div>
-                                                </div>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

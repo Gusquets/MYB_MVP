@@ -12,6 +12,7 @@ class Concert(models.Model):
     artist = models.ForeignKey(Artist, verbose_name = '아티스트', on_delete = models.CASCADE)
     description = models.TextField('공연 설명', blank = True, null = True)
     probability = models.PositiveIntegerField('공연 확률', validators = [MaxValueValidator(100)])
+    recommend_yn = models.BooleanField('추천 여부', default = False)
 
     class Meta:
         verbose_name = '공연 정보'
