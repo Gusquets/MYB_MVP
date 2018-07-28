@@ -30,3 +30,7 @@ class NaverMapPointWidget(forms.TextInput):
         html = render_to_string('common/widgets/naver_map_point_widget.html', context)
 
         return parent_html + html
+
+
+class CalendarWidget(forms.DateInput):
+    template_name = 'common/widgets/calendar_widget.html'

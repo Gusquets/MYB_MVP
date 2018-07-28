@@ -3,9 +3,9 @@ from .models import Concert, ConcertSongList
 
 @admin.register(Concert)
 class ConcertAdmin(admin.ModelAdmin):
-    list_display = ['id', 'date', 'location_1', 'artist', 'probability']
+    list_display = ['id', 'date', 'location_1', 'artist', 'probability', 'recommend_yn']
     list_display_links = ['id', 'date', 'artist']
-    list_filter = ['date', 'location_1', 'artist']
+    list_filter = ['date', 'location_1', 'recommend_yn']
     search_fields = ['location_1', 'artist__name']
 
 
