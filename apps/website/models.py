@@ -3,6 +3,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class CSService(models.Model):
     from_email = models.EmailField('문의자 E-mail')
+    name = models.CharField('문의자 이름', max_length = 50)
     title = models.CharField('제목', max_length = 100)
     description = models.TextField('내용')
 

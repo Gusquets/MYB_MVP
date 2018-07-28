@@ -7,6 +7,7 @@
         <form action="" method="post">
             {% csrf_token %}
             {% bootstrap_field form.from_email form_group_class='col-12 mb-2' show_label=False  placeholder='연락받으실 E-mail' %}
+            {% bootstrap_field form.name form_group_class='col-12 mb-2' show_label=False placeholder='문의자 성함' %}
             {% bootstrap_field form.title form_group_class='col-12 mb-2' show_label=False placeholder='제목' %}
             {% bootstrap_field form.description form_group_class='col-12 mb-2' show_label=False placeholder='내용' %}
             <input type="submit" value="문의하기" class="btn mb_main_button rec_btn mt-2">
