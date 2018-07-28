@@ -96,6 +96,23 @@ class ArtistCreate(CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
         artist = self.object
+        if artist.movie_1:
+            if not artist.movie_1.find('embed') > 0:
+                index = artist.movie_1.find('.be')
+                movie_id = artist.movie_1[index+4:]
+                artist.movie_1 = "https://www.youtube.com/embed/" + movie_id
+        if artist.movie_2:
+            if not artist.movie_2.find('embed') > 0:
+                index = artist.movie_2.find('.be')
+                movie_id = artist.movie_2[index+4:]
+                artist.movie_2 = "https://www.youtube.com/embed/" + movie_id
+        if artist.movie_3:
+            if not artist.movie_3.find('embed') > 0:
+                index = artist.movie_3.find('.be')
+                movie_id = artist.movie_3[index+4:]
+                artist.movie_3 = "https://www.youtube.com/embed/" + movie_id
+        
+        artist.save()
 
         self.request.user.artist = artist
 
