@@ -35,7 +35,7 @@ $('#sponsor_create_btn').on('click',(function(e) {
 
             if ( ! response_data.success ) {
                 alert(response_data.error_msg + "(" + response_data.error_code + ")");
-                location.href = '{% url "website:home" %}';
+                window.location.reload();
             }
             else {
                 $.each(response_data, function(key, value) {

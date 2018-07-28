@@ -73,39 +73,6 @@ class PayComplete(TemplateView):
     template_name = 'payment/payment_complete.html'
 
 
-def sponsor_pay(request, artist_id, merchant_uid):
-    if request.user.is_authenticated:
-        user_name = request.user.nickname
-        email = request.user.email
-        user = request.user
-    else:
-        user_name = 'Anonymous'
-        email = 'anonymous@example.com'
-        user = None
-
-    sponsor = get_object_or_404(Sponsor, user = user, merchant_uid = merchant_uid, status = 'ready')
-    artist = Artist.objects.get(id = artist_id)
-
-    if request.method == 'POST':
-        form = SponsorForm(request.POST, instance = sponsor)
-        if form.is_valid():
-            form.save()
-            return redirect('website:home')
-        else:
-            return redirect('profile')
-    else:
-        form = SponsorForm(instance = sponsor)
-    
-    return render(request, 'payment/payment_page.html', {
-        'form': form,
-        'artist': artist,
-        'user_name': user_name,
-        'email': email,
-        'iamport_shop_id': settings.IAMPORT_SHOP_ID,
-        'merchant_uid': sponsor.merchant_uid,
-    })
-
-
 class SponsorList(LoginRequiredMixin, ListView):
     model = Sponsor
     template_name = 'payment/sponsor_list.html'
