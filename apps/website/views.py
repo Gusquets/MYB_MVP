@@ -56,4 +56,3 @@ class SearchList(TemplateView):
         return context
 
 
-        

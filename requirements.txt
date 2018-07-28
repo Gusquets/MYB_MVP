@@ -3,3 +3,4 @@ django-allauth
 django-bootstrap4
 iamport-rest-client
 jsonfield
+django-ckeditor
