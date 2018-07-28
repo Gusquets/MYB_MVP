@@ -42,7 +42,7 @@ class Profile(LoginRequiredMixin, TemplateView):
         context['review_list'] = Review.objects.filter(user = self.request.user).order_by('-id')[:3]
         context['reviewed_list'] = Review.objects.filter(artist = self.request.user.artist).order_by('-id')[:3]
         context['reviewed_count'] = len(Review.objects.filter(artist = self.request.user.artist).order_by('-id'))
-        context['sponsor_list'] = Sponsor.objects.filter(user = self.request.user, status = 'paid')[:3]
+        context['sponsor_list'] = Sponsor.objects.filter(user = self.request.user, status = 'paid').order_by('-regist_dt')[:3]
         return context
 
 def login(request):

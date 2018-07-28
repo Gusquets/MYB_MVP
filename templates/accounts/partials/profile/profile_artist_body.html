@@ -1,4 +1,4 @@
-{% load static %}
+{% load static humanize %}
 <div class="row pt-4 pb-4 mypage-body">
     <div class="col-12 mypage-title">
         내 평가
@@ -161,6 +161,38 @@
         <div class="col-12 mt-3">
             <a href="{% url "preference:my_basket" %}">
                 <div class="_more txt-center mb-4"> 찜한 내역 더보기 + </div>
+            </a>
+        </div>
+        <div class="col-12 mypage-title">
+            내가 전한 후원
+        </div>
+        <div class="col-12">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">날짜</th>
+                    <th scope="col">아티스트</th>
+                    <th scope="col">금액</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for sponsor in sponsor_list %}
+                <tr>
+                    <td>{{ sponsor.regist_dt|date:"Y.m.d" }}</td>
+                    <td>{{ sponsor.artist.name }}</td>
+                    <td>{{ sponsor.amount|intcomma }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">전한 후원이 없습니다</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12">
+            <a href="{% url "payment:sponsor_list" %}">
+                <div class="_more txt-center mb-4"> 후원 더보기 + </div>
             </a>
         </div>
     </div>
