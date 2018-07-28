@@ -1,14 +1,26 @@
 {% load static %}
 <div class="w-100 pt-3 pb-3 row">
-    <div class="col-4">
-        <img src="{% static "images/facebook.png" %}">
+    {% if concert.artist.social_fb %}
+    <div class="col-4 mb-2">
+        <a href="{{ concert.artist.social_fb }}" target="_blank">
+            <img src="{% static "images/facebook.png" %}">
+        </a>
     </div>
-    <div class="col-4">
-        <img src="{% static "images/youtube.png" %}">
+    {% endif %}
+    {% if concert.artist.social_youtube %}
+    <div class="col-4 mb-2">
+        <a href="{{ concert.artist.social_youtube }}" target="_blank">
+            <img src="{% static "images/youtube.png" %}">
+        </a>
     </div>
-    <div class="col-4">
-        여기는 인스타
+    {% endif %}
+    {% if concert.artist.social_insta %}
+    <div class="col-4 mb-2">
+        <a href="{{ concert.artist.social_insta }}" target="_blank">
+            여기는 인스타
+        </a>
     </div>
+    {% endif %}
 </div>
 
 <!-- 이부분 토글 버튼으로 처리 -->

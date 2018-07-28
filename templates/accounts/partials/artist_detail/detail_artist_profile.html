@@ -2,15 +2,27 @@
 <!-- 이부분 fixed로 해놨는데 자바스크립트로 scroll따라 부드럽게 움직이면 좋을듯! -->
 
 <div class="detail-right pt-3 pb-3 row">
-    <div class="col-4">
-        <img src="{% static "images/facebook.png" %}">
+    {% if artist.social_fb %}
+    <div class="col-4 mb-2">
+        <a href="{{ artist.social_fb }}" target="_blank">
+            <img src="{% static "images/facebook.png" %}">
+        </a>
     </div>
-    <div class="col-4">
-        <img src="{% static "images/youtube.png" %}">
+    {% endif %}
+    {% if artist.social_youtube %}
+    <div class="col-4 mb-2">
+        <a href="{{ artist.social_youtube }}" target="_blank">
+            <img src="{% static "images/youtube.png" %}">
+        </a>
     </div>
-    <div class="col-4">
-        여기는 인스타
+    {% endif %}
+    {% if artist.social_insta %}
+    <div class="col-4 mb-2">
+        <a href="{{ artist.social_insta }}" target="_blank">
+            여기는 인스타
+        </a>
     </div>
+    {% endif %}
     {% if request.user.is_authenticated %}
     <div class="col-12">
         <a class="basket" href="{% url "preference:basket_create_artist" artist.id %}"><button class="btn btn-primary mb_action_btn">찜하기 </button></a>
