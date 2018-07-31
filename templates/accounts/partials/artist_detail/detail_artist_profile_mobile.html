@@ -32,6 +32,13 @@
     <a id="review_btn" class="col-4 txt-black modal-form-btn" href="{% url "preference:review_create" artist.id %}" data-toggle="modal" data-target="#review_create">
         후기쓰기
     </a>
+    {% else %}
+    <a class="col-4 txt-black" href="{% url "login" %}">
+        찜하기
+    </a>
+    <a class="col-4 txt-black" href="{% url "login" %}">
+        후기쓰기
+    </a>
     {% endif %}
     <a class="col-4 txt-black" href="{% url "payment:sponsor_create" artist.id %}">
         후원하기

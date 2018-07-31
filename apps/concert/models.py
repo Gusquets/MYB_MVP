@@ -5,13 +5,16 @@ from django.core.validators import MaxValueValidator
 
 class Concert(models.Model):
     date = models.DateField('공연 날짜')
-    time = models.TimeField('공연 시간')
+    start_time = models.TimeField('공연 시작 시간')
+    end_time = models.TimeField('공연 종료 시간')
     location_1 = models.CharField('공연 장소 1', max_length = 50, choices = (('신촌','신촌'),('홍대','홍대'),('강남','강남'),('이태원','이태원'),('건대','건대'),('한강','한강'),('그외','그외')))
     location_2 = models.CharField('공연 장소 2', max_length = 100)
     location_else = models.CharField('공연장소 그외', max_length = 50, default = '해당없음')
     artist = models.ForeignKey(Artist, verbose_name = '아티스트', on_delete = models.CASCADE)
     description = models.TextField('공연 설명', blank = True, null = True)
-    probability = models.PositiveIntegerField('공연 확률', validators = [MaxValueValidator(100)])
+    probability = models.PositiveIntegerField('공연 확률', validators = [MaxValueValidator(100)], default = 100)
+    rain_cancel = models.BooleanField('우천시 취소여부', choices = ((True,'네'),(False,'아니오')), default = False)
+    site_reserved = models.BooleanField('장소 예약여부', choices = ((True,'네'),(False,'아니오')), default = False)
     recommend_yn = models.BooleanField('추천 여부', default = False)
 
     class Meta:

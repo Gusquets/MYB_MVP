@@ -30,6 +30,13 @@
     <div class="col-12">
         <a id="review_btn" class="modal-form-btn" href="{% url "preference:review_create" artist.id %}" data-toggle="modal" data-target="#review_create"><button class="btn btn-primary mb_action_btn" data-toggle="modal" data-target="#review_create">후기쓰기 </button></a>
     </div>
+    {% else %}
+    <div class="col-12">
+        <a href="{% url "login" %}"><button class="btn btn-primary mb_action_btn">찜하기 </button></a>
+    </div>
+    <div class="col-12">
+        <a href="{% url "login"%}"><button class="btn btn-primary mb_action_btn">후기쓰기 </button></a>
+    </div>
     {% endif %}
     <div class="col-12">
         <a href="{% url "payment:sponsor_create" artist.id %}"><button class="btn btn-primary mb_action_btn">후원하기 </button></a>

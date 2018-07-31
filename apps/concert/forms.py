@@ -7,15 +7,19 @@ class ConcertCreateForm(forms.ModelForm):
         model = Concert
         fields = [
             'date',
-            'time',
+            'start_time',
+            'end_time',
             'location_1',
             'location_2',
             'location_else',
             'description',
-            'probability',
+            'rain_cancel',
+            'site_reserved',
         ]
         widgets = {
             'date': CalendarWidget(),
             'location_2': NaverMapPointWidget(attrs={'width': '100%'}),
             'location_else': forms.TextInput(attrs={'readonly': True}),
+            'rain_cancel': forms.RadioSelect(),
+            'site_reserved': forms.RadioSelect(),
             }
