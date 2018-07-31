@@ -1114,7 +1114,6 @@ display: none !important;
     }
 }
 
-}
 
 
 /* artist_detail/artistdetailbody.css */
@@ -1259,14 +1258,12 @@ display: none !important;
     margin: auto;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-.cs_body{
-    max-width : 900px;
-    margin : auto;
-=======
-=======
->>>>>>> 1824e45bfe6337ff812b1793324587a5a364afbd
+
+.cs_body {
+    max-width: 900px;
+    margin: auto;
+}
+
 /* payment/pamentbody.css */
 .payment-body{
     max-width : 500px;
@@ -1282,6 +1279,8 @@ display: none !important;
 .payment-artist-img img{
     width : 100%;
 }
+
+
 
 .mb_blue{
     background : #0088ff;
@@ -1316,8 +1315,4 @@ display: none !important;
     padding-top : 5px;
     font-size : 20px;
     color : white;
-<<<<<<< HEAD
->>>>>>> 1824e45bfe6337ff812b1793324587a5a364afbd
-=======
->>>>>>> 1824e45bfe6337ff812b1793324587a5a364afbd
 }
