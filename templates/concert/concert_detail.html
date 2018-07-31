@@ -66,6 +66,8 @@
 {% endblock %}
 {% block extrajs %}
 <script>
+    $('#id_location_2').attr({'style': 'display: none;'});
+    $('#map-search').attr({'style': 'display: none;'});
     $(function() {
         $('.basket').click(function() {
             $.get($(this).attr('href'))
@@ -79,7 +81,6 @@
             return false;
         });
     });
-    $('#id_location_2').attr({'type': 'hidden'});
     $(function() {
         $('.like').click(function() {
             $.get($(this).attr('href'))

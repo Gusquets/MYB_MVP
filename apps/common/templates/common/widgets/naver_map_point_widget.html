@@ -1,4 +1,7 @@
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId={{ naver_client_id }}"></script>
+{% load static %}
+
+<script src="{% static "plugins/jquery/jquery-3.3.1.min.js" %}"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId={{ naver_client_id }}&submodules=geocoder"></script>
 <style>
 #naver_map_point_{{ id }} {
     width: {{ width }};
@@ -6,23 +9,49 @@
     background-color: red;
 }
 </style>
-
+<div id="map-search" class="row mb-3">
+    <input type="text" class="form-control col-10" name="search">
+    <div id="btn-submit" class="btn btn-primary col-2">검색</div>
+</div>
 <div id="naver_map_point_{{ id }}"></div>
 
 <script>
-(function() {
-    var base_point = new naver.maps.LatLng({{ base_lat }}, {{ base_lng }});
-    var dom = document.getElementById('naver_map_point_{{ id }}');
-    var map = new naver.maps.Map(dom, {
-        center: base_point
+
+var base_point = new naver.maps.LatLng({{ base_lat }}, {{ base_lng }});
+var dom = document.getElementById('naver_map_point_{{ id }}');
+var map = new naver.maps.Map(dom, {
+    center: base_point
+});
+var btn = $('#btn-submit');
+var marker = new naver.maps.Marker({
+    position: base_point,
+    map: map
+});
+naver.maps.Event.addListener(map, 'click', function(e) {
+    marker.setPosition(e.coord);
+    document.getElementById('{{ id }}').value = e.coord.lng() + ',' + e.coord.lat();
+});
+function searchAddressToCoordinate(address) {
+    naver.maps.Service.geocode({
+        address: address
+    }, function(status, response) {
+        if (status === naver.maps.Service.Status.ERROR) {
+            return alert('주소가 존재하지 않습니다. 건물명을 제외한 도로명 주소 혹은 지번 주소로 검색해주세요.');
+        }
+
+        var item = response.result.items[0],
+        point = new naver.maps.Point(item.point.x, item.point.y);
+
+        map.setCenter(point);
+        marker.setPosition(point);
+        document.getElementById('{{ id }}').value = point.x + ',' + point.y;
     });
-    var marker = new naver.maps.Marker({
-        position: base_point,
-        map: map
-    });
-    naver.maps.Event.addListener(map, 'click', function(e) {
-        marker.setPosition(e.coord);
-        document.getElementById('{{ id }}').value = e.coord.lng() + ',' + e.coord.lat();
-    });
-})();
+}
+
+
+$('#btn-submit').on('click', function() {
+    var search = $('input[name="search"]').val();
+    searchAddressToCoordinate(search);
+});
+
 </script>
