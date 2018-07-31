@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.urls import reverse, reverse_lazy
 
-from apps.common.mixins import LoginRequiredMixin
+from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin, AbnormalUserMixin
 from apps.concert.models import Concert
 from apps.accounts.models import Artist
 from apps.payment.models import Sponsor
@@ -63,7 +63,7 @@ def basket_create_artist(request, id):
     return HttpResponse(json.dumps(context), content_type="application/json")
 
 
-class MyBasket(TemplateView):
+class MyBasket(LoginRequiredMixin, TemplateView):
     template_name = 'preference/basket/my_basket.html'
 
     def get_context_data(self, **kwargs):
@@ -121,7 +121,7 @@ class MyReview(LoginRequiredMixin, ListView):
         return context
 
 
-class ArtistReview(ListView):
+class ArtistReview(ArtistRequiredMixin, ListView):
     model = Review
     template_name = 'preference/review/my_review.html'
     paginate_by = 10
@@ -177,7 +177,7 @@ class ReviewCreate(LoginRequiredMixin, CreateView):
         return response
 
 
-class AnswerCreate(CreateView):
+class AnswerCreate(AbnormalUserMixin, CreateView):
     model = Answer
     form_class = AnswerForm
     

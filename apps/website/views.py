@@ -6,6 +6,7 @@ from django.db.models import Q
 
 from apps.accounts.models import Artist
 from apps.concert.models import Concert
+from apps.common.mixins import AbnormalUserMixin
 
 from .models import CSService, Terms
 from .forms import CSServiceForm
@@ -23,7 +24,7 @@ class HomeView(TemplateView):
         return context
 
 
-class CSServiceCreateView(SuccessMessageMixin , CreateView):
+class CSServiceCreateView(AbnormalUserMixin, SuccessMessageMixin , CreateView):
     model = CSService
     template_name = 'website/cs_create.html'
     form_class = CSServiceForm
@@ -48,7 +49,7 @@ class TermView(TemplateView):
         return context
 
 
-class SearchList(TemplateView):
+class SearchList(AbnormalUserMixin, TemplateView):
     template_name = 'website/search_list.html'
 
     def get_context_data(self, **kwargs):

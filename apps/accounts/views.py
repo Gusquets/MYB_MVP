@@ -17,7 +17,7 @@ from allauth.socialaccount.templatetags.socialaccount import get_providers
 
 from .forms import UserCreateForm, ArtistCreateForm, UserUpdateForm, SetPasswordForm, PasswordChangeForm
 from .models import Artist, ArtistImages
-from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin
+from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin, AbnormalUserMixin
 from apps.preference.models import Basket, Review
 from apps.payment.models import Sponsor
 
@@ -58,7 +58,7 @@ def login(request):
         template_name = 'accounts/login.html',
         extra_context = {'providers' : providers})
 
-class UserCreate(CreateView):
+class UserCreate(AbnormalUserMixin,CreateView):
     template_name = 'registration/user_create.html'
     form_class = UserCreateForm
     success_url = reverse_lazy('user_create_complete')
@@ -82,7 +82,7 @@ class UserCreate(CreateView):
 
         return response
 
-class UserCreateChoice(TemplateView):
+class UserCreateChoice(AbnormalUserMixin, TemplateView):
     template_name = 'registration/user_create_choice.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -124,7 +124,7 @@ class ArtistCreate(CreateView):
         return response
 
 
-class UserCreateComplete(TemplateView):
+class UserCreateComplete(AbnormalUserMixin, TemplateView):
     template_name = 'registration/user_create_complete.html'
 
 
@@ -137,7 +137,7 @@ class PasswordResetConfirmView(BasePasswordResetConfirmView):
 
 
 
-class ArtistList(ListView):
+class ArtistList(AbnormalUserMixin, ListView):
     model = Artist
     template_name = 'accounts/artist_list.html'
     paginate_by = 9
@@ -178,7 +178,7 @@ class ArtistList(ListView):
         return context
 
 
-class ArtistDetail(DetailView):
+class ArtistDetail(AbnormalUserMixin, DetailView):
     template_name = 'accounts/artist_detail.html'
     model = Artist
 
@@ -234,3 +234,7 @@ class FindEmail(TemplateView):
             if User.objects.all().filter(phone_number = phone_number):
                 context['result'] = User.objects.all().get(phone_number = phone_number).email
         return context
+
+
+class ArtistNeeded(TemplateView):
+    template_name = 'accounts/artist_needed.html'

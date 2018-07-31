@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import AccessMixin
 from django.template.loader import render_to_string
 from django.urls import reverse
+from django.shortcuts import redirect
 
 
 class LoginRequiredMixin(AccessMixin):
@@ -19,13 +20,15 @@ class LoginRequiredMixin(AccessMixin):
             return self.request.META.get('HTTP_REFERER', '/')
 
     def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.usertype == 2 and not request.user.artist:
+            return redirect('artist_needed')
         if request.user.is_authenticated:
             return super().dispatch(request, *args, **kwargs)
         return self.handle_no_permission()
 
 
 class ArtistRequiredMixin(AccessMixin):
-    message_artist_required = '아티스트 회원만 접근이 가능합니다'
+    message_artist_required = '아티스트 회원만 접근이 가능합니다.'
 
     def get_login_url(self):
         user = self.request.user
@@ -39,6 +42,14 @@ class ArtistRequiredMixin(AccessMixin):
             return self.request.META.get('HTTP_REFERER', '/')
     
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.usertype == 2:
+        if request.user.usertype == 2 and not request.user.artist:
+            return redirect('artist_needed')
+        if request.user.is_authenticated and request.user.is_authenticated and request.user.usertype == 2:
             return super().dispatch(request, *args, **kwargs)
         return self.handle_no_permission()
+
+class AbnormalUserMixin(AccessMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.usertype == 2 and not request.user.artist:
+            return redirect('artist_needed')
+        return super().dispatch(request, *args, **kwargs)

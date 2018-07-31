@@ -1,0 +1,32 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block nav %}
+{% endblock %}
+{% block content %}
+<div class="signup-complete-outer txt-center">
+    <div class="middle signup-complete-section">
+        <div class="row">
+            <div class="col-12 signup-complete-logo">
+                <a href="{% url "website:home" %}"><img src="{% static "images/logo-color.png" %}"></a>
+            </div>
+            <div class="col-12 signup-complete-img">
+                <img class="w-100" src="{% static "images/note.png" %}">
+            </div>
+            <div class="col-12 signup-complete-title">
+                아티스트 등록을<br/>
+                완료해 주세요
+            </div>
+            <div class="col-12">
+                <a href="{% url "artist_create" %}">
+                    <button class="btn btn-outline-primary w-100">
+                        아티스트 등록하기
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

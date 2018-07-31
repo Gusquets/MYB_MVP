@@ -1,7 +1,8 @@
 from django.views.generic import ListView
+from apps.common.mixins import AbnormalUserMixin
 
 
-class SearchView(ListView):
+class SearchView(AbnormalUserMixin, ListView):
     def get_queryset(self):
         obj_list = self.model.objects.all()
         q = self.request.GET.get('q', '')

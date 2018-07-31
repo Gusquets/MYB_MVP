@@ -4,7 +4,7 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, T
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 
-from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin
+from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin, AbnormalUserMixin
 from apps.preference.models import Basket
 from apps.accounts.models import Artist
 from .forms import ConcertCreateForm
@@ -33,11 +33,11 @@ class ConcertCreate(LoginRequiredMixin, ArtistRequiredMixin, SuccessMessageMixin
         return response
 
 
-class ConcertCreateComplete(TemplateView):
+class ConcertCreateComplete(AbnormalUserMixin, TemplateView):
     template_name = 'concert/concert_create_complete.html'
 
 
-class ConcertList(ListView):
+class ConcertList(AbnormalUserMixin, ListView):
     model = Concert
     template_name = 'concert/concert_list.html'
     paginate_by = 9
@@ -97,7 +97,7 @@ class ConcertList(ListView):
         return context
 
 
-class ConcertDetail(DetailView, UpdateView):
+class ConcertDetail(AbnormalUserMixin, DetailView, UpdateView):
     template_name = 'concert/concert_detail.html'
     model = Concert
     form_class = ConcertCreateForm
