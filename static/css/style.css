@@ -121,8 +121,10 @@ input[type='checkbox'] {
 .slider>img {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     max-height: 380px;
+    max-width: 100%;
 }
 .slider input[name='slide_switch'] {
     display: none;
@@ -141,11 +143,9 @@ input[type='checkbox'] {
 }
 .slider input[name='slide_switch'] ~ img {
     opacity: 0;
-    transform: scale(1.1);
 }
 .slider input[name='slide_switch']:checked+label+img {
     opacity: 1;
-    transform: scale(1);
 }
 
 .slider>.movie-wrapper-slider {
