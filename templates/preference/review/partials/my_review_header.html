@@ -4,11 +4,11 @@
             <div class="inner txt-center pt-5">
                 <p class="artist-list-mb_sub_title">
                     {% if type == 'review' %}
-                    {{ request.user.nickname }}님이 작성한 리뷰목록
+                    {{ request.user.nickname }}님이<br/> 작성한 리뷰목록
                     {% elif type == 'reviewed' %}
-                    {{ request.user.artist.name }}님께 작성된 리뷰목록
+                    {{ request.user.artist.name }}님께<br/> 작성된 리뷰목록
                     {% elif type == 'artist' %}
-                    {{ artist_name }}님께 작성된 리뷰목록
+                    {{ artist_name }}님께<br/> 작성된 리뷰목록
                     {% endif %}
                 </p>
             </div>
