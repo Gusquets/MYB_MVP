@@ -192,6 +192,9 @@ input[type='checkbox'] {
     .mobile-font-sm {
         font-size: .9em;
     }
+    .mobile-txt-left {
+        text-align: left !important;
+    }
 }
 
 /* base/style.css */

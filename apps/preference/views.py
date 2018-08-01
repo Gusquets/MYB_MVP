@@ -121,7 +121,7 @@ class MyReview(LoginRequiredMixin, ListView):
         return context
 
 
-class ArtistReview(ArtistRequiredMixin, ListView):
+class ArtistReview(AbnormalUserMixin, ListView):
     model = Review
     template_name = 'preference/review/my_review.html'
     paginate_by = 10

@@ -80,8 +80,8 @@
         {% for review in review_list %}
         <div class="col-12 mb-2">
             <div class="card">
-                <div class="row card-header align-items-center">
-                    <div class="col-8 txt-left {% if review.is_pay %}txt-blue{% endif %}">
+                <div class="row card-header align-items-center pt-1 pb-1">
+                    <div class="col-lg-8 col-12 txt-left {% if review.is_pay %}txt-blue{% endif %}">
                         {{ review.user_name }}{% if review.is_pay %} | 후원금액 : {{ review.amount }}원 {% endif %}<br/>
                         <span id="star-count-{{ review.id }}" class="txt-sm"></span>
                         <script>
@@ -96,7 +96,7 @@
                             }
                         </script>
                     </div>
-                    <div class="col-4 txt-right">
+                    <div class="col-lg-4 col-12 txt-right mobile-txt-left">
                         {% if request.user.is_authenticated %}
                         <a id="answer-new-{{ review.id }}" class="modal-form-btn-answer txt-smd" href="{% url "preference:answer_create" review.id 3 %}" data-toggle="modal" data-target="#answer_create">댓글달기</a>
                         {% endif %}
