@@ -185,6 +185,14 @@ input[type='checkbox'] {
 .slider input[name='slide_switch']:checked+label+.movie-wrapper-slider{
     display: block;
 }
+@media (max-width: 769px){
+    .mobile-txt-center {
+        text-align: center;
+    }
+    .mobile-font-sm {
+        font-size: .9em;
+    }
+}
 
 /* base/style.css */
 body {

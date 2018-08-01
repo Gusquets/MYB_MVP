@@ -1,7 +1,7 @@
 
 {% load bootstrap4 static %}
-<div class="col-3 offset-9 txt-right pb-2">
-    <ul class="mb_filter_menu">
+<div class="col-12 col-md-3 offset-md-9 txt-right pb-2">
+    <ul class="mb_filter_menu mobile-font-sm">
         <li><a href="{{ request.path }}?sorted=time" {% if sorted == 'time' %}style="color:#009bfc;"{% endif %} class="txt-black">시간순</a></li>
         {% if not list_artist %}
         <li>|</li>
