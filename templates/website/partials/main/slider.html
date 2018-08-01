@@ -12,7 +12,7 @@
                                             <div class="col-12 txt-center mb-5">
                                                 <h2 class="slider_title">'{% if not concert.location_1 == '그외' %}{{ concert.location_1 }}{% else %}{{ concert.location_else }}{% endif %}'의 버스킹</h2>
                                             </div>
-                                                <div class="col-md-6 col-12 txt-right">
+                                                <div class="col-md-6 col-12 txt-right youtubeWrap">
                                                     <iframe width="450" height="240" src="{% if concert.artist.movie_1 %}{{ concert.artist.movie_1 }}{% elif concert.artist.movie_2 %}{{ concert.artist.movie_2 }}{% else %}{{ concert.artist.movie_3 }}{% endif %}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                             </div>
                                                 <div class="col-md-6 col-12 txt-center">
