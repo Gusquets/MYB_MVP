@@ -2,52 +2,53 @@
     <div class="outer">
         <div class="bottom">
             <div class="inner">
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                            <div class="col-12">
-                                <div class="carousel-inner">
-                                    {% for concert in slider_concert %}
-                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                        <div class="mb_main_carousel w-70">
-                                            <div class="row">
-                                            <div class="col-12 txt-center mb-5">
-                                                <h2 class="slider_title">'{% if not concert.location_1 == '그외' %}{{ concert.location_1 }}{% else %}{{ concert.location_else }}{% endif %}'의 버스킹</h2>
-                                            </div>
-                                                <div class="col-md-6 col-12 txt-right youtubeWrap">
-                                                    <iframe width="450" height="240" src="{% if concert.artist.movie_1 %}{{ concert.artist.movie_1 }}{% elif concert.artist.movie_2 %}{{ concert.artist.movie_2 }}{% else %}{{ concert.artist.movie_3 }}{% endif %}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                            </div>
-                                                <div class="col-md-6 col-12 txt-center">
-                                                    {{ concert.artist.name }} | {{ concert.time }}
-                                            </div>
-                                            </div>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div class="col-12">
+                        <div class="carousel-inner">
+                            {% for concert in slider_concert %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <div class="mb_main_carousel w-70">
+                                    <div class="row">
+                                        <div class="col-12 txt-center mb-5">
+                                            <h2 class="slider_title">'{% if not concert.location_1 == '그외' %}{{ concert.location_1 }}{% else %}{{ concert.location_else }}{% endif %}'의 버스킹</h2>
+                                        </div>
+                                        <div class="col-md-6 col-12 txt-right">
+                                            <iframe width="450" height="240" src="{% if concert.artist.movie_1 %}{{ concert.artist.movie_1 }}{% elif concert.artist.movie_2 %}{{ concert.artist.movie_2 }}{% else %}{{ concert.artist.movie_3 }}{% endif %}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </div>
+                                        <div class="col-md-6 col-12 txt-center">
+                                            {{ concert.artist.name }} | {{ concert.time }}<br/>
+                                            {{ concert.start_time }} - {{ concert.end_time }}
                                         </div>
                                     </div>
-                                    {% endfor %}
                                 </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
+                                <div class="col-12">
+                                    <a class="txt-black" href="{% url "concert:concert_detail" concert.id %}">
+                                        <button class="btn mb_main_button b_sha_blue">
+                                            버스킹 정보 더 알아보기
+                                        </button>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                    </a>
+                                </div>
                             </div>
-                        <div class="col-12">
-                            <a class="txt-black" href="{% url "concert:concert_list" %}">
-                                <button class="btn mb_main_button b_sha_blue">
-                                    버스킹 정보 더 알아보기
-                                </button>
-                            </a>
+                            {% endfor %}
                         </div>
-                        <div class="col-12">
-                                    <ol class="carousel-indicators">
-                                        {% for concert in slider_concert %}
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter0 == 0 %}class="active"{% endif %}></li>
-                                        {% endfor %}
-                                    </ol>
-                        </div>
-                    <p data-edit="true" data-selector="p" class=""></p>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
+                    <div class="col-12">
+                        <ol class="carousel-indicators">
+                            {% for concert in slider_concert %}
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter0 == 0 %}class="active"{% endif %}></li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                    <p data-edit="true" data-selector="p" class=""></p>
+                </div>
             </div>
         </div>
     </div>
