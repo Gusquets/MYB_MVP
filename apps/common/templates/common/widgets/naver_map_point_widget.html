@@ -48,6 +48,13 @@ function searchAddressToCoordinate(address) {
     });
 }
 
+$('input[name="search"]').keydown(function() {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        var search = $('input[name="search"]').val();
+        searchAddressToCoordinate(search);
+    }
+});
 
 $('#btn-submit').on('click', function() {
     var search = $('input[name="search"]').val();
