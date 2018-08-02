@@ -56,5 +56,22 @@
     <script src="{% static "plugins/jquery-ui/js/jquery-ui.min.js" %}"></script>
     {% block extrajs %}
     {% endblock %}
+    <script>
+        $('#search_btn').click(function(e) {
+            e.preventDefault();
+        
+            var $body = $('#search_body');
+            
+            if ($body.hasClass('show')) {
+                $body.removeClass('show');
+                $body.slideUp(350);
+            } else {
+                $body.removeClass('show');
+                $body.slideUp(350);
+                $body.toggleClass('show');
+                $body.slideToggle(350);
+            }
+        });
+    </script>
 </body>
 </html>

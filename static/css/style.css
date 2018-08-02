@@ -276,6 +276,13 @@ label {
     overflow: hidden;
     display: none;
   }
+#search_body {
+overflow: hidden;
+display: none;
+}
+#search_btn.show {
+display: block;
+}
 
 /* 꾸밈 선 */
 .upper_sm_line{
@@ -443,6 +450,31 @@ label {
 }
 .navi-mobile img{
 	padding: 8px;
+}
+.navi-mobile .nav-search{
+    width: 90%;
+	height: 30px;
+    background: rgba(255, 255, 255, 0);
+    border: none;
+    color: rgb(39, 105, 129);
+    font-weight: bold;
+}
+.navi-mobile .nav-search:focus{
+	outline: none !important;
+}
+.navi-mobile .nav-search-btn{
+    background: rgba(255,255,255,0);
+    border: none;
+    margin-left: 0px;
+    cursor: pointer;
+}
+.navi-mobile .nav-search-btn:focus{
+    outline: none;
+}
+.navi-mobile .nav-search-form{
+    width: 80%;
+    margin: 0 auto;
+	border-bottom: 2px solid rgb(39, 105, 129);
 }
 
 /* 모바일 메뉴 */

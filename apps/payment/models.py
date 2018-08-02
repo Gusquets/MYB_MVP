@@ -32,7 +32,7 @@ class Sponsor(models.Model):
     user_name = models.CharField('후원자 이름' , max_length = 50)
     artist = models.ForeignKey(Artist, verbose_name = '아티스트', on_delete = models.CASCADE)
     amount = models.PositiveIntegerField('결제 금액', choices = ((1000,'1,000 원'),(3000,'3,000 원'),(5000,'5,000 원'),(10000,'10,000 원')), default = 3000)
-    rate = models.IntegerField('별점', choices = ((0,'☆☆☆☆☆'),(1,'★☆☆☆☆'),(2,'★★☆☆☆'),(3,'★★★☆☆'),(4,'★★★★☆'),(5,'★★★★★')), default = 0)
+    rate = models.IntegerField('별점', choices = ((0,'☆☆☆☆☆'),(1,'★☆☆☆☆'),(2,'★★☆☆☆'),(3,'★★★☆☆'),(4,'★★★★☆'),(5,'★★★★★')), default = 5)
     message = models.TextField('함께 전할 메세지', blank = True, null = True)
     pay_type = models.CharField('결제수단', max_length = 20, choices = (('html5_inicis','카드결제'),('kakaopay','카카오페이')), default = 'html5_inicis')
     merchant_uid = models.UUIDField('거래 ID')
