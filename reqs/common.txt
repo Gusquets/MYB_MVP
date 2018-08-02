@@ -1,4 +1,5 @@
 django
+Plliow
 django-allauth
 django-bootstrap4
 iamport-rest-client

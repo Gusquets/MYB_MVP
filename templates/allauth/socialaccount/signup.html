@@ -1,0 +1,65 @@
+{% extends "base/base.html" %}
+{% load static bootstrap4 %}
+
+{% block nav %}
+{% endblock %}
+{% block content %}
+<div class="Signup_1 row">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+                <form id="signup_form" class="row mb-5" action="" method="post">
+                    {% csrf_token %}
+                    <!-- 로고는 홈으로 연결 -->
+                    <div class="col-12 Signup-title">
+                        <a href="{% url "website:home" %}"><img src="{% static "images/logo-color.png" %}"></a>
+                    </div>
+                    <label for="id_email" class="txt-black">이메일</label><br>
+                    {% bootstrap_field form.email form_group_class='col-12 p-0' show_help=False show_label=False %}
+
+                    <label for="id_phone_number" class="txt-black">휴대폰 번호</label><br>
+                    {% bootstrap_field form.phone_number form_group_class='col-12 p-0' placeholder='(-) 제외' show_help=False show_label=False %}
+                    <label for="nickname" class="txt-black">닉네임</label><br>
+                    {% bootstrap_field form.nickname form_group_class='col-12 p-0' placeholder='마이버스커에서 사용할 닉네임' show_help=False show_label=False %}
+                    <div class="checkbox">
+                        <input type="checkbox" id="Signup-agree" required>
+                        <label for="Signup-agree" class="Signup-agree txt-black" required>
+                            <a href="{% url "website:term_access" %}" target="_blank">이용약관</a>과 <a href="{% url "website:term_information" %}" target="_blank">개인정보처리방침</a>에 동의합니다.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="Signup-agree2">
+                        <label for="Signup-agree2" class="Signup-agree txt-black">
+                            마케팅 정보 활용에 동의합니다.
+                        </label>
+                    </div>
+                    <!-- Submit 부분 아티스트인 경우 value="다음" -->
+                    <div class="Signup_submit">
+                        {% if request.POST.usertype == "1" or request.GET.usertype == "1" %}
+                            <input id="signup_form_btn" type="submit" value="회원가입하기" class="btn btn-primary">
+                        {% else %}
+                            <input id="signup_form_btn" type="submit" value="다음" class="btn btn-primary">
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block extrajs %}
+<script>
+    $('.form-control').addClass('Signup_form mb-4');
+    $('#signup_form_btn').on('click', function(e){
+        e.preventDefault();
+        if ($('#Signup-agree').is(":checked") && $('#Signup-agree2').is(":checked")){
+            $('#signup_form').submit();
+        }
+        else {
+            alert('약관에 동의해 주세요.');
+        }
+    })
+</script>
+{% endblock %}

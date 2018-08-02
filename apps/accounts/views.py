@@ -111,14 +111,14 @@ class ArtistCreate(CreateView):
                 index = artist.movie_3.find('.be')
                 movie_id = artist.movie_3[index+4:]
                 artist.movie_3 = "https://www.youtube.com/embed/" + movie_id
-        
-        artist.save()
 
         self.request.user.artist = artist
 
         files = self.request.FILES.getlist('image')
         for f in files:
             ArtistImages.objects.create(artist = artist, image = f)
+        
+        artist.save()
         
         self.request.user.save()
         return response

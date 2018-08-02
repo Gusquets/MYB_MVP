@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='concertsonglist',
             name='info',
-            field=models.CharField(default='자작곡', max_length=50, verbose_name='곡 정보'),
+            field=models.CharField(max_length=50, verbose_name='곡 정보'),
             preserve_default=False,
         ),
     ]

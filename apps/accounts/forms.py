@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.forms import SetPasswordForm as BaseSetPasswordForm, PasswordChangeForm as BasePasswordChangeForm
 from django.utils.safestring import mark_safe
+from allauth.socialaccount.forms import SignupForm as AllauthSignupForm
+from allauth.socialaccount.adapter import get_adapter
 
 from apps.common.validators import validate_password, PhoneNumberValidator
 from .models import Artist
@@ -76,6 +78,51 @@ class ArtistCreateForm(forms.ModelForm):
                 'multiple': True,
             })
         }
+
+
+class SocialSignupForm(AllauthSignupForm):
+    nickname = forms.CharField(label = '닉네임', required=True, widget = forms.TextInput(attrs={'autocomplete': 'off'}))
+    email = forms.EmailField(label = 'E-mail', required=True, widget = forms.EmailInput())
+    phone_number = forms.CharField(label = '휴대폰 번호', max_length=11, required=True, validators=[PhoneNumberValidator()])
+
+    def save(self, request):
+        adapter = get_adapter(request)
+        user = adapter.save_user(request, self.sociallogin, form=self, commit=False)
+        user.phone_number = self.cleaned_data['phone_number']
+        user.nickname = self.cleaned_data['nickname']
+        user.is_agreed_1 = True
+        user.is_agreed_2 = True
+
+        user.save()
+        self.custom_signup(request, user)
+        return user
+
+    def clean_nickname(self):
+        value = self.cleaned_data['nickname']
+        if value:
+            value = self.validate_unique_nickname(value)
+        return value
+
+    def clean_phone_number(self):
+        value = self.cleaned_data['phone_number']
+        if value:
+            value = self.validate_unique_phone_number(value)
+        return value
+
+    def validate_unique_nickname(self, value):
+        try:
+            return get_adapter().validate_unique_nickname(value)
+        except forms.ValidationError:
+            raise forms.ValidationError(
+                get_adapter().error_messages['nickname_taken'])
+
+    def validate_unique_phone_number(self, value):
+        try:
+            return get_adapter().validate_unique_phone_number(value)
+        except forms.ValidationError:
+            raise forms.ValidationError(
+                get_adapter().error_messages['phone_number_taken'])
+    
 
 
 class UserUpdateForm(forms.ModelForm):

@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='concert',
             name='location_else',
-            field=models.CharField(default='해당없음', max_length=50, verbose_name='공연장소 그외'),
+            field=models.CharField(max_length=50, verbose_name='공연장소 그외'),
         ),
     ]

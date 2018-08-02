@@ -1326,3 +1326,6 @@ display: none !important;
     font-size : 20px;
     color : white;
 }
+.container {
+    min-width : 0px !important;
+ }

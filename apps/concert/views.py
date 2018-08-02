@@ -25,6 +25,8 @@ class ConcertCreate(LoginRequiredMixin, ArtistRequiredMixin, SuccessMessageMixin
     
     def form_valid(self, form):
         concert = form.save(commit=False)
+        if not concert.location_1 == '그외':
+            concert.location_else = '해당없음'
         concert.artist = self.request.user.artist
 
         concert.save()

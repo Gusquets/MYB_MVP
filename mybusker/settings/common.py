@@ -86,6 +86,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates', 'allauth'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -136,13 +137,17 @@ AUTHENTICATION_BACKEND = [
     'allauth.account.auth.backends.AuthenticationBackend',
 ]
 
-
+SOCIALACCOUNT_ADAPTER = 'apps.accounts.adapter.SocialAccountAdapter'
+ACCOUNT_ADAPTER = 'apps.accounts.adapter.AccountAdapter'
 SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
-ACCOUNT_USER_MODEL_USERNAME_FIELD = 'None'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
+SOCIALACCOUNT_FORMS = {
+    'signup': 'apps.accounts.forms.SocialSignupForm'
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
