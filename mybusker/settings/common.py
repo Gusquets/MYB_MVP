@@ -194,6 +194,7 @@ IAMPORT_API_SECRET = get_secret("IAMPORT_API_SECRET")
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
+        "removePlugins": "stylesheetparser",
         # 'skin': 'moono',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']

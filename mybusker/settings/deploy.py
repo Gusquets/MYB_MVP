@@ -15,7 +15,7 @@ DATABASES = {
     },
 }
 
-INSTALLED_APPS += ['storages']
+INSTALLED_APPS += ['storages',]
 
 STATICFILES_STORAGE = 'mybusker.storages.StaticS3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'mybusker.storages.MediaS3Boto3Storage'
@@ -32,3 +32,5 @@ ALLOWED_HOSTS = ['www.mybusker.com', '127.0.0.1']
 DEBUG = False
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
+AWS_QUERYSTRING_AUTH = False
