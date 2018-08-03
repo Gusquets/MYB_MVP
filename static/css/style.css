@@ -522,6 +522,16 @@ display: block;
     font-weight : bold;
     font-size : 20px;
 }
+.footer-business-info{
+    padding-top : 1rem;
+    padding-bottom : 1rem;
+}
+@media(max-width : 576px){
+    .footer-business-info{
+        font-size : 12px;
+        padding-bottom : 3rem;
+    }
+}
 /* main/process.css */
 .w-70_slide3{
     width : 70%!important;
@@ -1219,6 +1229,9 @@ display: none !important;
     border-radius : 80px;
     margin : auto;
     overflow: hidden;
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .artist_stat{
@@ -1256,6 +1269,10 @@ display: none !important;
     display : none;
 }
 
+.artist-mobile-buttons{
+
+}
+
 @media(max-width : 780px){
     .detail{
         display :none;
@@ -1276,7 +1293,6 @@ display: none !important;
     position:fixed;
     bottom : 0px;
     width : 100%;
-    background : white;
     z-index : 100;
 }
 
@@ -1293,6 +1309,7 @@ display: none !important;
     width : 100%;
     margin-top : 5px;
     margin-bottom : 5px;
+    font-weight : bold;
 }
 
 .concert_create_grid{

@@ -36,46 +36,47 @@
         </div>
     </div>
     
+
     <!-- 팀소개 회원가입시 입력한 간단한 소개 등장 -->
-    <div class="team_info row mt-3">
-        <div class="detail-subtitle col-12">팀 소개</div>
-        <div class="team_text col-12">
+<div class="team_info row mt-3 mb-3">
+    <div class="detail-subtitle col-12">팀 소개</div>
+    <div class="team_text col-12">
+        <div class="card">
+            <div class="card-body">
+                {{ artist.description }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 공연 일정 리스트 -->
+<div class="performance_schedule row mt-3 mb-3">
+    <div class="col-12 detail-subtitle">공연일정</div>
+    {% for concert in concert_list %}
+        <div class="col-md-6 col-12">
             <div class="card">
                 <div class="card-body">
-                    {{ artist.description }}
+                    {{ concert.date }} | {{ concert.location_1 }}<br/>
+                    <a href="{% url "concert:concert_detail" concert.id %}" class="txt-white btn btn-dark mt-2">
+                        공연 자세히 보기
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- 공연 일정 리스트 -->
-    <div class="performance_schedule row mt-3">
-        <div class="col-12 detail-subtitle">공연일정</div>
-        {% for concert in concert_list %}
-            <div class="col-md-6 col-12">
-                <div class="card">
-                    <div class="card-body">
-                        {{ concert.date }} | {{ concert.location_1 }}<br/>
-                        <a href="{% url "concert:concert_detail" concert.id %}" class="txt-white btn btn-dark mt-2">
-                            공연 자세히 보기
-                        </a>
-                    </div>
-                </div>
-            </div>
-        {% empty %}
-            <div class="col-12">
-                공연정보가 없습니다.
-            </div>
-        {% endfor %}
-        <div class="col-12 mt-3">
-            <a class="txt-black" href="{% url "concert:concert_list_artist" artist.id %}">
-                <div class="_more"> 공연일정 더보기+ </div>
-            </a>
+    {% empty %}
+        <div class="col-12">
+            공연정보가 없습니다.
         </div>
+    {% endfor %}
+    <div class="col-12 mt-3 mb-3">
+        <a class="txt-black" href="{% url "concert:concert_list_artist" artist.id %}">
+            <div class="_more"> 공연일정 더보기+ </div>
+        </a>
     </div>
+</div>
     
     <!-- 리뷰 -->
-    <div class="artist_review row pb-3">
+    <div class="artist_review row mt-3 pb-3">
         <div class="col-12 detail-subtitle">후기</div>
         {% for review in review_list %}
         <div class="col-12 mb-2">
