@@ -58,7 +58,7 @@ class SearchList(AbnormalUserMixin, TemplateView):
         context['q'] = q
         context['artist_list'] = Artist.objects.all().filter(Q(name__icontains = q) | Q(description__icontains = q))
 
-        context['concert_list'] = Concert.objects.all().filter(Q(date__icontains = q) | Q(start_time__icontains = q) | Q(end_time__icontains = q) | Q(description__icontains = q) | Q(location_1__icontains = q) | Q(artist__name__icontains = q))
+        context['concert_list'] = Concert.objects.all().filter(Q(date__contains = q) | Q(start_time__contains = q) | Q(end_time__contains = q) | Q(description__icontains = q) | Q(location_1__icontains = q) | Q(artist__name__icontains = q))
 
         return context
 
