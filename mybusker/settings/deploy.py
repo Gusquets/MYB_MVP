@@ -29,7 +29,7 @@ SITE_ID = 3
 
 ALLOWED_HOSTS = ['www.mybusker.com', '127.0.0.1']
 
-DEBUG = True
+DEBUG = False
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
