@@ -26,6 +26,7 @@ urlpatterns = [
     path('artist/list/basket/', views.ArtistList.as_view(), name = 'artist_list_basket'),
     path('artist/detail/<int:pk>/', views.ArtistDetail.as_view(), name = 'artist_detail'),
     path('artist/update/<int:pk>/', views.ArtistUpdate.as_view(), name = 'artist_update'),
+    path('artist/landing/<int:pk>/', views.ArtistLanding.as_view(), name = 'artist_landing'),
 
     path('artist/needed/', views.ArtistNeeded.as_view(), name = 'artist_needed'),
 ]

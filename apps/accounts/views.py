@@ -238,3 +238,14 @@ class FindEmail(TemplateView):
 
 class ArtistNeeded(TemplateView):
     template_name = 'accounts/artist_needed.html'
+
+
+class ArtistLanding(DetailView):
+    template_name = 'accounts/artist_landing.html'
+    model = Artist
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['concert_count'] = len(self.object.concert_set.all()) 
+        return context
+    
