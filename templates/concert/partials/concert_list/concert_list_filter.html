@@ -3,17 +3,17 @@
     <div class="col-12 col-md-6 mobile-txt-center">
         <ul class="mb_filter_menu view_choice mobile-font-sm">
             {% if not list_artist %}
-            <li><a {% if request.path == '/concert/list/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "concert:concert_list" %}">사진으로 보기</a></li>
+            <li><a {% if request.path == '/concert/list/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "concert:concert_list" %}">사진으로</a></li>
             <li>|</li>
-            <li><a {% if request.path == '/concert/list/movie/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "concert:concert_list_movie" %}">영상으로 보기</a></li>
+            <li><a {% if request.path == '/concert/list/movie/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "concert:concert_list_movie" %}">영상으로</a></li>
                 {% if request.user.is_authenticated %}
                 <li>|</li>
-                <li><a {% if request.path == '/concert/list/basket/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "concert:concert_list_basket"  %}">찜한버스킹 보기</a></li>
+                <li><a {% if request.path == '/concert/list/basket/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "concert:concert_list_basket"  %}">찜한버스킹</a></li>
                 {% endif %}
             {% else %}
-            <li><a {% if request.path == '/concert/list/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "concert:concert_list_artist" list_artist.id %}">사진으로 보기</a></li>
+            <li><a {% if request.path == '/concert/list/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "concert:concert_list_artist" list_artist.id %}">사진으로</a></li>
             <li>|</li>
-            <li><a {% if request.path == '/concert/list/movie/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "concert:concert_list_movie_artist" list_artist.id %}">영상으로 보기</a></li>
+            <li><a {% if request.path == '/concert/list/movie/' %}style="color: #009bfc"{% endif %} class="txt-black" href="{% url "concert:concert_list_movie_artist" list_artist.id %}">영상으로</a></li>
             {% endif %}
         </ul>
     </div>

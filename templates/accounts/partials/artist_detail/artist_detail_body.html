@@ -7,10 +7,11 @@
         <div class="slider">
             {% for image in images %}
             <input type="radio" name="slide_switch" id="{{ forloop.counter }}" {% if forloop.first %}checked{% endif %}>
+
             <label for="{{ forloop.counter }}">
                 <img src="{{ image.image.url }}" alt="" width="100" height="100">
             </label>
-            <img src="{{ image.image.url }}" width="auto" height="100%" alt="">
+            <img src="{{ image.image.url }}">
             {% endfor %}
         </div>
     </div>

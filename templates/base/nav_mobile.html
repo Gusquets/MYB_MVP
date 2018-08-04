@@ -12,9 +12,9 @@
         </a>
     </div>
     <div id="search_body">
-        <form class="nav-search-form" method="get" action="{% url "website:search_list" %}">
-            <input class="nav-search" type="text" name="q">
-            <button class="nav-search-btn"><img class="p-0" src="{% static "images/search.png" %}" width="16"></button>
+        <form class="row nav-search-form mb-3" method="get" action="{% url "website:search_list" %}">
+            <input class="col-10 nav-search" type="text" name="q">
+            <button class="col-2 nav-search-btn"><img class="p-0" src="{% static "images/search.png" %}" width="16"></button>
         </form>
     </div>
     <div class="collapse navbar-collapse" id="navbarsExample06">

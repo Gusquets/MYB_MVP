@@ -3,8 +3,8 @@
             <div class="middle">
                 <div class="inner txt-center pt-5">
                     <p class="artist-list-mb_sub_title">공연 상세 정보<br/>
-                        <small>{{ concert.artist }}<br/>
-                        {{ concert.date }}부터 / {% if not concert.location_1 == '그외' %}{{ concert.location_1 }}{% else %}{{ concert.location_else }}{% endif %}앞</small>
+                        <p class="concert-info">{{ concert.artist }}<br/>
+                        {{ concert.date }} / {% if not concert.location_1 == '그외' %}{{ concert.location_1 }}{% else %}{{ concert.location_else }}{% endif %}에서</p>
                     </p>
                 </div>
             </div>

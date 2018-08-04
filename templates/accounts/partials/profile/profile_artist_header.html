@@ -2,8 +2,8 @@
     <div class="outer">
         <div class="middle">
             <div class="inner txt-center pt-5">
-                <div class="artist_profile mt-3 mb-3">
-                    <img src="{{ user.artist.image.url }}" width="100%" alt="">
+                <div class="artist_profile mt-3 mb-3" style="background-image: url({{ user.artist.image.url }})">
+
                 </div>
                 <p class="artist-detail-mb_sub_title">{{ user.artist.name }}</p>
                 <p class="artist_stat"> 작성된 리뷰수 : {% if reviewed_count %}{{ reviewed_count }}{% else %}0{% endif %} </p>

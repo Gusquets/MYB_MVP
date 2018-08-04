@@ -1,4 +1,5 @@
 {% load static %}
+<!--
 <div class="w-100 pt-3 pb-3 row">
     {% if concert.artist.social_fb %}
     <div class="col-4 mb-2">
@@ -22,25 +23,26 @@
     </div>
     {% endif %}
 </div>
+-->
 
 <!-- 이부분 토글 버튼으로 처리 -->
-<div class="test row pt-3 pb-3">
+<div class="test row">
     {% if request.user.is_authenticated %}
-    <a class="col-4 txt-black basket" href="{% url "preference:basket_create_concert" concert.id %}">
+    <a class="col-4 pt-3 pb-3 basket artist-mobile-buttons btn-warning txt-bold" href="{% url "preference:basket_create_concert" concert.id %}">
         찜하기
     </a>
-    <a id="review_btn" class="col-4 txt-black modal-form-btn" href="{% url "preference:review_create" concert.artist.id %}" data-toggle="modal" data-target="#review_create">
+    <a id="review_btn" class="col-4 artist-mobile-buttons pt-3 pb-3 modal-form-btn btn-success txt-bold" href="{% url "preference:review_create" concert.artist.id %}" data-toggle="modal" data-target="#review_create">
         후기쓰기
     </a>
     {% else %}
-    <a class="col-4 txt-black" href="{% url "login" %}">
+    <a class="col-4 artist-mobile-buttons pt-3 pb-3 btn-warning txt-bold" href="{% url "login" %}">
         찜하기
     </a>
-    <a class="col-4 txt-black" href="{% url "login" %}">
+    <a class="col-4 artist-mobile-buttons pt-3 pb-3 btn-success txt-bold" href="{% url "login" %}">
         후기쓰기
     </a>
     {% endif %}
-    <a class="col-4 txt-black" href="{% url "payment:sponsor_create" concert.artist.id %}">
+    <a class="col-4 artist-mobile-buttons pt-3 pb-3 btn-secondary txt-bold" href="{% url "payment:sponsor_create" concert.artist.id %}">
         후원하기
     </a>
 </div>

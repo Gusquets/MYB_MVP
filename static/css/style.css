@@ -101,12 +101,14 @@ input[type='checkbox'] {
   button:hover{
     cursor:pointer;
   }
+
 .slider {
     width: 100%;
     max-height: 560px;
     position: relative;
     padding-top: 380px;
 }
+
 .slider>img {
     position: absolute;
     top: 0;
@@ -115,6 +117,12 @@ input[type='checkbox'] {
     max-height: 380px;
     max-width: 100%;
 }
+/*
+.slider>img{
+    max-height : 100%;
+    max-width:100%;
+}
+*/
 .slider input[name='slide_switch'] {
     display: none;
 }
@@ -124,7 +132,7 @@ input[type='checkbox'] {
     cursor: pointer;
     opacity: 0.6;
 }
-.slider lable img {
+.slider label img {
     display: block;
 }
 .slider input[name='slide_switch']:checked+label {
@@ -643,6 +651,7 @@ display: block;
     }
     .mb_slide2_title{
         font-size : 30px;
+        padding : 0;
     }
     .mb_slide2_title_sub{
         font-size : 15px;
@@ -1137,6 +1146,13 @@ display: none !important;
     margin : auto;
 }
 
+.img-list {
+    height : 320px;
+    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
 /* artist_list/_filter.css */
 .artist_list_filter{
     max-width : 1140px;
@@ -1148,6 +1164,7 @@ display: none !important;
     list-style : none;
     margin : auto;
     margin-bottom : 1rem;
+    padding-left : 0px;
 }
 
 .mb_filter_menu li{
@@ -1193,6 +1210,10 @@ display: none !important;
     margin-bottom : 1rem;
 }
 
+.concert-info{
+    font-size : 17px;
+}
+
 .review-profile{
     text-align : left;
 }
@@ -1203,6 +1224,10 @@ display: none !important;
 @media(max-width : 780px){
     .review-meta{
         text-align : left;
+    }
+
+    .detail-selector{
+        font-size : 13px;
     }
 }
 
