@@ -206,7 +206,7 @@ label {
 .outer {
     display: table;
     height: 100%;
-    width: 95%;
+    width: 100%;
     margin: auto;
    /* max-width: 1200px; */
 }
@@ -717,6 +717,28 @@ display: block;
     height: 400px;
 }
 
+.main-videos{
+    margin-left : auto;
+    max-width : 450px;
+    height : 280px;
+    margin-bottom : 1rem;
+}
+
+.main-info{
+    font-family : "Nanum Gothic", sans-serif;
+    font-weight : 600;
+    font-size : 26px;
+    text-align : left;
+    padding-left : 4rem;
+    padding-top : 3rem;
+}
+
+.main-info-time{
+    font-size : 17px;
+    font-weight : 600;
+    text-shadow : none;
+}
+
 .slider_title{
 font-weight : 600;
 text-shadow: 0 0 10px rgba(18, 101, 255, 0.8)
@@ -727,6 +749,31 @@ background: #FFF !important;
 }
 .ytp-large-play-button svg {
 display: none !important;
+}
+
+@media(max-width : 576px){
+    .main-videos{
+        height : 240px;
+        margin-top : 8px;
+        margin-bottom : 8px;
+    }
+    .main-info{
+        font-size : 20px;
+        text-align : center;
+        padding : 0;
+        margin-top : 5px;
+        line-height : 1.4;
+    }
+    .main-info-time{
+        font-size : 16px;
+    }
+    .carousel-indicators{
+        height : 35px;
+        padding-top : 20px;
+    }
+    .carousel-control-prev, .carousel-control-next{
+        width : 12%;
+    }
 }
 
 /* account/_login.css */
@@ -1212,6 +1259,7 @@ display: none !important;
 
 .concert-info{
     font-size : 17px;
+    color : white;
 }
 
 .review-profile{

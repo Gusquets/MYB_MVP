@@ -9,19 +9,23 @@
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
                                 <div class="mb_main_carousel w-70">
                                     <div class="row">
-                                        <div class="col-12 txt-center mb-5">
+                                        <div class="col-12 txt-center mb-2 mb-xl-5">
                                             <h2 class="slider_title">'{% if not concert.location_1 == '그외' %}{{ concert.location_1 }}{% else %}{{ concert.location_else }}{% endif %}'의 버스킹</h2>
                                         </div>
-                                        <div class="offset-md-3 col-md-3 col-12 txt-right movie-wrapper">
-                                            <iframe width="450" height="240" src="{% if concert.artist.movie_1 %}{{ concert.artist.movie_1 }}{% elif concert.artist.movie_2 %}{{ concert.artist.movie_2 }}{% else %}{{ concert.artist.movie_3 }}{% endif %}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        <div class="col-md-6 col-12 pt-sm-0 pt-2">
+                                            <div class="main-videos">
+                                                <iframe width="100%" height="100%" src="{% if concert.artist.movie_1 %}{{ concert.artist.movie_1 }}{% elif concert.artist.movie_2 %}{{ concert.artist.movie_2 }}{% else %}{{ concert.artist.movie_3 }}{% endif %}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 col-12 txt-center">
-                                            {{ concert.artist.name }} | {{ concert.time }}<br/>
-                                            {{ concert.start_time }} - {{ concert.end_time }}
+                                        <div class="col-md-6 col-12 main-info">
+                                            {{ concert.artist.name }}{{ concert.time }}<br/>
+                                            <a class="main-info-time">
+                                                {{ concert.date }}<br/>
+                                                {{ concert.start_time }} - {{ concert.end_time }}</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 mt-lg-0 mt-4">
                                     <a class="txt-black" href="{% url "concert:concert_detail" concert.id %}">
                                         <button class="btn mb_main_button b_sha_blue">
                                             버스킹 정보 더 알아보기

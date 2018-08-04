@@ -4,7 +4,7 @@
         <a href="{% url "concert:concert_detail" concert.id %}" class="txt-white col-4 detail-selector _selected"> 공연장소 보기 </a>
         <a href="{% url "concert:concert_detail" concert.id %}?view=image" class="txt-black col-4 detail-selector"> 사진 </a>
         <a href="{% url "concert:concert_detail" concert.id %}?view=movie" class="txt-black col-4 detail-selector"> 영상 </a>
-        <div class="col-12 mt-1">
+        <div class="col-12 mt-1 px-0">
             {{ form.location_2 }}
         </div>
     </div>
