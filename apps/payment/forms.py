@@ -17,7 +17,6 @@ class SponsorForm(forms.ModelForm):
             'rate',
             'message',
             'amount',
-            'pay_type',
             'imp_uid',
             'merchant_uid'
         ]

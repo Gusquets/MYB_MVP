@@ -22,10 +22,6 @@
         <label for="id_message">함께 전할 메세지(선택)</label>
         {% bootstrap_field form.message form_group_class='mb-3' placeholder='함께 전할 메시지가 있나요?' show_label=False %}
     </div>
-    <div class="col-12">
-        <label for="id_pay_type">결제수단</label>
-        {% bootstrap_field form.pay_type form_group_class='mb-3' show_label=False %}
-    </div>
     {% bootstrap_field form.user %}
     {% bootstrap_field form.artist %}
     {% bootstrap_field form.imp_uid %}

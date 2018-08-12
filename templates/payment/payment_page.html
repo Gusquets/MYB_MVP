@@ -19,7 +19,8 @@ $('#sponsor_create_btn').on('click',(function(e) {
         e.preventDefault();
         var $form = $('#sponsor_create_form');
         var params = {
-            pg : $form.find('[name=pay_type]').val(),
+            //pg : $form.find('[name=pay_type]').val(),
+            pg: 'html5_inicis',
             name: '{{ artist.name }}',
             amount: $form.find('[name=amount]').val(),
             merchant_uid: '{{ merchant_uid }}',
