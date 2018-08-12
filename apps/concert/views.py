@@ -42,21 +42,19 @@ class ConcertCreateComplete(AbnormalUserMixin, TemplateView):
 class ConcertList(AbnormalUserMixin, ListView):
     model = Concert
     template_name = 'concert/concert_list.html'
-    paginate_by = 9
+    paginate_by = 2
 
     name = 'concert_list'
 
     def get_queryset(self):
         q = self.request.GET.get('q', '')
         sort = self.request.GET.get('sorted', '')
-        date = self.request.GET.get('date', '')
-        location = self.request.GET.get('location', '')
 
         if self.request.path == '/concert/list/basket/':
             if self.request.user.is_authenticated:
                 obj_list = Basket.objects.all().filter(user = self.request.user, artist__isnull = True)
                 if q:
-                    obj_list = obj_list.filter(concert__artist__name__icontains=q)
+                    obj_list = obj_list.filter(Q(concert__artist__name__icontains=q) | Q(concert__location_1__icontains=q))
                 if sort == 'time':
                     obj_list = obj_list.order_by('-concert__date')
                 elif sort == 'rate':
@@ -67,14 +65,14 @@ class ConcertList(AbnormalUserMixin, ListView):
             artist = Artist.objects.get(id = self.kwargs['pk'])
             obj_list = self.model.objects.filter(artist = artist)
             if q:
-                obj_list = obj_list.filter(artist__name__icontains=q)
+                obj_list = obj_list.filter(Q(artist__name__icontains=q) | Q(location_1__icontains=q))
             if sort == 'time':
                 obj_list = obj_list.order_by('-date')
 
         else:
             obj_list = self.model.objects.all()
             if q:
-                obj_list = obj_list.filter(artist__name__icontains=q)
+                obj_list = obj_list.filter(Q(artist__name__icontains=q) | Q(location_1__icontains=q))
 
             if sort == 'time':
                 obj_list = obj_list.order_by('-date')
