@@ -109,3 +109,7 @@ def artist_image_upload_to_3(instance, filename):
 class ArtistImagesTemp(models.Model):
     user = models.ForeignKey(User, verbose_name = '유저', on_delete=models.CASCADE)
     image = models.ImageField('사진 1', upload_to=artist_image_upload_to_3)
+
+    class Meta:
+        verbose_name = '아티스트 사진 임시저장'
+        verbose_name_plural = '아티스트 사진 임시저장'
