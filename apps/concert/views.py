@@ -42,7 +42,7 @@ class ConcertCreateComplete(AbnormalUserMixin, TemplateView):
 class ConcertList(AbnormalUserMixin, ListView):
     model = Concert
     template_name = 'concert/concert_list.html'
-    paginate_by = 2
+    paginate_by = 10
 
     name = 'concert_list'
 
@@ -87,6 +87,7 @@ class ConcertList(AbnormalUserMixin, ListView):
         context['date'] = self.request.GET.get('date', '')
         context['location'] = self.request.GET.get('location', '')
         context['sorted'] = self.request.GET.get('sorted', '')
+        context['page'] = self.request.GET.get('page','')
         if self.kwargs.get('pk',''):
             context['list_artist'] = Artist.objects.get(id = self.kwargs['pk'])
         if self.request.path.find('movie') > 0:
