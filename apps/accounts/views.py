@@ -116,9 +116,11 @@ class ArtistCreate(CreateView):
                 artist.movie_3 = "https://www.youtube.com/embed/" + movie_id
 
         self.request.user.artist = artist
-
-        images = ArtistImagesTemp.objects.filter(user = self.request.user)
-        artist.image = images.first().image
+        while True:
+            images = ArtistImagesTemp.objects.filter(user = self.request.user)
+            if images:
+                break;
+        artist.image = ArtistImagesTemp.objects.filter(user = self.request.user).first().image
         for f in images:
             ArtistImages.objects.create(artist = artist, image = f.image)
         
@@ -162,7 +164,7 @@ class PasswordResetConfirmView(BasePasswordResetConfirmView):
 class ArtistList(AbnormalUserMixin, ListView):
     model = Artist
     template_name = 'accounts/artist_list.html'
-    paginate_by = 9
+    paginate_by = 10
 
     name = 'artist_list'
 
