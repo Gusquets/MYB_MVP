@@ -62,7 +62,6 @@ class ArtistCreateForm(forms.ModelForm):
         fields = [
             'name',
             'description',
-            'image',
             'movie_1',
             'movie_2',
             'movie_3',
@@ -74,9 +73,6 @@ class ArtistCreateForm(forms.ModelForm):
             'description': forms.Textarea(attrs={
                 'rows': 3,
             }),
-            'image': forms.ClearableFileInput(attrs={
-                'multiple': True,
-            })
         }
 
 

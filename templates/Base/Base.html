@@ -15,14 +15,14 @@
 
     <link rel="stylesheet" href="{% static "plugins/jquery-ui/css/jquery-ui.min.css" %}">
     <link rel="stylesheet" href="{% static "plugins/jquery-ui/css/jquery-ui.theme.min.css" %}">
+    <link rel="stylesheet" href="{% static "plugins/file-input/css/fileinput.min.css" %}">
 
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     <!-- CUSTOM CSS -->
 
     <!-- 폰트 어썸 -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"></head>
 <body>
     <!-- 네비게이션바 추가 -->
     {% block nav %}
@@ -54,6 +54,10 @@
     <script src="{% static "js/scrollify.js" %}"></script>
     <script src="{% static "plugins/jquery/jquery.form.min.js" %}"></script>
     <script src="{% static "plugins/jquery-ui/js/jquery-ui.min.js" %}"></script>
+    <script src="{% static "plugins/file-input/js/plugins/piexif.min.js" %}"></script>
+    <script src="{% static "plugins/file-input/js/plugins/sortable.min.js" %}"></script>
+    <script src="{% static "plugins/file-input/js/plugins/purify.min.js" %}"></script>
+    <script src="{% static "plugins/file-input/js/fileinput.min.js" %}"></script>
     {% block extrajs %}
     {% endblock %}
     <script>

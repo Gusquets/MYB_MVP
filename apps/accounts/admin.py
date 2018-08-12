@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils.safestring import mark_safe
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserCreationForm
-from .models import Artist, ArtistImages
+from .models import Artist, ArtistImages, ArtistImagesTemp
 User = get_user_model()
 
 
@@ -85,3 +85,8 @@ class ArtistImagesAdmin(admin.ModelAdmin):
     list_display = ['artist']
     list_display_links = ['artist']
     search_fields = ['artist__name']
+
+
+@admin.register(ArtistImagesTemp)
+class ArtistImagesTempAdmin(admin.ModelAdmin):
+    list_display = ['user']

@@ -102,3 +102,10 @@ class ArtistImages(models.Model):
     class Meta:
         verbose_name = '아티스트 사진'
         verbose_name_plural = '아티스트 사진'
+
+
+def artist_image_upload_to_3(instance, filename):
+    return '/'.join([instance.user.nickname, 'images/', filename])
+class ArtistImagesTemp(models.Model):
+    user = models.ForeignKey(User, verbose_name = '유저', on_delete=models.CASCADE)
+    image = models.ImageField('사진 1', upload_to=artist_image_upload_to_3)

@@ -1,3 +1,5 @@
+import json
+from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login as auth_login
 from django.contrib.auth.tokens import default_token_generator
@@ -11,12 +13,13 @@ from django.urls import reverse_lazy, reverse
 from django.utils.http import urlsafe_base64_decode
 from django.views.generic import CreateView, RedirectView, UpdateView, FormView, TemplateView, ListView, DetailView
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 from allauth.socialaccount.models import SocialApp
 from allauth.socialaccount.templatetags.socialaccount import get_providers
 
 from .forms import UserCreateForm, ArtistCreateForm, UserUpdateForm, SetPasswordForm, PasswordChangeForm
-from .models import Artist, ArtistImages
+from .models import Artist, ArtistImages, ArtistImagesTemp
 from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin, AbnormalUserMixin
 from apps.preference.models import Basket, Review
 from apps.payment.models import Sponsor
@@ -114,15 +117,34 @@ class ArtistCreate(CreateView):
 
         self.request.user.artist = artist
 
-        files = self.request.FILES.getlist('image')
-        for f in files:
-            ArtistImages.objects.create(artist = artist, image = f)
+        images = ArtistImagesTemp.objects.filter(user = self.request.user)
+        artist.image = images.first().image
+        for f in images:
+            ArtistImages.objects.create(artist = artist, image = f.image)
         
         artist.save()
         
         self.request.user.save()
         return response
 
+@csrf_exempt
+def artist_image_temp(request):
+    user = User.objects.get(id = request.POST.get('user_id'))
+    ArtistImagesTemp.objects.create(user = user, image = request.FILES.get('image'))
+
+    context = {'message': '사진이 등록되었습니다.'}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+@csrf_exempt
+def artist_image_delete(request):
+    image_id = request.POST.get('id')
+
+    ArtistImages.objects.filter(id = image_id).delete()
+
+    context = {'message': '사진이 삭제되었습니다.'}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 class UserCreateComplete(AbnormalUserMixin, TemplateView):
     template_name = 'registration/user_create_complete.html'
@@ -200,18 +222,25 @@ class ArtistUpdate(ArtistRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['images'] = self.object.artistimages_set.all()
-
+        i = 1
+        for image in self.object.artistimages_set.all():
+            context_name = 'url_'+str(i)
+            context[context_name] = image
+            i += 1
+        context['images_count'] = len(self.object.artistimages_set.all())
+        context['images_temp_id'] = ArtistImagesTemp.objects.filter(user = self.request.user).order_by('-id').first().id
         return context
     
     def form_valid(self, form):
         response = super().form_valid(form)
         artist = self.object
 
-        files = self.request.FILES.getlist('image')
-        for f in files:
-            ArtistImages.objects.create(artist = artist, image = f)
-        
+        images_temp_id = self.request.POST.get('images_temp_id')
+        if ArtistImagesTemp.objects.filter(user = self.request.user, id__gt = images_temp_id).exists():
+            images = ArtistImagesTemp.objects.filter(user = self.request.user, id__gt = images_temp_id)
+            for f in images:
+                ArtistImages.objects.create(artist = artist, image = f.image)
+                
         images = self.object.artistimages_set.all().order_by('id')
 
         if len(images) > 5:

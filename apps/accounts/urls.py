@@ -27,6 +27,8 @@ urlpatterns = [
     path('artist/detail/<int:pk>/', views.ArtistDetail.as_view(), name = 'artist_detail'),
     path('artist/update/<int:pk>/', views.ArtistUpdate.as_view(), name = 'artist_update'),
     path('artist/landing/<int:pk>/', views.ArtistLanding.as_view(), name = 'artist_landing'),
+    path('artist/image/temp/', views.artist_image_temp, name = 'artist_image_temp'),
+    path('artist/image/delete/', views.artist_image_delete, name = 'artist_image_delete'),
 
     path('artist/needed/', views.ArtistNeeded.as_view(), name = 'artist_needed'),
 ]

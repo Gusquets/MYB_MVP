@@ -19,7 +19,13 @@
                     <label for="id_description" class="txt-black">간단한 소개</label><br>
                     {% bootstrap_field form.description  form_group_class='col-12 p-0' show_label=False placeholder='간단한 소개' %}
                     <label for="id_image" class="txt-black">사진 (최대 5장)</label><br>
-                    {% bootstrap_field form.image form_group_class='col-12 p-0 w-100 txt-black mb-2 ' show_label=False %}
+                    <div class="col-12 p-0 w-100 txt-black mb-2 is-invalid">
+                        <div class="row bootstrap4-multi-input">
+                            <div class="col-12">
+                                <input type="file" name="image" multiple class="is-invalid" required id="id_image">
+                            </div>
+                        </div>
+                    </div>
                     <label for="id_movie_1" class="txt-black">영상 (최대 3개)</label><br>
                     <span>Youtube영상 우클릭 후 '</span>
                     {% bootstrap_field form.movie_1 form_group_class='col-12 p-0' show_label=False placeholder='youtube 영상주소 1' %}
@@ -50,6 +56,19 @@
     $('#id_movie_2').removeClass('mb-4');
     $('#id_social_fb').removeClass('mb-4');
     $('#id_social_youtube').removeClass('mb-4');
+    $("#id_image").fileinput({
+        uploadUrl: '{% url "artist_image_temp" %}',
+        uploadExtraData: {user_id: {{ request.user.id }}},
+        required: true,
+        showUpload: false,
+        msgFilerequired: '사진을 선택해주세요',
+        minFileCount: 1,
+        maxFileCount: 5,
+        msgFilesTooLess: '최소한 {n}장의 사진을 등록해야 합니다.',
+        msgFilesTooMany: '사진이 {n}장 선택되었습니다. 사진은 최대 {m}장 까지 등록가능합니다.',
+        allowedFileTypes: ['image'],
+        msgInvalidFileType: '이미지 파일만 등록할 수 있습니다.',
+    });
     $(function(){
         $("input[type='submit']").click(function(e){
             e.preventDefault();
@@ -59,12 +78,18 @@
             var movie_3 = $("input[name='movie_3']").val();
             console.log(movie_1);
             if (parseInt($fileUpload.get(0).files.length)>5 || parseInt($fileUpload.get(0).files.length)<1){
-             alert("사진은 1장이상, 최대 5장까지 등록할 수 있습니다.");
+                alert("사진은 1장이상, 최대 5장까지 등록할 수 있습니다.");
             }
             if (!movie_1 && !movie_2 && !movie_3){
                 alert("영상 주소를 1개이상 등록해 주세요.");
             }
             if(parseInt($fileUpload.get(0).files.length)>=1 && parseInt($fileUpload.get(0).files.length) <=5 && (movie_1 || movie_2 || movie_3)){
+                $('button[title="Upload file"').trigger('click');
+                while (true){
+                    if(!$('button[title="Not uploaded yet"').length){
+                        break;
+                    }
+                }
                 $('#artist_create').submit();
             }
         });    
