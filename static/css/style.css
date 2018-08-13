@@ -123,6 +123,34 @@ input[type='checkbox'] {
     max-width:100%;
 }
 */
+
+.detail-img-main{
+    max-width : 100%;
+    max-height : 400px;
+}
+
+.img_list_container{
+    display : inline-block;
+    margin-right : 1rem;
+}
+
+.img_list{
+    width : 90px;
+    height : 90px;
+}
+
+@media(max-width : 600px){
+    .img_list_container{
+        margin-right : 5px;
+    }
+
+    .img_list{
+        width : 60px;
+        height : 60px;
+    }
+
+}
+
 .slider input[name='slide_switch'] {
     display: none;
 }

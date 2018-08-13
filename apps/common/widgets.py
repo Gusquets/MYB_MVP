@@ -8,7 +8,7 @@ class NaverMapPointWidget(forms.TextInput):
 
     def render(self, name, value, attrs):
         width = str(self.attrs.get('width', 800))
-        height = str(self.attrs.get('height', 600))
+        height = str(self.attrs.get('height', 400))
         if width.isdigit(): width += 'px'
         if height.isdigit(): height += 'px'
 
