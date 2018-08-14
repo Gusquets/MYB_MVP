@@ -27,10 +27,6 @@ var marker = new naver.maps.Marker({
     position: base_point,
     map: map
 });
-naver.maps.Event.addListener(map, 'click', function(e) {
-    marker.setPosition(e.coord);
-    document.getElementById('{{ id }}').value = e.coord.lng() + ',' + e.coord.lat();
-});
 function searchAddressToCoordinate(address) {
     naver.maps.Service.geocode({
         address: address

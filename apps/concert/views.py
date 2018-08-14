@@ -7,7 +7,7 @@ from django.db.models import Q
 from apps.common.mixins import LoginRequiredMixin, ArtistRequiredMixin, AbnormalUserMixin
 from apps.preference.models import Basket
 from apps.accounts.models import Artist
-from .forms import ConcertCreateForm
+from .forms import ConcertCreateForm, ConcertCreateForm2
 from .models import Concert
 
 class ConcertCreate(LoginRequiredMixin, ArtistRequiredMixin, SuccessMessageMixin, CreateView):
@@ -101,7 +101,7 @@ class ConcertList(AbnormalUserMixin, ListView):
 class ConcertDetail(AbnormalUserMixin, DetailView, UpdateView):
     template_name = 'concert/concert_detail.html'
     model = Concert
-    form_class = ConcertCreateForm
+    form_class = ConcertCreateForm2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
