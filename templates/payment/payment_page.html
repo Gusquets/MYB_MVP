@@ -16,6 +16,10 @@
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
 $('#sponsor_create_btn').on('click',(function(e) {
+    if ($('#id_user_name').val() == ''){
+        alert('후원자 이름을 작성해 주세요.');
+    }
+    else{
         e.preventDefault();
         var $form = $('#sponsor_create_form');
         var params = {
@@ -26,7 +30,6 @@ $('#sponsor_create_btn').on('click',(function(e) {
             merchant_uid: '{{ merchant_uid }}',
             buyer_email: '{{ email }}',
             buyer_name: $form.find('[name=user_name]').val(),
-            merchant_uid: '{{ merchant_uid }}'
         };
 
         IMP.init('{{ iamport_shop_id }}');
@@ -45,7 +48,8 @@ $('#sponsor_create_btn').on('click',(function(e) {
 
                 $form.submit();
             }
-        });
+        })
+    };
     }));
 </script>
 {% endblock %}
