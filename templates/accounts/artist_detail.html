@@ -145,6 +145,17 @@
             return false;
         });
     });
+
+    $(document).ready(function(){
+                var a = $('#1').attr('src');
+                $('#main').attr('src', a);
+            });
+
+            $('.img_list').click(function(){
+                var img = $(this).attr('src');
+                $('#main').attr('src', img);
+            });
+
     $(function() {
         $(document).on('click', '.modal-form-btn-answer', function(e) {
             e.preventDefault();
@@ -201,4 +212,7 @@
         });
     });
 </script>
+<script>
+
+        </script>
 {% endblock %}

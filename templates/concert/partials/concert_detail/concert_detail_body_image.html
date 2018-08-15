@@ -134,17 +134,6 @@
 
 
             </script>
-            <script>
-                $(document).ready(function(){
-                    var a = $('#1').attr('src');
-                    $('#main').attr('src', a);
-                });
-
-                $('.img_list').click(function(){
-                    var img = $(this).attr('src');
-                    $('#main').attr('src', img);
-                });
-            </script>
             </div>
     {% empty %}
         <div class="col-12 mb-2 txt-center">
@@ -156,4 +145,15 @@
             <div class="_more txt-black"> 리뷰 더보기 + </div>
         </a>
     </div>
+    <script>
+        $(document).ready(function(){
+            var a = $('#1').attr('src');
+            $('#main').attr('src', a);
+        });
+
+        $('.img_list').click(function(){
+            var img = $(this).attr('src');
+            $('#main').attr('src', img);
+        });
+    </script>
 </div>
