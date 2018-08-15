@@ -36,6 +36,7 @@
                     {% bootstrap_field form.social_fb form_group_class='col-12 p-0' show_label=False placeholder='페이스북' %}
                     {% bootstrap_field form.social_youtube form_group_class='col-12 p-0' show_label=False placeholder='유튜브' %}
                     {% bootstrap_field form.social_insta form_group_class='col-12 p-0' show_label=False placeholder='인스타그램' %}
+                    <input type="hidden" name="image_count" id="id_image_count">
 
                     <div class="Signup_submit">
                     <input type="submit" value="회원가입하기" class="btn btn-primary">
@@ -76,6 +77,7 @@
             var movie_1 = $("input[name='movie_1']").val();
             var movie_2 = $("input[name='movie_2']").val();
             var movie_3 = $("input[name='movie_3']").val();
+            $('#id_image_count').val(($('button[title="View Details"]').length)/2);
             console.log(movie_1);
             if (parseInt($fileUpload.get(0).files.length)>5 || parseInt($fileUpload.get(0).files.length)<1){
                 alert("사진은 1장이상, 최대 5장까지 등록할 수 있습니다.");
@@ -84,9 +86,9 @@
                 alert("영상 주소를 1개이상 등록해 주세요.");
             }
             if(parseInt($fileUpload.get(0).files.length)>=1 && parseInt($fileUpload.get(0).files.length) <=5 && (movie_1 || movie_2 || movie_3)){
-                $('button[title="Upload file"').trigger('click');
+                $('button[title="Upload file"]').trigger('click');
                 while (true){
-                    if(!$('button[title="Not uploaded yet"').length){
+                    if(!$('button[title="Not uploaded yet"]').length){
                         break;
                     }
                 }

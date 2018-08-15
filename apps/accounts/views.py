@@ -116,9 +116,10 @@ class ArtistCreate(CreateView):
                 artist.movie_3 = "https://www.youtube.com/embed/" + movie_id
 
         self.request.user.artist = artist
+        image_count = self.request.POST.get('image_count');
         while True:
             images = ArtistImagesTemp.objects.filter(user = self.request.user)
-            if images:
+            if images and len(images) == int(image_count):
                 break;
         artist.image = ArtistImagesTemp.objects.filter(user = self.request.user).first().image
         for f in images:
