@@ -42,9 +42,9 @@ class ArtistRequiredMixin(AccessMixin):
             return self.request.META.get('HTTP_REFERER', '/')
     
     def dispatch(self, request, *args, **kwargs):
-        if request.user.usertype == 2 and not request.user.artist:
+        if request.user.is_authenticated and request.user.usertype == 2 and not request.user.artist:
             return redirect('artist_needed')
-        if request.user.is_authenticated and request.user.is_authenticated and request.user.usertype == 2:
+        if request.user.is_authenticated and request.user.usertype == 2:
             return super().dispatch(request, *args, **kwargs)
         return self.handle_no_permission()
 
