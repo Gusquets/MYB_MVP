@@ -1000,7 +1000,7 @@ display: none !important;
     }
 
     .Signup-agree {
-        font-size : 15px;
+        font-size : 14px;
     }
 }
 
@@ -1041,7 +1041,7 @@ display: none !important;
     }
 
     .Signup-agree {
-        font-size : 15px;
+        font-size : 14px;
     }
 }
 
@@ -1479,3 +1479,56 @@ display: none !important;
 .container {
     min-width : 0px !important;
  }
+
+/* 마이페이지 모바일 버튼 */
+
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    display : none;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight : bold;
+}
+
+.sidenav a {
+    text-decoration: none;
+    padding-top : 20px;
+    padding-bottom : 20px;
+    font-size: 17px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#mypage_mobile_toggle{
+    position : fixed;
+    width : 30px;
+    right : 0;
+    z-index : 29;
+    top : 47%;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

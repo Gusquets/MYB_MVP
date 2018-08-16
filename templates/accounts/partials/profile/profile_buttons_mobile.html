@@ -1,3 +1,33 @@
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="col _pd-10">
+        <a class="txt-black py-2" href="{% url "preference:my_basket" %}">나의 찜</a>
+    </div>
+    <div class="col">
+        <a class="txt-black py-2" href="{% url "preference:my_review" %}">내 후기</a>
+    </div>
+    <div class="col">
+        <a class="txt-black py-2" href="{% url "payment:sponsor_list" %}">내 후원</a>
+    </div>
+    <div class="col">
+        <a class="txt-black py-2" href="{% url "user_update" %}">정보수정</a>
+    </div>
+    {% if request.user.usertype == 2 %}
+    <div class="col">
+        <a class="txt-black py-2" href="{% url "artist_update" request.user.artist.id %}">아티스트정보 수정</a>
+    </div>
+    <div class="col">
+        <a class="txt-black py-2" href="{% url "concert:concert_create" %}">공연 등록</a>
+    </div>
+    <div class="col">
+        <a class="txt-black py-2" href="{% url "payment:sponsor_list_to" %}">내게 전달된 후원</a>
+    </div>
+    {% endif %}
+</div>
+
+<div style="font-size:30px;cursor:pointer" onclick="openNav()" id="mypage_mobile_toggle"> < </div>
+
+<!--
 <div class="row">
     <div class="col _pd-10">
         <a class="txt-black" href="{% url "preference:my_basket" %}">나의 찜</a>
@@ -23,3 +53,14 @@
     </div>
     {% endif %}
 </div>
+-->
+
+
+<script>
+    function openNav() {
+        $("#mySidenav").css("display", "block")
+    }
+    function closeNav() {
+        $('#mySidenav').css("display", "none")
+    }
+</script>
