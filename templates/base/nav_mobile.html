@@ -37,7 +37,7 @@
         <div class="auth-group">
             {% if user.is_authenticated %}
             <div class="auth">
-                <a href="{% url "profile" %}">{{ request.user.nickname }}님</a>
+                <a href="{% url "profile" %}">마이페이지</a>
             </div>
             <div class="auth">
                 <a href="{% url "logout" %}?next={{ request.path }}">로그아웃 </a>
