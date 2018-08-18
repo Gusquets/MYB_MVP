@@ -42,7 +42,7 @@
         후기쓰기
     </a>
     {% endif %}
-    <a class="col-4 artist-mobile-buttons pt-3 pb-3 btn-secondary txt-bold" href="https://qr.kakaopay.com/2810060110000919228448315dc03518" target="_blank">
+    <a class="col-4 artist-mobile-buttons pt-3 pb-3 btn-secondary txt-bold" href="{% url "payment:sponsor_create" concert.artist.id %}">
         후원하기
     </a>
 </div>
