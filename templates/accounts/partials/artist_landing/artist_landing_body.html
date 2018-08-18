@@ -1,13 +1,13 @@
 <div>
     <a href="{% url "artist_detail" artist.id %}">
-        <div class="py-5 txt-center" style="background: #f1c40f;">
+        <div class="pt-5 pb-4 txt-center" style="background: #fffff5;">
             <h2 class="txt-black txt-bold">아티스트 더 알아보기</h2>
             <p class="txt-black">이 아티스트 궁금하지 않으신가요?</p>
         </div>
     </a>
     {% if request.user.is_authenticated %}
     <a id="review_btn" class="modal-form-btn" href="{% url "preference:review_create" artist.id %}" data-toggle="modal" data-target="#review_create">
-        <div class="py-5 txt-center" style="background: #73b2dc;">
+        <div class="py-5 txt-center" style="background: #80d4f6;">
             <h2 class="txt-black txt-bold">후기쓰기</h2>
             <p class="txt-black">멋진 공연을 위해 노력한 아티스트에게<br/>
             응원의 한마디는 큰 힘이됩니다!</p>
@@ -15,21 +15,26 @@
     </a>
     {% else %}
     <a href="{% url "login"%}">
-        <div class="py-5 txt-center" style="background: #73b2dc;">
+        <div class="py-5 txt-center" style="background: #80d4f6;">
             <h2 class="txt-black txt-bold">후기쓰기</h2>
             <p class="txt-black">멋진 공연을 위해 노력한 아티스트에게<br/>
-            응원의 한마디는 큰 힘이됩니다!</p>
+                응원의 한마디는 큰 힘이됩니다!</p>
         </div>
     </a>
     {% endif %}
+    <!-- PG사 연동 전 카카오페이 대체
     <a href="{% url "payment:sponsor_create" artist.id %}">
-        <div class="py-5 txt-center" style="background: #deb7ed;">
+    -->
+    <a href="https://qr.kakaopay.com/2810060110000919228448315dc03518" target="_blank">
+
+        <div class="pt-5 pb-3 txt-center" style="background: #ffda8e;">
             <h2 class="txt-black txt-bold">후원하기</h2>
-            <p class="txt-black">아티스트에게 후원과 <응원의></응원의> 메세지를 전하고<br/>
-            감사 인사 & 리액션을 받아보세요!</p>
+            <p class="txt-black">멋진 공연을 한 아티스트에게<br/>
+            '카카오페이'로 간편하게 후원을 전해주세요</p>
+            <p class="txt-black txt-pre" style="font-size : 12px;">렉이 걸릴 경우 우측하단의 '카카오페이 바로가기'를 눌러주세요
+예금주 : 마이버스커(강구헌)
+
+            </p>
         </div>
     </a>
 </div>
-<!-- 후원 대체
-<a href="https://qr.kakaopay.com/2810060110000919228448315dc03518" target="_blank">
--->
