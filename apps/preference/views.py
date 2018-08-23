@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import CreateView, TemplateView, ListView
+from django.views.generic import CreateView, TemplateView, ListView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.urls import reverse, reverse_lazy
@@ -173,6 +173,37 @@ class ReviewCreate(LoginRequiredMixin, CreateView):
         artist.save()
 
         response = super().form_valid(form)
+
+        return response
+
+
+class ReviewUpdate(LoginRequiredMixin, UpdateView):
+    model = Review
+    form_class = ReviewForm
+
+    def get_queryset(self):
+            return Review.objects.filter(id = self.kwargs['pk'])
+
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return ['preference/review/_review_create.html']
+        return ['preference/review/review_create.html']
+    
+    def get_success_url(self):
+        return reverse('preference:artist_review', kwargs = {'pk': self.object.artist.id})
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        artist = Artist.objects.get(id = self.kwargs['artist_id'])
+        rates_review = Review.objects.all().filter(artist = artist)
+        rates_sponsor = Sponsor.objects.all().filter(artist = artist)
+        rates_list = []
+        for rate  in rates_review:
+            rates_list.append(rate.rate)
+        for rate in rates_sponsor:
+            rates_list.append(rate.rate)
+        artist.rate_avg = sum(rates_list) / len(rates_list)
+        artist.save()
 
         return response
 
