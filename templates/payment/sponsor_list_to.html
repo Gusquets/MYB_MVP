@@ -44,6 +44,24 @@
         });
     });
     $(function() {
+        $('.review-delete').click(function(e) {
+            e.preventDefault();
+            var delete_yn = confirm('정말 삭제하시겠습니까?');
+            if (delete_yn){
+                $.get($(this).attr('href'))
+                .done(function(response) {
+                    alert(response.message);
+                    location.reload();
+                })
+                .fail(function(response) {
+                    console.log('문제가 발생하였습니다. 다시 시도해 주세요.');
+                    console.log(response);
+                });
+                return false;
+            }
+        });
+    });
+    $(function() {
         $(document).on('click', '.modal-form-btn-answer', function(e) {
             e.preventDefault();
 

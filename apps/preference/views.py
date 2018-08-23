@@ -177,6 +177,18 @@ class ReviewCreate(LoginRequiredMixin, CreateView):
         return response
 
 
+def review_delete(request, pk):
+    try:
+        Review.objects.filter(id = pk).delete()
+        message = '삭제하였습니다.'
+    except:
+        message = '오류가 발생하여 삭제하지 못하였습니다.'
+    
+    context = {'message': message}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+
 class AnswerCreate(AbnormalUserMixin, CreateView):
     model = Answer
     form_class = AnswerForm

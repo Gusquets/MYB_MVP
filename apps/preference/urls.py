@@ -16,6 +16,7 @@ urlpatterns = [
     path('artist/review/<int:pk>', views.ArtistReview.as_view(), name='artist_review'),
 
     path('review/create/<int:artist_id>/', views.ReviewCreate.as_view(), name = 'review_create'),
+    path('review/delete/<int:pk>/', views.review_delete, name = 'review_delete'),
 
     path('answer/create/<int:review_id>/<int:redirect>/', views.AnswerCreate.as_view(), name = 'answer_create'),
 ]

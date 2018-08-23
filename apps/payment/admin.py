@@ -8,7 +8,7 @@ from .models import Sponsor
 class SponsorAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'artist', 'amount', 'status_html', 'paid_at', 'receipt_link']
     list_display_links = ['id', 'user', 'artist']
-    search_fields = ['artist']
+    search_fields = ['artist__name']
     list_filter = ['amount', 'status']
     actions = ['do_update', 'do_cancel']
 
