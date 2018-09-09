@@ -86,7 +86,7 @@
                 alert("영상 주소를 1개이상 등록해 주세요.");
             }
             if(parseInt($fileUpload.get(0).files.length)>=1 && parseInt($fileUpload.get(0).files.length) <=5 && (movie_1 || movie_2 || movie_3)){
-                $('button[title="Upload file"]').trigger('click');
+                $('button[title="Upload file"]').click();
                 while (true){
                     if(!$('button[title="Not uploaded yet"]').length){
                         break;
