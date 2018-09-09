@@ -183,6 +183,16 @@
             });
         });
 
+        $(document).ready(function(){
+                var a = $('#1').attr('src');
+                $('#main').attr('src', a);
+            });
+
+            $('.img_list').click(function(){
+                var img = $(this).attr('src');
+                $('#main').attr('src', img);
+            });
+
         $(document).on('submit', '.modal-form-modal-answer form', function(e) {
             e.preventDefault();
 
