@@ -35,7 +35,7 @@
         <div class="card">
             <div class="card-body">
                 <p class="txt-bold">아티스트의 한마디</p>
-                <h2>{{ concert.description }}</h2>
+                <span>{{ concert.description | linebreaks }}</span>
             </div>
         </div>
     </div>
@@ -145,15 +145,4 @@
             <div class="_more txt-black"> 리뷰 더보기 + </div>
         </a>
     </div>
-    <script>
-        $(document).ready(function(){
-            var a = $('#1').attr('src');
-            $('#main').attr('src', a);
-        });
-
-        $('.img_list').click(function(){
-            var img = $(this).attr('src');
-            $('#main').attr('src', img);
-        });
-    </script>
 </div>

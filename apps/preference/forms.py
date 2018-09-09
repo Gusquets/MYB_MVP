@@ -10,6 +10,11 @@ class ReviewForm(forms.ModelForm):
             'description',
         ]
 
+class DeleteForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = []
+
 
 class AnswerForm(forms.ModelForm):
     class Meta:
