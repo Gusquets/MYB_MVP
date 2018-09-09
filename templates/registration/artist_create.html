@@ -77,8 +77,8 @@
             var movie_1 = $("input[name='movie_1']").val();
             var movie_2 = $("input[name='movie_2']").val();
             var movie_3 = $("input[name='movie_3']").val();
+            var complete = $('div[title="Uploaded"]').length;
             var image_count = ($('button[title="View Details"]').length)/2;
-            console.log(image_count);
             $('#id_image_count').val(($('button[title="View Details"]').length)/2);
 
             if (image_count>5 || image_count<1){
@@ -88,7 +88,13 @@
                 alert("영상 주소를 1개이상 등록해 주세요.");
             }
             if(image_count>=1 && image_count <=5 && (movie_1 || movie_2 || movie_3)){
-                $('button[title="Upload file"]').click();
+                if(complete > 0 && !(complete == image_count)){
+                    var btn = $('button[title="Upload file"]').filter(function(index){
+                        return index % 2 == 0 && !$(this).attr('style');
+                    });
+                    btn.click();
+                }
+                else{$('button[title="Upload file"]').click();}
                 while (true){
                     if(!$('button[title="Not uploaded yet"]').length){
                         break;
