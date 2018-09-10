@@ -1251,6 +1251,16 @@ display: none !important;
 .mb_sub_search{
     margin : auto;
 }
+
+.artist-list-des{
+    overflow: hidden;
+    white-space: normal;
+    max-height: 5em;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
 @media(max-width : 576px){
     .mb_filter_menu{
         padding-left: 0;
@@ -1532,3 +1542,4 @@ display: none !important;
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
