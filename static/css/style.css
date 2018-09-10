@@ -1265,6 +1265,7 @@ display: none !important;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+
 @media(max-width : 576px){
     .mb_filter_menu{
         padding-left: 0;
@@ -1284,6 +1285,10 @@ display: none !important;
     padding-bottom : 10px;
     margin-top : 5px;
     cursor : pointer;
+}
+
+.card-body p{
+    margin : 0;
 }
 
 ._selected{
