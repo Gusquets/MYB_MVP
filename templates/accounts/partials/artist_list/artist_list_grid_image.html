@@ -13,7 +13,7 @@
                 <div class="img-list" style="background-image : url({{ artist.image.url }})">
                 </div>
                 <div class="mt-3"><strong>{{ artist.name }}</strong></div>
-                <div class="mt-3">{{ artist.description }}</div>
+                <div class="mt-3 artist-list-des">{{ artist.description }}</div>
                 <div id="rate-{{ artist.id }}" class="mt-3"></div>
                 <script>
                     for(var i=0; i < Math.round({{ artist.rate_avg }}); i++){
