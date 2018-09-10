@@ -89,12 +89,36 @@
             }
             if(image_count>=1 && image_count <=5 && (movie_1 || movie_2 || movie_3)){
                 if(complete > 0 && !(complete == image_count)){
+                    console.log('일부');
                     var btn = $('button[title="Upload file"]').filter(function(index){
                         return index % 2 == 0 && !$(this).attr('style');
                     });
-                    btn.click();
+                    console.log(btn);
+                    btn.each(function(index){
+                        $(this).click();
+                        while(true){
+                            if($(this).change()){
+                                break;
+                            }
+                        };
+                    })
+                    //btn.click();
                 }
-                else{$('button[title="Upload file"]').click();}
+                else{
+                    var btn = $('button[title="Upload file"]').filter(function(index){
+                        return index % 2 == 0;
+                    });
+                    console.log(btn);
+                    btn.each(function(index){
+                        $(this).click();
+                        while(true){
+                            if($(this).change()){
+                                break;
+                            }
+                        };
+                    })
+                    //$('button[title="Upload file"]').click();
+                }
                 while (true){
                     if(!$('button[title="Not uploaded yet"]').length){
                         break;
