@@ -124,6 +124,10 @@ input[type='checkbox'] {
 }
 */
 
+button[title="Upload file"]{
+    cursor: pointer !important;
+}
+
 .detail-img-main{
     max-width : 100%;
     max-height : 400px;
