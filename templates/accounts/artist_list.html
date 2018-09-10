@@ -26,3 +26,73 @@
     {% endif %}
 </div>
 {% endblock %}
+{% block extrajs %}
+<script>
+    $(function(){
+        var search_params = new URLSearchParams(window.location.search);
+        var current_page = search_params.get('page');
+        if (!current_page){
+            current_page = 1;
+        }
+        var search = search_params.get('q');
+        var sorted = search_params.get('sorted');
+        var image = $('.image').attr('href');
+        var movie = $('.movie').attr('href');
+
+        if (search && !sorted){
+            $('.pagination li a').each(function(index){
+                if ($(this).attr('href')){
+                    if(index == 0){
+                        $(this).attr({'href': '?q='+search+'&page='+ 1});
+                    }
+                    else{
+                        $(this).attr({'href': '?q='+search+'&page='+ index});
+                    }
+                }
+            })
+            $('.time').attr({'href': '?q='+search+'&page='+current_page+'&sorted=time'});
+            $('.rate').attr({'href': '?q='+search+'&page='+current_page+'&sorted=rate'});
+            $('.image').attr({'href': image+'?q='+search+'&page='+current_page});
+            $('.movie').attr({'href': movie+'?q='+search+'&page='+current_page});
+        }
+        else if (sorted && !search){
+            $('.pagination li a').each(function(index){
+                if ($(this).attr('href')){
+                    if(index == 0){
+                        $(this).attr({'href': '?sorted='+sorted+'&page='+ 1});
+                    }
+                    else{
+                        $(this).attr({'href': '?sorted='+sorted+'&page='+ index});
+                    }
+                }
+            })
+            $('.time').attr({'href': '?page='+current_page+'&sorted=time'});
+            $('.rate').attr({'href': '?page='+current_page+'&sorted=rate'});
+            $('.image').attr({'href': image+'?sorted='+sorted+'&page='+current_page});
+            $('.movie').attr({'href': movie+'?sorted='+sorted+'&page='+current_page});
+        }
+        else if(search && sorted){
+            $('.pagination li a').each(function(index){
+                if ($(this).attr('href')){
+                    if(index == 0){
+                        $(this).attr({'href': '?sorted='+sorted+'&page='+1+'&q='+search});
+                    }
+                    else{
+                        $(this).attr({'href': '?sorted='+sorted+'&page='+index+'&q='+search});
+                    }
+                }
+            })
+            $('.time').attr({'href': '?page='+current_page+'&sorted=time&q='+search});
+            $('.rate').attr({'href': '?page='+current_page+'&sorted=rate&q='+search});
+            $('.image').attr({'href': image+'?q='+search+'&page='+current_page+'&sorted='+sorted});
+            $('.movie').attr({'href': movie+'?q='+search+'&page='+current_page+'&sorted='+sorted});
+        }
+        else if(!search && !sorted){
+            $('.time').attr({'href': '?page='+current_page+'&sorted=time'});
+            $('.rate').attr({'href': '?page='+current_page+'&sorted=rate'});
+            $('.image').attr({'href': image+'?page='+current_page});
+            $('.movie').attr({'href': movie+'?page='+current_page});
+        }
+    })
+</script>
+{% endblock %}

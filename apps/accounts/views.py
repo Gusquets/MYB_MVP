@@ -165,7 +165,7 @@ class PasswordResetConfirmView(BasePasswordResetConfirmView):
 class ArtistList(AbnormalUserMixin, ListView):
     model = Artist
     template_name = 'accounts/artist_list.html'
-    paginate_by = 10
+    paginate_by = 12
 
     name = 'artist_list'
 

@@ -42,7 +42,7 @@ class ConcertCreateComplete(AbnormalUserMixin, TemplateView):
 class ConcertList(AbnormalUserMixin, ListView):
     model = Concert
     template_name = 'concert/concert_list.html'
-    paginate_by = 10
+    paginate_by = 12
 
     name = 'concert_list'
 

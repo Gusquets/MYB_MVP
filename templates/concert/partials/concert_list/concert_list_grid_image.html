@@ -1,10 +1,10 @@
 {% load bootstrap4 static %}
 <div class="col-12 col-md-3 offset-md-9 txt-right pb-2">
     <ul class="mb_filter_menu mobile-font-sm">
-        <li><a href="{{ request.path }}?sorted=time" {% if sorted == 'time' %}style="color:#009bfc;"{% endif %} class="txt-black">시간순</a></li>
+        <li><a href="?sorted=time" {% if sorted == 'time' %}style="color:#009bfc;"{% endif %} class="txt-black time">시간순</a></li>
         {% if not list_artist %}
         <li>|</li>
-        <li><a href="{{ request.path }}?sorted=rate" {% if sorted == 'rate' %}style="color:#009bfc;"{% endif %} class="txt-black">평점순</a></li>
+        <li><a href="?sorted=rate" {% if sorted == 'rate' %}style="color:#009bfc;"{% endif %} class="txt-black rate">평점순</a></li>
         {% endif %}
     </ul>
 </div>
