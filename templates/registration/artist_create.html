@@ -81,13 +81,13 @@
             var image_count = ($('button[title="View Details"]').length)/2;
             $('#id_image_count').val(($('button[title="View Details"]').length)/2);
 
-            if (image_count>5 || image_count<0){
+            if (image_count>5 || image_count<1){
                 alert("사진은 1장이상, 최대 5장까지 등록할 수 있습니다.");
             }
             if (!movie_1 && !movie_2 && !movie_3){
                 alert("영상 주소를 1개이상 등록해 주세요.");
             }
-            if(image_count>=0 && image_count <=5 && (movie_1 || movie_2 || movie_3)){
+            if(image_count>=1 && image_count <=5 && (movie_1 || movie_2 || movie_3)){
                 if(navigator.userAgent.match('iPhone')){
                     if(complete == image_count){
                         $('#artist_create').submit();
