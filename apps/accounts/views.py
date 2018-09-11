@@ -117,7 +117,7 @@ class ArtistCreate(CreateView):
 
         self.request.user.artist = artist
         image_count = self.request.POST.get('image_count');
-        if image_count == 0 or not self.request.FILES.getlist('image'):
+        if int(image_count) == 0:
             artist.image = ArtistImagesTemp.objects.filter(user = 1).first().image
         else:
             while True:
