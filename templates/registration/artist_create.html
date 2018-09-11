@@ -88,7 +88,7 @@
                 alert("영상 주소를 1개이상 등록해 주세요.");
             }
             if(image_count>=1 && image_count <=5 && (movie_1 || movie_2 || movie_3)){
-                if(navigator.userAgent.match('iPhone')){
+                if(navigator.userAgent.match('iPhone') || navigator.userAgent.match('iPad')){
                     if(complete == image_count){
                         $('#artist_create').submit();
                     }
