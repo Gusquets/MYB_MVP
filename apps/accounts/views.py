@@ -117,13 +117,16 @@ class ArtistCreate(CreateView):
 
         self.request.user.artist = artist
         image_count = self.request.POST.get('image_count');
-        while True:
-            images = ArtistImagesTemp.objects.filter(user = self.request.user)
-            if images and len(images) == int(image_count):
-                break;
-        artist.image = ArtistImagesTemp.objects.filter(user = self.request.user).first().image
-        for f in images:
-            ArtistImages.objects.create(artist = artist, image = f.image)
+        if image_count == 0 or not self.request.FILES.getlist('image'):
+            artist.image = ArtistImagesTemp.objects.filter(user = 1).first().image
+        else:
+            while True:
+                images = ArtistImagesTemp.objects.filter(user = self.request.user)
+                if images and len(images) == int(image_count):
+                    break;
+            artist.image = ArtistImagesTemp.objects.filter(user = self.request.user).first().image
+            for f in images:
+                ArtistImages.objects.create(artist = artist, image = f.image)
         
         artist.save()
         
