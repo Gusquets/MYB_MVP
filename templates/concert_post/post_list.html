@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="artist-list-section artist-list-mb_artist_list" style="height : 200px">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner txt-center pt-5">
+                <p class="artist-list-mb_sub_title">공연게시판</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="row container mx-auto pt-1">
+
+    {% for post in contacts %}
+     <div class="col-12 px-1">
+        <div class="card">
+            <a href="#post_content_{{ forloop.counter }}" class="txt-black" data-toggle="collapse" aria-expanded="false" aria-controls="post_content_{{ forloop.counter }}">
+            <div class="row card-header align-items-center pt-1 pb-1">
+                <div class ="col-12"> {{ post.title }}</div>
+                <div class="col-6"><small>{{ post.author }}</small></div>
+                <div class="col-6"><small>{{ post.created_at.time }}</small></div>
+            </div>
+            </a>
+                <div class="col-12 collapse px-0 py-1" id="post_content_{{ forloop.counter }}">
+                    <div class="card card-body">{{ post.content }}</div>
+                    <div class="card-header py-1">댓글</div>
+                    {% for a in post.return_comment %}
+                    <div class="card-header py-1">{{ a.author }} : {{ a.content }}</div>
+                    {% empty %}
+                    <div class="card card-body">댓글이 없습니다.</div>
+                    {% endfor %}
+                    <div class="txt-center">
+                        <a href="#post_content_{{ forloop.counter }}" class="txt-black txt-center" data-toggle="collapse" aria-expanded="false" aria-controls="post_content_{{ forloop.counter }}">접기</a>
+                    </div>
+                </div>
+             </div>
+     </div>
+
+    {% endfor %}
+    </div>
+
+    <div class="txt-center pt-3">
+        <a href="{% url 'concert_post:concert_post_create' %}"> <button class="btn btn-outline-primary">글쓰기</button></a>
+    </div>
+
+<div class="pagination mt-3">
+
+    <ul class="pagination mx-auto">
+    {% for page in page.page_range %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ forloop.counter }}" >
+                {{ forloop.counter }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

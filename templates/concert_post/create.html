@@ -1,0 +1,42 @@
+{% extends 'Base/Base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="artist-list-section artist-list-mb_artist_list" style="height : 200px">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner txt-center pt-5">
+                <p class="artist-list-mb_sub_title">글쓰기</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+     <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>
+            <button type="submit">저장</button>
+        </p>
+        {{ request.session.author }}
+    </form>
+-->
+    <form method="post" action="" class="form-group mt-4" style="margin:auto; max-width:500px;">
+        {% csrf_token %}
+        <label for="author">작성자</label>
+        {% if request.session.author %}
+            <input type="text" name="author" value='{{ request.session.author }}' id="author" class="form-control" required>
+        {% else %}
+            <input type="text" name="author" id="author" class="form-control" required>
+        {% endif %}
+        <label for="title" class="mt-1">제목</label>
+        <input type="text" name="title" id="title" class="form-control" required>
+        <label for="content" class="mt-1">내용</label>
+        <textarea name="content" id="content" class="form-control" rows="5" required></textarea>
+        <div class="txt-center mb-4">
+            <button type="submit" class="btn btn-primary mt-3">작성완료</button>
+        </div>
+    </form>
+{% endblock %}

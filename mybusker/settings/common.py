@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'apps.common',
     'apps.preference',
     'apps.payment',
+    'apps.board',
 ]
 
 MIDDLEWARE = [
