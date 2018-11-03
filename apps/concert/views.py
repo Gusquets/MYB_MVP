@@ -44,6 +44,7 @@ class ConcertList(AbnormalUserMixin, ListView):
     template_name = 'concert/concert_list.html'
     paginate_by = 12
 
+
     name = 'concert_list'
 
     def get_queryset(self):
@@ -53,6 +54,7 @@ class ConcertList(AbnormalUserMixin, ListView):
         if self.request.path == '/concert/list/basket/':
             if self.request.user.is_authenticated:
                 obj_list = Basket.objects.all().filter(user = self.request.user, artist__isnull = True)
+                obj_list = obj_list.order_by('-date')
                 if q:
                     obj_list = obj_list.filter(Q(concert__artist__name__icontains=q) | Q(concert__location_1__icontains=q))
                 if sort == 'time':
@@ -64,6 +66,7 @@ class ConcertList(AbnormalUserMixin, ListView):
         elif self.kwargs.get('pk',''):
             artist = Artist.objects.get(id = self.kwargs['pk'])
             obj_list = self.model.objects.filter(artist = artist)
+            obj_list = obj_list.order_by('-date')
             if q:
                 obj_list = obj_list.filter(Q(artist__name__icontains=q) | Q(location_1__icontains=q))
             if sort == 'time':
@@ -71,6 +74,7 @@ class ConcertList(AbnormalUserMixin, ListView):
 
         else:
             obj_list = self.model.objects.all()
+            obj_list = obj_list.order_by('-date')
             if q:
                 obj_list = obj_list.filter(Q(artist__name__icontains=q) | Q(location_1__icontains=q))
 

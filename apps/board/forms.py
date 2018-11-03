@@ -4,7 +4,7 @@ from .models import *
 class PostForm(forms.ModelForm):
     class Meta:
         model = ConcertPost
-        fields = ['author', 'title', 'content']
+        fields = ['author', 'content']
 
 class CommentForm(forms.ModelForm):
     class Meta:

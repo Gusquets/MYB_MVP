@@ -10,7 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="naver-site-verification" content="05b2ff208c9565dad41edc2988db9e88597d1273"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.png" %}"/>
-
+    {% block head %}
+    {% endblock %}
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -72,8 +73,10 @@
     <script src="{% static "plugins/file-input/js/plugins/sortable.min.js" %}"></script>
     <script src="{% static "plugins/file-input/js/plugins/purify.min.js" %}"></script>
     <script src="{% static "plugins/file-input/js/fileinput.min.js" %}"></script>
+
     {% block extrajs %}
     {% endblock %}
+
     <script>
         $('#search_btn').click(function(e) {
             e.preventDefault();

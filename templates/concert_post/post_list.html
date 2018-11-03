@@ -1,40 +1,82 @@
 {% extends 'base/base.html' %}
 {% load static %}
-
+{% block head %}
+    <style>
+        @-webkit-keyframes blinker {
+          from {opacity: 1.0;}
+          to {opacity: 0.0;}
+        }
+        .blink{
+            text-decoration: blink;
+            -webkit-animation-name: blinker;
+            -webkit-animation-duration: 0.6s;
+            -webkit-animation-iteration-count:infinite;
+            -webkit-animation-timing-function:ease-in-out;
+            -webkit-animation-direction: alternate;
+        }
+    </style>
+{% endblock %}
 {% block content %}
 <div class="artist-list-section artist-list-mb_artist_list" style="height : 200px">
-    <div class="outer">
+    <div class="outer" style="position : relative">
         <div class="middle">
             <div class="inner txt-center pt-5">
                 <p class="artist-list-mb_sub_title">공연게시판</p>
+                <div class="txt-center" style="padding-right:12px"><span style="height:10px; width:10px;background-color:mediumspringgreen; display:inline-block ; border-radius:60px; margin-right:5px" class="blink"></span>Live</div>
             </div>
         </div>
     </div>
 </div>
 
     <div class="row container mx-auto pt-1">
+    <div class="col-12 txt-right py-1 px-1">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#to_artist">오늘의 아티스트는?</button>
+    </div>
 
     {% for post in contacts %}
-     <div class="col-12 px-1">
-        <div class="card">
+     <div class="col-12 px-1 mt-1">
+        <div class="card" style="background-color : white;">
             <a href="#post_content_{{ forloop.counter }}" class="txt-black" data-toggle="collapse" aria-expanded="false" aria-controls="post_content_{{ forloop.counter }}">
-            <div class="row card-header align-items-center pt-1 pb-1">
-                <div class ="col-12"> {{ post.title }}</div>
-                <div class="col-6"><small>{{ post.author }}</small></div>
-                <div class="col-6"><small>{{ post.created_at.time }}</small></div>
+            <div class="row card-header align-items-center py-2" style="border-bottom:none; background-color : white;">
+                <div class ="col-12"> {{ post.content | linebreaksbr}}</div>
+                <div class="col-6"><small style="opacity:0.3;">{{ post.author }}</small></div>
+                <div class="col-6 txt-right"><small style="opacity:0.3;">{{ post.created_at.time }}</small></div>
             </div>
             </a>
                 <div class="col-12 collapse px-0 py-1" id="post_content_{{ forloop.counter }}">
-                    <div class="card card-body">{{ post.content }}</div>
-                    <div class="card-header py-1">댓글</div>
+                    <div style="padding : 15px 25px 15px 25px; border-top : 1px solid rgba(0, 0, 0, 0.125); ">
                     {% for a in post.return_comment %}
-                    <div class="card-header py-1">{{ a.author }} : {{ a.content }}</div>
+                    <div class="py-2" style="border-bottom: 0.5px solid rgba(0, 0, 0, 0.125)">{{ a.author }} : {{ a.content }}</div>
                     {% empty %}
-                    <div class="card card-body">댓글이 없습니다.</div>
+                    <div class="py-2">댓글이 없습니다.</div>
                     {% endfor %}
-                    <div class="txt-center">
-                        <a href="#post_content_{{ forloop.counter }}" class="txt-black txt-center" data-toggle="collapse" aria-expanded="false" aria-controls="post_content_{{ forloop.counter }}">접기</a>
+                    <form method="post" action="{% url 'concert_post:comment_create' post.pk %}" class="form-group row mt-3 mb_form" id="form{{ forloop.counter }}" style="margin:auto;">
+                        {% csrf_token %}
+                        <div class="col-8 px-0">
+                        {% if request.session.author %}
+                            <input type="text" name="author" value='{{ request.session.author }}' id="author" class="form-control" style="border-radius : 0;" required>
+                        {% else %}
+                            <input type="text" name="author" id="author" class="form-control" placeholder="작성자" style="border-radius : 0;" required>
+                        {% endif %}
+                        </div>
+                        <div class="col-4 px-0 txt-center">
+                            <button type="submit" class="btn btn-primary w-100" style="border-radius : 0;">작성완료</button>
+                        </div>
+                            <textarea name="content" id="content" class="form-control col-12" rows="2" placeholder="내용" style="border-radius : 0;" required></textarea>
+                            <div class="txt-center"><small>욕설, 비난, 음란글은 제재의 대상이 됩니다</small></div>
+
+                    </form>
+
                     </div>
+
+
+                    <a href="#post_content_{{ forloop.counter }}" class="txt-black txt-center" data-toggle="collapse" aria-expanded="false" aria-controls="post_content_{{ forloop.counter }}">
+                    <div class="txt-center py-1">
+                            <div style="border-top:solid 1px rgba(0, 0, 0, 0.125); width:300px;height:9px; margin:auto;"></div>
+                            <i class="fas fa-angle-up" style="font-size : 30px; opacity:0.4;"></i>
+
+                    </div>
+                    </a>
                 </div>
              </div>
      </div>
@@ -42,12 +84,30 @@
     {% endfor %}
     </div>
 
-    <div class="txt-center pt-3">
-        <a href="{% url 'concert_post:concert_post_create' %}"> <button class="btn btn-outline-primary">글쓰기</button></a>
+    <div style="position : fixed; bottom:0; z-index:30; background-color : white;" class="w-100" >
+        <div style="background-color : #009bfc; font-weight : 600;" class="txt-center w-100 py-3 txt-white wt" > 글쓰기</div>
+        <div style="background-color : #009bfc; font-weight : 600; display:none;" class="txt-center w-100 py-3 txt-white wt"> 접기</div>
+        <div style="display:none;"  id="form">
+            <form method="post" action="{% url "concert_post:concert_post_create" %}" class="form-group px-2 py-1" style="margin:auto; max-width:500px; background-color : white;">
+                {% csrf_token %}
+                <label for="author">작성자</label>
+                {% if request.session.author %}
+                    <input type="text" name="author" value='{{ request.session.author }}' id="author" class="form-control" required>
+                {% else %}
+                    <input type="text" name="author" id="author" class="form-control" placeholder="최대 8자" maxlength="8" required>
+                {% endif %}
+                <label for="content" class="mt-1">내용</label>
+                <textarea name="content" id="content" class="form-control" rows="2" maxlength="300" placeholder="최대 300자" required></textarea>
+                <div class="txt-center">
+                    <button type="submit" class="btn btn-primary mt-3">작성완료</button><br/>
+                    <small>욕설, 비난, 음란글은 제재의 대상이 됩니다</small>
+                </div>
+
+            </form>
+        </div>
     </div>
 
 <div class="pagination mt-3">
-
     <ul class="pagination mx-auto">
     {% for page in page.page_range %}
         <li class="page-item">
@@ -57,6 +117,26 @@
         </li>
     {% endfor %}
     </ul>
-
 </div>
+
+<div class="modal fade" id="to_artist" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <a href="#"><button class="btn btn-warning mb_action_btn">하바나 : 한 줄 소개</button></a>
+        <a href="https://www.mybusker.com/accounts/artist/detail/148/"><button class="btn btn-outline-primary mb_action_btn">이길우 : 한 줄 소개</button></a>
+        <a href="https://www.mybusker.com/accounts/artist/detail/146/"><button class="btn btn-outline-dark mb_action_btn">솔직히 송아지 : 한 줄 소개</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+{% block extrajs %}
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+    $('.wt').click(function() {
+            $('#form').toggle('display');
+            $('.wt').toggle();
+    })
+</script>
+{% endblock %}
 {% endblock %}

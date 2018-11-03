@@ -1,3 +1,17 @@
+@font-face {
+  font-family: 'Godo';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Godo';
+  font-style: normal;
+  font-weight: 700;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff');
+}
+
 a {
     text-decoration : none;
 }
@@ -228,7 +242,7 @@ button[title="Upload file"]{
 
 /* base/style.css */
 body {
-	font-family: 'Nanum Gothic', sans-serif !important;
+	font-family: 'Godo', sans-serif !important;
 }
 
 label {
@@ -352,8 +366,8 @@ display: block;
     background : white;
     color : black;
     border-radius : 40px;
-    font-family : 'Nanum Gothic', sans-serif;
-    font-weight : bold;
+    font-family : 'Godo', sans-serif;
+    font-weight : 500;
 }
 
 .b_sha_blue{
@@ -401,6 +415,9 @@ display: block;
 }
 
 /* base/nav.css */
+.navbar-expand{
+    max-width : 1300px;
+}
 @media (min-width: 0px) and (max-width: 996px){
 	.navi{
 		display: none;
@@ -424,7 +441,7 @@ display: block;
 }
 .navi a{
 	color: rgb(0, 0, 0) !important;
-	font-weight: bold;
+	font-weight: 500;
 	margin:0px 10px;
 }
 .navi .auth{
@@ -465,9 +482,9 @@ display: block;
 	text-align: center;
 	background: rgba(255, 255, 255);
 	padding: 0px !important;
-	position: fixed;
-    z-index: 100;
+    position : fixed;
     width: 100%;
+    z-index: 100;
     transition: 0.5s;
 }
 .navi-bg{
@@ -523,7 +540,7 @@ display: block;
 }
 .navi-mobile .nav-link{
 	color: rgb(0, 0, 0) !important;
-	font-weight: bold;
+	font-weight: 500;
 	font-size: 18px;
 	padding: 15px 0px;
 }
@@ -553,6 +570,7 @@ display: block;
 	width : 100%;
 	background: rgb(50, 50, 50);
 	color : rgb(200, 200, 200) !important;
+    font-weight: lighter;
 }
 .footer a{
 	color : rgb(200, 200, 200) !important;
@@ -582,7 +600,7 @@ display: block;
 }
 
 .mb_slide3_title{
-    font-family: 'Nanum Square', sans-serif;
+    font-family: 'Godo', sans-serif;
     font-size: 40px;
     text-align: center;
     color: #009bfc;
@@ -590,6 +608,7 @@ display: block;
 }
 .mb_slide3_title_sub{
     font-size : 18px;
+    font-weight : 300;
     color : #626262;
 }
 .mb_main_slide3_container{
@@ -613,6 +632,7 @@ display: block;
     margin-top : 5px;
     color : #626262;
     font-size : 14px;
+    font-weight : 300;
 }
 
 @media (max-width: 780px) {
@@ -636,6 +656,9 @@ display: block;
     .mb_main_carousel img {
         width: 100%;
     }
+    .carousel-inner{
+        overflow : hidden;
+    }
 }
 @media (max-width: 578px){
         .w-70_slide3{
@@ -652,15 +675,15 @@ display: block;
 }
 
 .mb_slide2_title{
-        font-family: 'Nanum Square', sans-serif;
+        font-family: 'Godo', sans-serif;
         font-size: 40px;
         text-align: center;
         color: #009bfc;
-        font-weight:300;
+        font-weight:400;
     }
 .mb_slide2_title_sub{
     font-size:18px;
-    font-weight:300;
+    font-weight:400;
 }
 
 .mb_main_slide2_container{
@@ -669,7 +692,7 @@ display: block;
     }
 
 .rec_btn_label{
-    font-weight : bold;
+    font-weight : 500;
 }
 
 .rec_btn{
@@ -702,17 +725,17 @@ display: block;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-image: url("/static/images/foot-banner.png");
-	font-family : 'Nanum Square', sans-serif;
+	font-family : 'Godo', sans-serif;
 }
 .registration_title{
 	font-size:40px;
-	font-weight : 300;
+	font-weight : 400;
 }
 
 .registration_text{
-	font-family : 'Nanum Gothic', sans-serif;
+	font-family : 'Godo', sans-serif;
 	font-size:18px;
-	font-weight : lighter;
+	font-weight : 400;
 }
 @media(max-width : 780px){
     .registration{
@@ -757,8 +780,8 @@ display: block;
 }
 
 .main-info{
-    font-family : "Nanum Gothic", sans-serif;
-    font-weight : 600;
+    font-family : 'Godo', sans-serif;
+    font-weight : 500;
     font-size : 26px;
     text-align : left;
     padding-left : 4rem;
@@ -767,13 +790,14 @@ display: block;
 
 .main-info-time{
     font-size : 17px;
-    font-weight : 600;
+    font-weight : 400;
     text-shadow : none;
 }
 
 .slider_title{
-font-weight : 600;
-text-shadow: 0 0 10px rgba(18, 101, 255, 0.8)
+font-weight : 700;
+text-shadow: 0 0 10px rgba(18, 101, 255, 0.8);
+font-family :'Godo', sans-serif;
 }
 
 .ytp-button:not([aria-disabled=true]):not([disabled]):not([aria-hidden=true]) {
@@ -1201,7 +1225,7 @@ display: none !important;
 /* artist_list/_header.css */
 .artist-list-section{
     height : 310px;
-    font-family : 'Nanum Gothic', sans-serif;
+    font-family : 'Godo', sans-serif;
     background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -1429,6 +1453,7 @@ display: none !important;
     width : 100%;
     margin-top : 5px;
     margin-bottom : 5px;
+    font-family : 'Nanum Gothic', sans-serif;
     font-weight : bold;
 }
 

@@ -8,13 +8,13 @@ from django.conf import settings
 class ConcertPost(models.Model):
     login_user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name = '회원이름', on_delete=models.CASCADE, blank=True, null=True, related_name="login_user")
     author = models.CharField('작성자', max_length=50)
-    title = models.CharField('제목', max_length=100)
+    #title = models.CharField('제목', max_length=100)
     content = models.TextField('내용')
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     updated_at = models.DateTimeField(blank=True, auto_now=True)
 
     def __str__(self):
-        return f'Title: {self.title}, Author: {self.author}'
+        return f'Title: {self.content}, Author: {self.author}'
 
     def save(self, *args, **kwargs):
         if not self.id:

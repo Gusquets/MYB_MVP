@@ -2,9 +2,10 @@ from django.shortcuts import render
 from .models import *
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import get_object_or_404, redirect, get_list_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.urls import reverse
 from .forms import *
+import json
 
 # Create your views here.
 
@@ -29,7 +30,6 @@ def detail(request, post_pk):
     ctx = {
         'pk' : post.pk,
         'author' : post.author,
-        'title' : post.title,
         'content' : post.content,
         'created_at' : post.created_at,
         'comment' : comment,
@@ -61,12 +61,11 @@ def comment_create(request, post_pk):
 
     elif request.method == 'POST':
         form = CommentForm(request.POST)
-
         if form.is_valid():
             obj = form.save(commit=False)
             obj.post = post
             obj.save()
-            return redirect(obj)
+            return redirect(obj.post)
 
     ctx = {
         'form' : form,
