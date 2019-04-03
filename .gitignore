@@ -4,6 +4,7 @@
 *.iml
 *.zip
 
+/myenv/
 /resources/
 *.sqlite3
 

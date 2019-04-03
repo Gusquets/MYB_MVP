@@ -27,9 +27,9 @@ AWS_S3_REGION_NAME = get_secret("AWS_S3_REGION_NAME")
 
 SITE_ID = 3
 
-ALLOWED_HOSTS = ['www.mybusker.com', '127.0.0.1']
+ALLOWED_HOSTS = ['www.mybusker.com', '127.0.0.1', 'localhost']
 
-DEBUG = False
+DEBUG = True
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 

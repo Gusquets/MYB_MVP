@@ -1530,7 +1530,7 @@ display: none !important;
     height: 100%;
     width: 200px;
     position: fixed;
-    z-index: 30;
+    z-index: 101;
     top: 0;
     right: 0;
     background-color: #fff;
